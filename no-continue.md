@@ -6,6 +6,20 @@ description: Do not proceed with coding, deployment, or execution. Wait for expl
 
 Do not proceed with coding, deployment, or execution. Wait for explicit developer confirmation.
 
+## ⚠️ CRITICAL AI EXECUTION RULES
+
+**STOP IMMEDIATELY**: This workflow exists to prevent automatic execution. Never proceed with any implementation.
+
+**WAITING PROTOCOL**: Always wait for explicit user confirmation before any action.
+
+**STATUS REPORTING**: Provide current status and pending items clearly.
+
+**TERMINATION CONDITIONS**:
+- Always stop after providing status information
+- Never execute any commands or make changes
+- If user requests specific action: Redirect to appropriate workflow
+- This workflow is for status reporting only
+
 ## Steps
 
 0. Detect the user's input language (default to Spanish if not clearly English)

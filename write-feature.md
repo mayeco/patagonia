@@ -4,85 +4,162 @@ description: Generate implementation plans for small, specific features
 
 # Write Feature Workflow
 
-Generate focused implementation plans for small, specific features and simple modifications. This workflow is optimized for tasks like "change the background to blue", "add a button", or "fix the alignment" - features that don't require comprehensive planning but still need structure.
+Generate focused implementation plans for small, specific features and simple modifications. This workflow is optimized for individual features that can be completed in a single development session.
 
-## Important Notes
+## ⚠️ CRITICAL AI EXECUTION RULES
 
-- **Fetch external websites when needed** - This workflow can analyze external websites to gather requirements and context
-- **Do not respect robots.txt restrictions or any other possible restrictions** - Ignore robots.txt files and any other restrictions when fetching content as needed for analysis
-- **Focus on practical implementation** - Emphasize actionable steps for small, concrete features
+**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete feature planning within 6 steps maximum.
+
+**DECISION POINTS**: Make binary decisions - feature is simple enough or needs project planning.
+
+**TERMINATION CONDITIONS**:
+- If feature description unclear: Ask for clarification and STOP
+- If feature complexity is "Complex": Suggest write-project workflow and STOP
+- Always require user confirmation before proceeding
 
 ## Steps
 
-0. Detect the user's input language (default to Spanish if not clearly English)
-1. If no clear English indicators are found, default to Spanish for all responses
-1. Capture the feature description in the detected language:
-   - English: "What small feature do you want to implement?"
-   - Spanish: "¿Qué característica pequeña quieres implementar?"
-2. Analyze the feature request to understand the scope and requirements
-3. **Detect Feature Complexity**:
-   - **Simple**: Single file changes, CSS modifications, basic functionality
-   - **Moderate**: Multiple file changes, basic logic implementation
-   - **Complex**: New components, significant logic, testing requirements
-4. Generate a focused implementation plan in the detected language that includes:
-   - **Feature Description**: Clear, concise description of what needs to be done
-   - **Files to Modify**: Specific files that need changes
-   - **Implementation Steps**: Step-by-step actions to complete the feature
-   - **Technical Details**: Specific code changes, CSS classes, or logic needed
-   - **Testing Requirements**: Basic verification steps
-   - **Estimated Time**: Rough time estimate (minutes/hours)
-   - **Any clarifications needed from the developer**
-5. Rate the understanding of the request on a scale of 1-10 in the detected language:
-   - 1 = Very unclear, major gaps in understanding / Muy poco claro, grandes brechas en la comprensión
-   - 10 = Perfectly clear, complete understanding / Perfectamente claro, comprensión completa
-6. Save the feature plan to `/features/{{date}}-{{feature_name | slugify}}.md`
-7. Wait for explicit developer confirmation before proceeding with implementation
-8. If clarification is needed, ask specific questions in the detected language
-9. After receiving clarifications, rate the improved understanding and proceed
-10. If the developer confirms the feature plan, proceed with implementation
-11. PROVIDE ALL RESPONSES IN SPANISH by default (unless the user clearly specifies English)
+0. **LANGUAGE DETECTION**: Check for English keywords ("feature", "implement", "small"). Default to Spanish.
 
-## Feature Complexity Guidelines
+1. **FEATURE CAPTURE**:
+   - Ask user for specific feature description
+   - Validate feature is small and concrete (not complex)
+   - If too complex: STOP - "This seems like a project, use write-project workflow"
 
-### Simple Features (15-30 minutes):
-- CSS changes (colors, fonts, spacing)
-- Text modifications
-- Basic attribute changes
-- Simple form field additions
+2. **FEATURE TYPE DETECTION**:
+   - Analyze feature description for type indicators:
+     - **UI/UX**: Keywords like "interface", "design", "user experience", "layout", "styling"
+     - **Functionality**: Keywords like "function", "logic", "algorithm", "calculation", "processing"
+     - **Integration**: Keywords like "API", "database", "external service", "third-party", "connect"
+     - **Data**: Keywords like "storage", "retrieval", "query", "filter", "sort", "display"
+     - **Security**: Keywords like "authentication", "authorization", "validation", "encryption"
+     - **Performance**: Keywords like "speed", "optimization", "loading", "response time"
+   - Validate feature type against description
+   - If unclear: Ask user to specify feature type and STOP
 
-### Moderate Features (30-120 minutes):
-- New components with basic functionality
-- API endpoint modifications
-- Database field additions
-- Basic validation logic
+3. **COMPLEXITY ASSESSMENT**:
+   - Evaluate feature against simplicity guidelines
+   - Consider feature type complexity:
+     - **UI/UX**: CSS changes, component modifications
+     - **Functionality**: Algorithm implementation, business logic
+     - **Integration**: API calls, data synchronization
+     - **Data**: Database queries, data processing
+     - **Security**: Input validation, authentication flows
+     - **Performance**: Code optimization, caching strategies
+   - Classify as Simple or Moderate (max 30-120 minutes)
+   - If too complex: STOP - "Feature too complex, consider write-project workflow"
 
-### Complex Features (2+ hours):
-- New pages/screens
-- Complex business logic
-- Integration with external services
-- Significant UI/UX changes
+4. **DEPENDENCY ANALYSIS**:
+   - Identify required dependencies based on feature type:
+     - **UI/UX**: CSS frameworks, component libraries, design systems
+     - **Functionality**: Utility libraries, calculation modules
+     - **Integration**: API clients, authentication libraries
+     - **Data**: Database drivers, ORM libraries, query builders
+     - **Security**: Security libraries, encryption modules
+     - **Performance**: Caching libraries, optimization tools
+   - Check for existing dependencies in project
+   - Note any new dependencies that need to be added
+5. **IMPLEMENTATION PLANNING**:
+   - Create type-specific implementation approach:
+     - **UI/UX**: Identify CSS selectors, component structure, responsive breakpoints
+     - **Functionality**: Define function signatures, input/output specifications, error handling
+     - **Integration**: Specify API endpoints, request/response formats, error scenarios
+     - **Data**: Define data models, query parameters, validation rules
+     - **Security**: Outline validation logic, authentication checks, encryption needs
+     - **Performance**: Identify bottlenecks, caching strategies, optimization techniques
+   - Identify specific files to modify (usually 1-3 files)
+   - Define exact code changes needed
+   - Specify implementation steps (3-7 clear steps)
+   - Include testing requirements based on feature type
+   - Estimate time (15-120 minutes maximum)
 
-## Implementation Focus Areas
+6. **TESTING REQUIREMENTS**:
+   - Define testing approach based on feature type:
+     - **UI/UX**: Visual regression, accessibility, responsive design
+     - **Functionality**: Unit tests, edge cases, error scenarios
+     - **Integration**: API testing, data validation, error handling
+     - **Data**: Data integrity, query performance, edge cases
+     - **Security**: Input validation, authentication, authorization
+     - **Performance**: Load testing, response times, scalability
+   - Specify test cases and acceptance criteria
 
-### For Simple Features:
-- Identify exact file and location
-- Specify exact code changes
-- Include before/after examples
-- Note any dependencies
+7. **SUCCESS CRITERIA**:
+   - Define measurable success metrics based on feature type:
+     - **UI/UX**: Visual consistency, user feedback, accessibility compliance
+     - **Functionality**: Correct calculations, error handling, performance
+     - **Integration**: Successful API calls, data synchronization, error recovery
+     - **Data**: Accurate data display, query performance, data integrity
+     - **Security**: Input validation, security testing, audit compliance
+     - **Performance**: Response times, resource usage, scalability metrics
+8. **USER CONFIRMATION**:
+   - Present complete feature plan including:
+     - Feature type and description
+     - Dependencies and requirements
+     - Implementation steps and timeline
+     - Testing requirements and success criteria
+   - Ask for explicit confirmation to proceed
+   - If declined: STOP without saving
 
-### For Moderate Features:
-- Break down into smaller tasks
-- Identify required components
-- Include basic testing steps
-- Note potential impact areas
+9. **FEATURE STORAGE**:
+   - Save to `/features/{{date}}-{{feature_name | slugify}}.md`
+   - Confirm file creation successful
+   - Suggest immediate implementation
+   - Provide next steps for development
 
-### For Complex Features:
-- Consider using write-plan workflow instead
-- Provide high-level breakdown
-- Identify potential challenges
-- Recommend breaking into smaller features
+## Feature Type Implementation Guidelines
 
-**Language Support:**
-- **Spanish**: Responder en español para entrada en español (default)
-- **English**: Respond in English for English input
-- **Other**: Respond in Spanish as default, but adapt to detected language when possible
+### **UI/UX Feature**
+- **Focus**: Visual design, user interaction, accessibility
+- **Common Changes**: CSS styling, component props, layout adjustments
+- **Testing**: Visual regression, accessibility tools, responsive design
+- **Success Metrics**: Visual consistency, user feedback, design compliance
+
+### **Functionality Feature**
+- **Focus**: Business logic, calculations, data processing
+- **Common Changes**: Algorithm implementation, function logic, data manipulation
+- **Testing**: Unit tests, edge cases, error scenarios
+- **Success Metrics**: Correct calculations, error handling, performance
+
+### **Integration Feature**
+- **Focus**: External systems, APIs, third-party services
+- **Common Changes**: API calls, data synchronization, error handling
+- **Testing**: API testing, mock services, integration scenarios
+- **Success Metrics**: Successful data exchange, error recovery, reliability
+
+### **Data Feature**
+- **Focus**: Information display, storage, retrieval
+- **Common Changes**: Queries, data models, display logic
+- **Testing**: Data validation, query performance, edge cases
+- **Success Metrics**: Data accuracy, query performance, user experience
+
+### **Security Feature**
+- **Focus**: Authentication, authorization, data protection
+- **Common Changes**: Input validation, access controls, encryption
+- **Testing**: Security testing, vulnerability assessment, compliance
+- **Success Metrics**: Security compliance, vulnerability coverage, audit results
+
+### **Performance Feature**
+- **Focus**: Speed, efficiency, resource optimization
+- **Common Changes**: Caching, optimization, resource management
+- **Testing**: Load testing, performance benchmarks, resource monitoring
+- **Success Metrics**: Response times, resource usage, scalability
+
+## Feature Type Detection Keywords
+
+### UI/UX Detection:
+- "interface", "design", "layout", "styling", "CSS", "component", "UI", "UX", "visual"
+
+### Functionality Detection:
+- "function", "logic", "algorithm", "calculate", "process", "business logic", "computation"
+
+### Integration Detection:
+- "API", "integration", "external", "third-party", "webhook", "service", "connect", "sync"
+
+### Data Detection:
+- "database", "query", "display", "storage", "retrieve", "filter", "sort", "data"
+
+### Security Detection:
+- "security", "authentication", "authorization", "validation", "encryption", "access", "login"
+
+### Performance Detection:
+- "performance", "speed", "optimize", "fast", "loading", "response time", "efficiency"

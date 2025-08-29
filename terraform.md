@@ -46,14 +46,21 @@ Scan the current project and automatically detect infrastructure requirements th
    - Generate scripts for common operations (plan, apply, destroy)
    - Create .env.example for environment variables
 
-7. Validate generated configuration:
-   - Run terraform validate to check syntax
-   - Verify resource dependencies and references
-   - Check for security best practices
-   - Validate variable definitions and defaults
+7. **CONFIGURATION VALIDATION**:
+   - Execute: `terraform validate`
+   - If command fails: STOP - "Terraform validation failed - check configuration syntax and fix errors"
+   - Check for syntax errors and missing resources
+   - If validation fails: Fix errors and re-validate
 
-8. Generate deployment documentation:
-   - Create step-by-step deployment guide
+8. **FILE OUTPUT**:
+   - Create /terraform directory structure
+   - Save all generated files
+   - Provide summary of generated infrastructure
+
+9. **COMPLETION REPORT**:
+   - Confirm successful generation
+   - Provide file locations and next steps
+   - Suggest manual review before deployment guide
    - Document required permissions and prerequisites
    - Include cost estimation commands
    - Provide rollback procedures

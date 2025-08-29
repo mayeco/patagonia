@@ -23,25 +23,33 @@ Interact with Vercel CLI to deploy, manage, and configure applications on the Ve
    - Analytics and monitoring
    - Function and API management
 
-3. Validate Vercel CLI installation and authentication:
-   - Check if Vercel CLI is installed
-   - Verify user is logged in (vercel whoami)
-   - Confirm project context if applicable
-   - Validate permissions for requested operations
+3. **ENVIRONMENT VALIDATION**:
+   - Execute: `vercel --version`
+   - If command fails: STOP - "Vercel CLI not installed - ensure vercel is available"
+   - Execute: `vercel whoami`
+   - If command fails: STOP - "Not logged in to Vercel - run 'vercel login' first"
+   - Check current project if applicable
 
-4. Prepare Vercel CLI command parameters:
-   - Parse user request for specific operation
-   - Identify required flags and options
-   - Prepare file paths, names, and configurations
-   - Set appropriate environment and scope
+4. **COMMAND CONSTRUCTION**:
+   - Map operation to specific vercel command
+   - Add required flags and options
+   - Include project name, team, region as needed
+   - Validate command syntax mentally
 
-5. Execute Vercel CLI command:
-   - Run the prepared command with proper parameters
-   - Handle authentication prompts if needed
-   - Capture command output and any errors
-   - Apply appropriate timeouts for operations
+5. **SAFETY CHECK**:
+   - Scan command for destructive keywords: remove, delete, destroy
+   - If found: Ask user for explicit confirmation
+   - If user denies: STOP with safety message
+   - If user confirms: Proceed to execution
 
-6. Process command results:
+6. **COMMAND EXECUTION**:
+   - Execute prepared vercel command
+   - Set reasonable timeout (60-120 seconds for deployments)
+   - Capture stdout, stderr, and exit code
+   - If command fails: Parse error output and STOP with specific error message
+   - Do NOT attempt alternative commands or installations
+
+7. Process command results:
    - Display command output to user
    - Interpret success/failure status
    - Provide next steps or follow-up actions

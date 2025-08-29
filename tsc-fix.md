@@ -19,29 +19,12 @@ Fix all TypeScript compiler (TSC) errors including type errors, syntax errors, m
    - **Type Errors**: Property access, type assignments, argument mismatches
    - **Module Errors**: Cannot find modules, wrong import paths
    - **Declaration Errors**: Cannot find names, missing declarations
-   - **Syntax Errors**: Brackets, semicolons, malformed constructs
-   - **Configuration Errors**: tsconfig.json issues, compiler options
-   - **Strict Mode Errors**: Null checks, type assertions, strict settings
-4. Use TypeScript compiler and tools for comprehensive analysis:
-   - `run_command` with `tsc --noEmit` to identify all compilation errors
-   - `run_command` with `tsc --listFiles` to check module resolution
-   - `read` to examine specific error locations and tsconfig.json
-   - Parse TSC output for error codes, file locations, and suggestions
-5. Apply comprehensive TypeScript corrections:
-   - Fix type-related errors (assignments, property access, arguments)
-   - Correct module import/export issues
-   - Add missing type declarations and interfaces
-   - Fix syntax errors and malformed constructs
-   - Update tsconfig.json settings if needed
-   - Implement proper type guards and assertions
-6. Validate all TypeScript corrections:
-   - Run `tsc --noEmit` to verify all errors are resolved
-   - Check `tsc --build` for project-wide compilation success
    - Ensure type safety is maintained across all files
    - Verify no new compilation errors were introduced
-7. PROVIDE THE CORRECTED VERSION with comprehensive TypeScript error explanations
-8. If multiple TypeScript files are involved, provide a summary of all compilation fixes
-9. Ask if the user wants to apply the TypeScript compilation fixes
+
+5. PROVIDE THE CORRECTED VERSION with comprehensive TypeScript error explanations
+6. If multiple TypeScript files are involved, provide a summary of all compilation fixes
+7. Ask if the user wants to apply the TypeScript compilation fixes
 
 ## Comprehensive TSC Error Categories
 

@@ -29,24 +29,24 @@ Create new releases based on Semantic Versioning (semver) with automated version
    - Check version doesn't already exist in git tags
    - Generate pre-release versions if specified
 
-5. Update version files:
+5. **VERSION FILE UPDATES**:
    - Update package.json version field
-   - Update setup.py or pyproject.toml version
-   - Update any version constants in source code
-   - Update documentation version references
-   - Commit version changes with descriptive message
+   - Update any other version files (setup.py, constants)
+   - Execute: `git add . && git commit -m "Bump version to X.Y.Z"`
+   - If command fails: STOP - "Git commit failed - check repository status"
 
-6. Generate and update changelog:
-   - Run changelog workflow to generate new entries
-   - Move changes from "Unreleased" to new version section
-   - Format with proper release date (YYYY-MM-DD)
-   - Commit changelog updates
+6. **CHANGELOG UPDATE**:
+   - Execute changelog workflow to generate entries
+   - Move unreleased changes to new version section
+   - Add release date
+   - Execute: `git add CHANGELOG.md && git commit -m "Update changelog for vX.Y.Z"`
+   - If command fails: STOP - "Git commit failed for changelog"
 
-7. Create git release:
-   - Create and push version tag (v1.2.3 format)
-   - Push commits to main/master branch
-   - Create GitHub/GitLab release with changelog
-   - Generate release notes automatically
+7. **GIT OPERATIONS**:
+   - Execute: `git tag -a vX.Y.Z -m "Release vX.Y.Z"`
+   - If command fails: STOP - "Git tag creation failed"
+   - Execute: `git push origin main && git push origin vX.Y.Z`
+   - If command fails: STOP - "Git push failed - check remote repository access"
 
 8. Publish release:
    - Publish to package registries (npm, PyPI, etc.)

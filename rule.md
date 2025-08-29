@@ -4,6 +4,20 @@ description: AI-Optimized Pure Coding Rules - Machine Readable Format
 
 # AI CODE GENERATION RULES
 
+## ⚠️ CRITICAL AI EXECUTION RULES
+
+**CODE GENERATION PROTOCOL**: Always follow these rules when generating code. Never deviate from established patterns.
+
+**VALIDATION FIRST**: Check code against all rules before presenting to user.
+
+**RULE COMPLIANCE**: Ensure all generated code meets every specified rule and guideline.
+
+**TERMINATION CONDITIONS**:
+- If code violates any rule: Reject and regenerate
+- If user requests rule violation: Explain why and suggest alternative
+- If rule interpretation unclear: Ask user for clarification
+- Always ensure code meets all specified criteria
+
 ## CORE CODING DIRECTIVES
 
 ### CODE_GENERATION

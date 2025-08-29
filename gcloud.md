@@ -18,23 +18,32 @@ Execute Google Cloud CLI (gcloud) commands based on developer requests. This wor
    - Monitoring and logging
    - IAM and permissions configuration
 
-3. Validate gcloud configuration:
-   - Verify gcloud CLI installation
-   - Verify active authentication
-   - Verify default configured project
-   - Verify configured zone/region
+2. **ENVIRONMENT VALIDATION**:
+   - Execute: `gcloud --version`
+   - If command fails: STOP - "gcloud CLI not installed - ensure Google Cloud SDK is available"
+   - Execute: `gcloud auth list`
+   - If command fails: STOP - "Not authenticated with Google Cloud - run 'gcloud auth login' first"
+   - Execute: `gcloud config get-value project`
+   - If no project: Ask user to set project
 
-4. Prepare command parameters:
-   - Parse developer request
-   - Identify specific gcloud command
-   - Configure appropriate flags and options
-   - Prepare necessary environment variables
+3. **COMMAND CONSTRUCTION**:
+   - Map operation to specific gcloud command
+   - Add required flags and options
+   - Include project, zone, region as needed
+   - Validate command syntax mentally
 
-5. Execute gcloud command:
-   - Execute command with prepared parameters
-   - Handle authentication if necessary
-   - Capture output and possible errors
-   - Apply appropriate timeouts
+4. **SAFETY CHECK**:
+   - Scan command for destructive keywords: delete, remove, destroy, rm
+   - If found: Ask user for explicit confirmation
+   - If user denies: STOP with safety message
+   - If user confirms: Proceed to execution
+
+5. **COMMAND EXECUTION**:
+   - Execute prepared gcloud command
+   - Set reasonable timeout (30-60 seconds)
+   - Capture stdout, stderr, and exit code
+   - If command fails: Parse error output and STOP with specific error message
+   - Do NOT attempt alternative commands or installations
 
 6. Process results:
    - Display command output

@@ -1,10 +1,24 @@
 ---
-description: Ejecutar análisis de seguridad con Checkmarx One CLI
+description: Execute security analysis with Checkmarx One CLI
 ---
 
 # Checkmarx One CLI Scan Workflow
 
-Ejecutar análisis de seguridad en el proyecto actual usando Checkmarx One CLI con variables de entorno configuradas.
+Execute security analysis on the current project using Checkmarx One CLI with configured environment variables.
+
+## ⚠️ CRITICAL AI EXECUTION RULES
+
+**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete security scan within 10 steps maximum. If scan takes too long, provide status and continue monitoring.
+
+**ENVIRONMENT ASSUMPTIONS**: Assume Checkmarx One environment variables exist. Do NOT validate or check environment variables.
+
+**COMMAND EXECUTION**: Execute cx commands directly without validation. If commands fail, parse error output for specific issues.
+
+**TERMINATION CONDITIONS**:
+- If cx command fails: Parse error and stop with specific guidance
+- If credentials invalid: Stop with credential configuration message
+- If project not found: Stop with project setup guidance
+- Always provide scan results or clear error explanation
 
 ## Steps
 
@@ -20,16 +34,22 @@ Ejecutar análisis de seguridad en el proyecto actual usando Checkmarx One CLI c
    - Branch detection: Default to "main", detect current branch only if explicitly requested
    - IMPORTANT: Do NOT run git commands unless specifically requested by user
 
-3. Execute Checkmarx One scan:
-   - Run `cx scan create --project-name "${PROJECT_NAME}" --file-source "." --scan-info-format "json" --branch "${BRANCH_NAME}" --agent "Panagonia" --file-filter "${FILE_FILTERS}"`
-   - CORRECT FLAGS: Use --file-source (NOT --source)
+3. **ENVIRONMENT VALIDATION**:
+   - Assume CX_TENANT, CX_BASE_URI, CX_CLIENT_ID, CX_CLIENT_SECRET exist
+   - Do NOT validate environment variables
 
-4. Monitor and process results:
+4. **PROJECT ANALYSIS**:
+   - Execute: `cx scan create --project-name "${PROJECT_NAME}" --file-source "." --scan-info-format "json" --branch "${BRANCH_NAME}" --agent "Panagonia"`
+   - If command fails: Parse error output for missing credentials or configuration
+   - If credentials error: STOP - "Missing or invalid Checkmarx One credentials - check CX_TENANT, CX_BASE_URI, CX_CLIENT_ID, CX_CLIENT_SECRET"
+   - If other error: STOP - "Checkmarx One scan failed - check project configuration"
+
+5. Monitor and process results:
    - Display scan progress and status
    - Retrieve and categorize vulnerability findings (Critical, High, Medium, Low)
    - Provide remediation suggestions
 
-5. Generate report:
+6. Generate report:
    - Create local report file with scan results
    - Include executive summary and detailed findings
    - Provide recommendations for fixing identified issues

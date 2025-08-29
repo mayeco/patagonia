@@ -10,6 +10,20 @@ description: Workflow for obtaining documentation of frameworks, libraries, lang
 
 Complete workflow for obtaining technical documentation of frameworks, libraries, programming languages and other technologies. This workflow helps find, access and use documentation efficiently.
 
+## ⚠️ CRITICAL AI EXECUTION RULES
+
+**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete documentation search within 8 steps maximum. If search takes longer than expected, use first available results.
+
+**DECISION POINTS**: Make binary decisions quickly - use first relevant result found. Do not compare multiple options extensively.
+
+**SEARCH LIMITATIONS**: Execute search commands directly. If search fails, use basic web search as fallback.
+
+**TERMINATION CONDITIONS**:
+- If no documentation found after 3 search attempts: Provide best available alternative
+- If user specifies specific technology: Focus search on that technology only
+- If search commands fail: Use basic web search as fallback
+- If results found: Stop and present documentation
+
 ## Steps
 
 0. Detect the user's input language (default to Spanish if not clearly English)
@@ -43,15 +57,14 @@ Complete workflow for obtaining technical documentation of frameworks, libraries
    - Consider usage context
    - Prepare alternative queries
 
-6. Execute search and retrieval:
-   - Search official sources first
-   - Use MCP search brave_web_search for comprehensive web searches:
-     - `brave_web_search "python documentation site:docs.python.org"`
-     - `brave_web_search "react tutorial site:react.dev"`
-     - `brave_web_search "docker best practices"`
-   - Verify date and relevance
-   - Get direct links
-   - Download documentation if necessary
+6. **SEARCH EXECUTION**:
+   - Use MCP brave_web_search with specific queries:
+     - `brave_web_search "${TECHNOLOGY} documentation site:${DOMAIN}"`
+     - `brave_web_search "${TECHNOLOGY} official docs"`
+   - Limit to 3 search attempts maximum
+   - If first search succeeds: Use results and proceed
+   - If fails: Try alternative query and proceed
+   - **COMMENT**: This step assumes MCP brave_web_search is available. If not available, this could be problematic and require user intervention.
 
 7. Process and organize results:
    - Filter relevant information

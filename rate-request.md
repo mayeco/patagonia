@@ -6,6 +6,20 @@ description: Evaluate understanding of requests, plans, backlog items, or curren
 
 Evaluate how well requests, plans, backlog items, or current pending tasks are understood before proceeding.
 
+## ⚠️ CRITICAL AI EXECUTION RULES
+
+**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete evaluation within 6 steps maximum. Provide rating and either ask questions or proceed.
+
+**DECISION POINTS**: Make binary decisions - content is clear enough to proceed or needs clarification.
+
+**CONTENT ANALYSIS**: Evaluate clarity, completeness, and feasibility quickly.
+
+**TERMINATION CONDITIONS**:
+- If rating is 6-10: Provide explanation and recommend proceeding
+- If rating is 1-5: Ask specific questions and STOP
+- If user provides clarification: Re-evaluate and provide new rating
+- Never proceed with implementation without user confirmation
+
 ## Steps
 
 0. Detect the user's input language (default to Spanish if not clearly English)

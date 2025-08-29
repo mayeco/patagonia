@@ -10,6 +10,20 @@ description: Write pending tasks to system memory as epics with functionalities
 
 Write pending tasks to system memory, organizing them as epics with their pending functionalities.
 
+## ⚠️ CRITICAL AI EXECUTION RULES
+
+**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete backlog creation within 6 steps maximum. If user provides too many items, prioritize and limit to essential features.
+
+**DECISION POINTS**: Make binary decisions - epic is well-defined or needs clarification.
+
+**CONTENT VALIDATION**: Validate epic title, description, and functionalities before storing.
+
+**TERMINATION CONDITIONS**:
+- If user doesn't provide epic title: Ask and STOP
+- If no functionalities listed: Ask user to specify and STOP
+- If user declines confirmation: STOP immediately
+- Always require user confirmation before storing
+
 ## Steps
 
 0. Detect the user's input language (default to Spanish if not clearly English)

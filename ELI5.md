@@ -10,6 +10,20 @@ description: Explain concepts in simple terms like to a 5-year-old
 
 Explain any concept, web, plan, backlog, or input in simple terms as if explaining to a 5-year-old.
 
+## ⚠️ CRITICAL AI EXECUTION RULES
+
+**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete explanation within 6 steps maximum. If concept is too complex, provide basic explanation and stop.
+
+**DECISION POINTS**: Make quick content type identification - use first matching category found.
+
+**CONTENT LIMITATIONS**: Keep explanations simple and short. Use analogies appropriate for a 5-year-old.
+
+**TERMINATION CONDITIONS**:
+- If content type unclear: Ask user for clarification and STOP
+- If explanation becomes too complex: Simplify and provide basic explanation
+- If user requests specific format: Adapt and complete
+- Always provide explanation within 5 minutes of processing
+
 ## Steps
 
 0. Detect the user's input language (default to Spanish if not clearly English)
@@ -27,9 +41,9 @@ Explain any concept, web, plan, backlog, or input in simple terms as if explaini
 4. Break down the concept into the simplest possible terms using analogies a 5-year-old would understand
 5. Explain using simple words, short sentences, and relatable examples (toys, games, everyday activities)
    - Use MCP search brave_web_search for comprehensive web searches:
-     - `brave_web_search "python documentation site:docs.python.org"`
-     - `brave_web_search "react tutorial site:react.dev"`
-     - `brave_web_search "docker best practices"`
+     - `brave_web_search "explain like i'm five {concept}"`
+     - `brave_web_search "{concept} explanation for children"`
+     - `brave_web_search "easy explanation of {concept}"`
 6. Use visual metaphors and avoid technical jargon completely
 7. PROVIDE THE EXPLANATION IN SPANISH by default (unless the user clearly specifies English)
 8. If the explanation is too complex, simplify it further until it's truly understandable to a child
