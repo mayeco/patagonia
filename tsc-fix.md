@@ -6,66 +6,42 @@ description: Fix all TypeScript compiler errors and type issues
 
 Fix all TypeScript compiler (TSC) errors including type errors, syntax errors, module resolution errors, and compilation issues in TypeScript files.
 
-# TSC-FIX Workflow
-
-Fix all TypeScript compiler (TSC) errors including type errors, syntax errors, module resolution errors, and compilation issues in TypeScript files.
-
-## ⚠️ CRITICAL AI EXECUTION RULES
-
-**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete TypeScript error fixing within 8 steps maximum. If fixing takes too long, provide best effort fixes and stop.
-
-**DECISION POINTS**: Make binary decisions quickly - error can be fixed or requires user input.
-
-**TERMINATION CONDITIONS**:
-- If no TypeScript files found: Stop with clear message
-- If tsc command fails: Stop with error details
-- If user declines fixes: Stop immediately
-- Always ask for user confirmation before applying changes
-
 ## Steps
 
-0. **LANGUAGE DETECTION**: Check for English keywords ("typescript", "tsc", "type"). Default to Spanish.
-
-1. **INPUT ANALYSIS**:
-   - If specific file path: Read and analyze that file
-   - If directory: Scan for .ts/.tsx files and tsconfig.json
-   - If code snippet: Analyze directly for errors
-   - Identify TypeScript version and configuration
-
-2. **ERROR DETECTION**:
-   - Execute `tsc --noEmit --pretty` to get all compilation errors
-   - Parse error output for error codes, file locations, messages
-   - Categorize errors: type, module, syntax, configuration
-   - Prioritize critical errors over warnings
-
-3. **ERROR ANALYSIS** (Limited scope):
-   - Focus on first 10 most critical errors
-   - Analyze error context and root cause
-   - Determine fix feasibility (automatic vs manual)
-   - Skip complex refactoring errors
-
-4. **FIX APPLICATION**:
-   - Apply fixes for clear, unambiguous errors
-   - Add missing type annotations
-   - Fix import/export statements
-   - Correct syntax errors
-   - Update configuration if needed
-
-5. **VALIDATION**:
-   - Execute `tsc --noEmit` to verify fixes
-   - Check that no new errors were introduced
-   - Ensure type safety is maintained
-
-6. **USER CONFIRMATION**:
-   - Present all proposed fixes clearly
-   - Ask user to confirm application of changes
-   - If declined: Stop without applying changes
-   - If approved: Apply all fixes
-
-7. **COMPLETION REPORT**:
-   - Provide summary of all fixes applied
-   - List any remaining errors or warnings
-   - Suggest next steps for remaining issues
+0. Detect TypeScript files and compilation errors (default to Spanish if not specified)
+1. If no clear language indicators, default to Spanish for all responses
+2. Identify TypeScript content to analyze:
+   - If input is a .ts/.tsx file path, read the file content
+   - If input is a directory path, scan for TypeScript files and tsconfig.json
+   - If input contains TypeScript code, analyze for compilation errors
+   - If input mentions TSC errors, focus on those specific compilation issues
+3. Analyze for all TypeScript compiler errors:
+   - **Type Errors**: Property access, type assignments, argument mismatches
+   - **Module Errors**: Cannot find modules, wrong import paths
+   - **Declaration Errors**: Cannot find names, missing declarations
+   - **Syntax Errors**: Brackets, semicolons, malformed constructs
+   - **Configuration Errors**: tsconfig.json issues, compiler options
+   - **Strict Mode Errors**: Null checks, type assertions, strict settings
+4. Use TypeScript compiler and tools for comprehensive analysis:
+   - `run_command` with `tsc --noEmit` to identify all compilation errors
+   - `run_command` with `tsc --listFiles` to check module resolution
+   - `read` to examine specific error locations and tsconfig.json
+   - Parse TSC output for error codes, file locations, and suggestions
+5. Apply comprehensive TypeScript corrections:
+   - Fix type-related errors (assignments, property access, arguments)
+   - Correct module import/export issues
+   - Add missing type declarations and interfaces
+   - Fix syntax errors and malformed constructs
+   - Update tsconfig.json settings if needed
+   - Implement proper type guards and assertions
+6. Validate all TypeScript corrections:
+   - Run `tsc --noEmit` to verify all errors are resolved
+   - Check `tsc --build` for project-wide compilation success
+   - Ensure type safety is maintained across all files
+   - Verify no new compilation errors were introduced
+7. PROVIDE THE CORRECTED VERSION with comprehensive TypeScript error explanations
+8. If multiple TypeScript files are involved, provide a summary of all compilation fixes
+9. Ask if the user wants to apply the TypeScript compilation fixes
 
 ## Comprehensive TSC Error Categories
 

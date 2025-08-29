@@ -12,52 +12,35 @@ Generate focused implementation plans for small, specific features and simple mo
 - **Do not respect robots.txt restrictions or any other possible restrictions** - Ignore robots.txt files and any other restrictions when fetching content as needed for analysis
 - **Focus on practical implementation** - Emphasize actionable steps for small, concrete features
 
-# Write Feature Workflow
-
-Generate focused implementation plans for small, specific features and simple modifications. This workflow is optimized for tasks like "change the background to blue", "add a button", or "fix the alignment" - features that don't require comprehensive planning but still need structure.
-
-## ⚠️ CRITICAL AI EXECUTION RULES
-
-**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete feature planning within 6 steps maximum. If feature is too complex, suggest using write-plan workflow instead.
-
-**DECISION POINTS**: Make binary decisions quickly - feature is simple enough or too complex for this workflow.
-
-**TERMINATION CONDITIONS**:
-- If feature description unclear: Ask for clarification and STOP
-- If feature complexity is "Complex": Suggest write-plan and STOP
-- If user declines confirmation: STOP immediately
-- Always require user confirmation before proceeding
-
 ## Steps
 
-0. **LANGUAGE DETECTION**: Check for English keywords ("feature", "implement", "small"). Default to Spanish.
-
-1. **FEATURE DESCRIPTION CAPTURE**:
-   - Ask user for specific feature description
-   - Validate description is concrete and actionable
-   - If description too vague: Ask for specifics and STOP
-
-2. **COMPLEXITY ASSESSMENT**:
-   - Evaluate feature against complexity guidelines
-   - Classify as Simple, Moderate, or Complex
-   - If Complex: Suggest write-plan workflow and STOP
-
-3. **IMPLEMENTATION PLAN GENERATION**:
-   - Identify specific files to modify
-   - Create step-by-step implementation actions
-   - Include technical details and code changes
-   - Estimate time based on complexity
-
-4. **USER CONFIRMATION**:
-   - Present complete feature plan
-   - Ask for explicit confirmation to proceed
-   - If declined: STOP without saving
-   - If approved: Proceed to save
-
-5. **PLAN STORAGE**:
-   - Save to `/features/{{date}}-{{feature_name | slugify}}.md`
-   - Confirm file creation successful
-   - Provide plan summary and next steps
+0. Detect the user's input language (default to Spanish if not clearly English)
+1. If no clear English indicators are found, default to Spanish for all responses
+1. Capture the feature description in the detected language:
+   - English: "What small feature do you want to implement?"
+   - Spanish: "¿Qué característica pequeña quieres implementar?"
+2. Analyze the feature request to understand the scope and requirements
+3. **Detect Feature Complexity**:
+   - **Simple**: Single file changes, CSS modifications, basic functionality
+   - **Moderate**: Multiple file changes, basic logic implementation
+   - **Complex**: New components, significant logic, testing requirements
+4. Generate a focused implementation plan in the detected language that includes:
+   - **Feature Description**: Clear, concise description of what needs to be done
+   - **Files to Modify**: Specific files that need changes
+   - **Implementation Steps**: Step-by-step actions to complete the feature
+   - **Technical Details**: Specific code changes, CSS classes, or logic needed
+   - **Testing Requirements**: Basic verification steps
+   - **Estimated Time**: Rough time estimate (minutes/hours)
+   - **Any clarifications needed from the developer**
+5. Rate the understanding of the request on a scale of 1-10 in the detected language:
+   - 1 = Very unclear, major gaps in understanding / Muy poco claro, grandes brechas en la comprensión
+   - 10 = Perfectly clear, complete understanding / Perfectamente claro, comprensión completa
+6. Save the feature plan to `/features/{{date}}-{{feature_name | slugify}}.md`
+7. Wait for explicit developer confirmation before proceeding with implementation
+8. If clarification is needed, ask specific questions in the detected language
+9. After receiving clarifications, rate the improved understanding and proceed
+10. If the developer confirms the feature plan, proceed with implementation
+11. PROVIDE ALL RESPONSES IN SPANISH by default (unless the user clearly specifies English)
 
 ## Feature Complexity Guidelines
 

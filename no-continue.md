@@ -6,50 +6,16 @@ description: Do not proceed with coding, deployment, or execution. Wait for expl
 
 Do not proceed with coding, deployment, or execution. Wait for explicit developer confirmation.
 
-# No Continue Workflow
-
-Do not proceed with coding, deployment, or execution. Wait for explicit developer confirmation.
-
-## ⚠️ CRITICAL AI EXECUTION RULES
-
-**STOP IMMEDIATELY**: This workflow exists to prevent automatic execution. Never proceed with any implementation.
-
-**WAITING PROTOCOL**: Always wait for explicit user confirmation before any action.
-
-**TERMINATION CONDITIONS**:
-- Always stop after providing status information
-- Never execute any commands or make changes
-- If user requests specific action: Redirect to appropriate workflow
-- This workflow is for status reporting only
-
 ## Steps
 
-0. **LANGUAGE DETECTION**: Check for English keywords ("status", "pending", "waiting"). Default to Spanish.
-
-1. **STATUS ASSESSMENT**:
-   - Check current project state
-   - Identify pending tasks or decisions
-   - Review any incomplete workflows or plans
-
-2. **INFORMATION GATHERING**:
-   - Collect details about pending features
-   - Identify required clarifications
-   - List outstanding decisions
-
-3. **STATUS REPORT**:
-   - Present current status clearly
-   - List all pending items
-   - Explain what is waiting for approval
-
-4. **WAITING INSTRUCTION**:
-   - Clearly state that no action will be taken
-   - Explain what user confirmation is needed
-   - Provide clear next steps for user
-
-5. **STOP EXECUTION**:
-   - Do not proceed with any implementation
-   - Do not execute any commands
-   - Wait for explicit user instruction
+0. Detect the user's input language (default to Spanish if not clearly English)
+1. If no clear English indicators are found, default to Spanish for all responses
+2. Describe the current status of pending features or issues in the detected language
+3. Explain what actions are waiting for approval in the detected language
+4. List any clarifications or decisions needed from the developer in the detected language
+5. Do NOT proceed with any coding, deployment, or execution activities
+6. Wait for explicit confirmation from the developer before taking any further action
+7. PROVIDE ALL RESPONSES IN SPANISH by default (unless the user clearly specifies English)
 
 **Language Support:**
 - **Spanish**: Responder en español para entrada en español (default)

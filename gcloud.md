@@ -6,72 +6,41 @@ description: Execute Google Cloud CLI commands based on developer requests
 
 Execute Google Cloud CLI (gcloud) commands based on developer requests. This workflow handles common GCP operations like authentication, project management, deployments, and resource configuration.
 
-# Google Cloud CLI Workflow
-
-Execute Google Cloud CLI (gcloud) commands based on developer requests. This workflow handles common GCP operations like authentication, project management, deployments, and resource configuration.
-
-## ⚠️ CRITICAL AI EXECUTION RULES
-
-**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete workflow within 8 steps maximum. If command execution takes longer than expected, provide status and continue monitoring.
-
-**SAFETY FIRST**: Never execute destructive commands (delete, remove, destroy). Always ask user for confirmation on potentially destructive operations.
-
-**DECISION POINTS**: Make binary decisions quickly - use first matching operation type found.
-
-**TERMINATION CONDITIONS**:
-- If gcloud not installed: Stop with installation instructions
-- If authentication fails: Stop with auth instructions
-- If command fails: Provide error details and stop
-- If destructive command detected: Ask for confirmation and stop if denied
-
 ## Steps
 
-0. **LANGUAGE DETECTION**: Check for English keywords ("gcloud", "google cloud", "gcp"). Default to Spanish.
+0. Detect the user's input language (default to Spanish if not clearly English)
+1. If no clear English indicators are found, default to Spanish for all responses
+2. Detect type of GCP operation:
+   - Authentication and initial configuration
+   - Project management (create, list, configure)
+   - Resource management (compute, storage, networking)
+   - Deployments and services (App Engine, Cloud Run, Kubernetes)
+   - Monitoring and logging
+   - IAM and permissions configuration
 
-1. **OPERATION CLASSIFICATION** (Quick match):
-   - **Auth**: Keywords like "login", "auth", "authenticate"
-   - **Project**: Keywords like "project", "create", "list", "set"
-   - **Compute**: Keywords like "vm", "instance", "compute"
-   - **Storage**: Keywords like "bucket", "storage", "gs://"
-   - **Deploy**: Keywords like "deploy", "app engine", "cloud run"
-   - **Default**: General gcloud operations
+3. Validate gcloud configuration:
+   - Verify gcloud CLI installation
+   - Verify active authentication
+   - Verify default configured project
+   - Verify configured zone/region
 
-2. **ENVIRONMENT VALIDATION**:
-   - Execute: `gcloud --version`
-   - If fails: STOP - "gcloud CLI not installed"
-   - Execute: `gcloud auth list`
-   - If no active account: STOP - "Authentication required"
-   - Execute: `gcloud config get-value project`
-   - If no project: Ask user to set project
+4. Prepare command parameters:
+   - Parse developer request
+   - Identify specific gcloud command
+   - Configure appropriate flags and options
+   - Prepare necessary environment variables
 
-3. **COMMAND CONSTRUCTION**:
-   - Map operation to specific gcloud command
-   - Add required flags and options
-   - Include project, zone, region as needed
-   - Validate command syntax mentally
+5. Execute gcloud command:
+   - Execute command with prepared parameters
+   - Handle authentication if necessary
+   - Capture output and possible errors
+   - Apply appropriate timeouts
 
-4. **SAFETY CHECK**:
-   - Scan command for destructive keywords: delete, remove, destroy, rm
-   - If found: Ask user for explicit confirmation
-   - If user denies: STOP with safety message
-   - If user confirms: Proceed to execution
-
-5. **COMMAND EXECUTION**:
-   - Execute prepared gcloud command
-   - Set reasonable timeout (30-60 seconds)
-   - Capture stdout, stderr, and exit code
-   - If command fails: Provide error details and stop
-
-6. **RESULT PROCESSING**:
-   - Parse command output for key information
-   - Format results for user readability
-   - Extract important details (IDs, URLs, status)
-   - Provide success confirmation
-
-7. **FOLLOW-UP GUIDANCE**:
-   - Suggest next logical steps
-   - Provide relevant documentation links
-   - Offer alternative commands if applicable
+6. Process results:
+   - Display command output
+   - Interpret exit codes
+   - Provide feedback to developer
+   - Suggest next steps if applicable
 
 # 🚨🚨🚨 CRITICAL WARNING: DESTRUCTIVE OPERATIONS 🚨🚨🚨
 

@@ -6,66 +6,38 @@ description: Generate or update README.md based on current application analysis
 
 Generate or update a comprehensive README.md file based on the current application/project structure and code analysis.
 
-# README Generator Workflow
-
-Generate or update a comprehensive README.md file based on the current application/project structure and code analysis.
-
-## ⚠️ CRITICAL AI EXECUTION RULES
-
-**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete README generation within 8 steps maximum. If project analysis takes too long, use available information and proceed.
-
-**DECISION POINTS**: Make binary decisions quickly - include section or skip based on available information.
-
-**TERMINATION CONDITIONS**:
-- If no project structure found: Generate basic template and stop
-- If README.md already exists: Ask user if they want to overwrite
-- If generation completes: Save file and provide summary
-- Always provide README content or clear error message
-
 ## Steps
 
-0. **LANGUAGE DETECTION**: Check for English keywords ("readme", "documentation", "generate"). Default to Spanish.
-
-1. **PROJECT ANALYSIS**:
-   - Scan current directory for project files
-   - Identify main programming languages
-   - Detect project type (web app, API, library, CLI)
-   - Check for existing README.md
-
-2. **DEPENDENCY ANALYSIS**:
-   - Read package.json, requirements.txt, or similar files
-   - Extract project name, version, description
-   - Identify key dependencies and scripts
-   - Note installation requirements
-
-3. **CODE STRUCTURE ANALYSIS** (Limited scope):
-   - Examine main entry points (index.js, main.py, etc.)
-   - Identify key directories (src/, lib/, api/)
-   - Note any configuration files
-   - Skip detailed code analysis to avoid loops
-
-4. **CONTENT GENERATION**:
-   - Create title and description from project data
-   - Generate installation instructions
-   - Add basic usage examples
-   - Include project structure overview
-   - Add development setup section
-
-5. **FORMATTING AND VALIDATION**:
-   - Ensure proper markdown syntax
-   - Add relevant badges if applicable
-   - Validate all links and references
-   - Check for completeness
-
-6. **FILE OUTPUT**:
-   - Save to ./README.md
-   - Preserve existing README if user chooses not to overwrite
-   - Include generation timestamp
-
-7. **COMPLETION REPORT**:
-   - Confirm successful generation
-   - Provide file location and summary
-   - Suggest next steps (customization, review)
+0. Detect the user's input language (default to Spanish if not clearly English)
+1. If no clear English indicators are found, default to Spanish for all responses
+2. Analyze the project structure and identify key components:
+   - Project type (web app, API, library, CLI tool, etc.)
+   - Main programming languages and frameworks used
+   - Key directories and their purposes
+   - Configuration files and their roles
+   - Entry points and main application files
+3. Examine package.json, requirements.txt, or similar dependency files to understand:
+   - Project dependencies and their purposes
+   - Available scripts and commands
+   - Project metadata (name, version, description, author)
+4. Analyze key source files to understand:
+   - Main functionality and features
+   - Architecture patterns used
+   - API endpoints or main functions (if applicable)
+   - Database models or data structures
+5. Generate a comprehensive README.md in the detected language with sections:
+   - Project title and description
+   - Installation instructions
+   - Usage examples
+   - API documentation (if applicable)
+   - Project structure overview
+   - Dependencies and requirements
+   - Development setup
+   - Contributing guidelines
+   - License information
+6. Include appropriate badges and links based on project type
+7. Save the generated README.md to the project root
+8. PROVIDE ALL RESPONSES IN SPANISH by default (unless the user clearly specifies English)
 
 **Language Support:**
 - **Spanish**: DEFAULT - Generar README en español para toda entrada

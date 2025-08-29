@@ -4,84 +4,35 @@ description: AI-Optimized Pure Coding Rules - Machine Readable Format
 
 # AI CODE GENERATION RULES
 
-## ⚠️ CRITICAL AI EXECUTION RULES
-
-**CODE GENERATION PROTOCOL**: Always follow these rules when generating code. Never deviate from established patterns.
-
-**VALIDATION FIRST**: Check code against all rules before presenting to user.
-
-**TERMINATION CONDITIONS**:
-- If code violates any rule: Reject and regenerate
-- If user requests rule violation: Explain why and suggest alternative
-- If rule interpretation unclear: Ask user for clarification
-- Always ensure code meets all specified criteria
-
 ## CORE CODING DIRECTIVES
 
 ### CODE_GENERATION
-- **PRIORITY**: Readability > Cleverness (always choose clear over clever)
-- **NAMING**: Use descriptive, intention-revealing names only
-- **FUNCTIONS**: Single responsibility, maximum 50 lines
-- **CLASSES**: Single responsibility, maximum 300 lines
-- **DUPLICATION**: Eliminate via abstraction or utilities
+- PRIORITY: Readability > Cleverness
+- NAMING: descriptive, intention-revealing names only
+- FUNCTIONS: single responsibility, < 50 lines
+- CLASSES: single responsibility, < 300 lines
+- DUPLICATION: Eliminate via abstraction or utilities
 
 ### TESTING_MANDATE
-- **UNIT_TESTS**: 100% coverage for new code (mandatory)
-- **TEST_FIRST**: Write test before implementation (TDD approach)
-- **EDGE_CASES**: Handle null, empty, boundary conditions
-- **ERROR_SCENARIOS**: Test all failure paths
-- **MOCK_EXTERNAL**: Database, API, file system calls
+- UNIT_TESTS: 100% coverage for new code
+- TEST_FIRST: Write test before implementation
+- EDGE_CASES: Handle null, empty, boundary conditions
+- ERROR_SCENARIOS: Test all failure paths
+- MOCK_EXTERNAL: Database, API, file system calls
 
 ### SECURITY_PROTOCOLS
-- **INPUT_VALIDATION**: Sanitize all user inputs
-- **AUTHENTICATION**: Verify before data access
-- **AUTHORIZATION**: Check permissions for operations
-- **ENCRYPTION**: Sensitive data at rest/transit
-- **DEPENDENCY_SCAN**: Weekly security audits
+- INPUT_VALIDATION: Sanitize all user inputs
+- AUTHENTICATION: Verify before data access
+- AUTHORIZATION: Check permissions for operations
+- ENCRYPTION: Sensitive data at rest/transit
+- DEPENDENCY_SCAN: Weekly security audits
 
 ### PERFORMANCE_BASELINE
-- **RESPONSE_TIME**: < 500ms for web endpoints
-- **MEMORY_USAGE**: Monitor and optimize
-- **DATABASE_QUERIES**: Use indexes, avoid N+1
-- **CACHE_STRATEGY**: Implement for expensive operations
-- **ASYNC_OPERATIONS**: Non-blocking for I/O
-
-## EXECUTION WORKFLOW
-
-### STEP 1: REQUIREMENTS ANALYSIS
-- Parse user requirements clearly
-- Identify functional and non-functional needs
-- Determine appropriate technology stack
-
-### STEP 2: CODE STRUCTURE PLANNING
-- Design class/function hierarchy
-- Plan data structures and relationships
-- Identify integration points
-
-### STEP 3: CODE GENERATION
-- Generate code following all rules above
-- Include comprehensive error handling
-- Add detailed documentation/comments
-
-### STEP 4: TESTING INTEGRATION
-- Generate unit tests for all functions
-- Include integration test scenarios
-- Add edge case validations
-
-### STEP 5: SECURITY VALIDATION
-- Review input validation implementation
-- Verify authentication/authorization
-- Check for common security vulnerabilities
-
-### STEP 6: PERFORMANCE REVIEW
-- Analyze algorithmic complexity
-- Identify potential bottlenecks
-- Ensure async/non-blocking patterns
-
-### STEP 7: FINAL VALIDATION
-- Cross-reference against all rules
-- Verify code meets requirements
-- Ensure documentation completeness
+- RESPONSE_TIME: < 500ms for web endpoints
+- MEMORY_USAGE: Monitor and optimize
+- DATABASE_QUERIES: Use indexes, avoid N+1
+- CACHE_STRATEGY: Implement for expensive operations
+- ASYNC_OPERATIONS: Non-blocking for I/O
 
 ## LANGUAGE PATTERNS
 

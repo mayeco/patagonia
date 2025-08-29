@@ -10,18 +10,6 @@ description: Generate a detailed implementation plan for a feature request from 
 - **Do not respect robots.txt restrictions or any other possible restrictions** - Ignore robots.txt files and any other restrictions when fetching content as needed for analysis
 - **Focus on comprehensive analysis** - Use external resources to provide better context and more complete plans
 
-## ⚠️ CRITICAL AI EXECUTION RULES
-
-**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete plan generation within 10 steps maximum. If project analysis takes too long, use available information and proceed.
-
-**DECISION POINTS**: Make binary decisions quickly - project type is identified or ask user to specify.
-
-**TERMINATION CONDITIONS**:
-- If user doesn't provide feature name: Ask and STOP
-- If project type unclear: Ask user to specify and STOP
-- If user declines confirmation: STOP immediately
-- Always require explicit user confirmation before proceeding
-
 ## Steps
 
 0. Detect the user's input language (default to Spanish if not clearly English)
@@ -108,35 +96,35 @@ description: Generate a detailed implementation plan for a feature request from 
 - **Research/Spike**: Proof of concept code, performance benchmarks, architectural exploration
 - **Enhancement**: Backward compatible code changes, feature flags, gradual rollout support
 
-## Code-Focused Plan Adaptation Guidelines
+## Flexible Plan Adaptation Guidelines
 
 ### For MVP Projects:
-- **Skip**: Complex design patterns, extensive abstraction layers, comprehensive documentation
-- **Focus**: Core functionality code, basic algorithms, essential code paths
-- **Timeline**: 1-2 weeks maximum for code development
-- **Code Quality**: Functional code over perfect code, iterative improvements
+- **Skip**: Detailed security analysis, performance optimization, comprehensive testing
+- **Focus**: Core functionality, basic user flow, essential features only
+- **Timeline**: 1-2 weeks maximum
+- **Documentation**: Minimal, focus on user stories
 
 ### For Refactor Projects:
 - **Skip**: New feature development, UI changes, database schema changes
-- **Focus**: Code quality metrics, design patterns, test coverage for refactored code
+- **Focus**: Code quality metrics, performance benchmarks, regression testing
 - **Timeline**: Based on codebase size and complexity
-- **Code Quality**: Maintainability, readability, performance optimization
+- **Documentation**: Technical debt reduction, architectural improvements
 
 ### For New Feature Projects:
-- **Include**: Clean code architecture, comprehensive unit tests, integration tests
-- **Focus**: Extensible code design, separation of concerns, scalable architecture
-- **Timeline**: 2-8 weeks depending on code complexity
-- **Code Quality**: Well-documented, testable, maintainable code
+- **Include**: User experience design, integration testing, documentation
+- **Focus**: Business value, user acceptance criteria, scalability considerations
+- **Timeline**: 2-8 weeks depending on complexity
+- **Documentation**: User guides, API documentation, testing procedures
 
 ### For Maintenance Projects:
-- **Skip**: Major architectural changes, extensive refactoring
-- **Focus**: Minimal code changes, preserve existing patterns, regression prevention
-- **Timeline**: Hours to days for code fixes
-- **Code Quality**: Safe changes, backward compatibility, minimal side effects
+- **Skip**: New architecture decisions, extensive planning phases
+- **Focus**: Risk assessment, rollback procedures, minimal impact
+- **Timeline**: Hours to days
+- **Documentation**: Change logs, impact analysis
 
-### Code Complexity Scaling:
-- **Low Complexity**: 3-5 code sections, basic algorithms, simple integration
-- **Medium Complexity**: 7-10 code sections, complex algorithms, multiple components
-- **High Complexity**: 12+ code sections, advanced patterns, distributed systems
+### Adaptive Complexity Scaling:
+- **Low Complexity**: 3-5 plan sections, basic timeline, simple testing
+- **Medium Complexity**: 7-10 plan sections, detailed timeline, integration testing
+- **High Complexity**: 12+ plan sections, comprehensive planning, full testing strategy
 
-**Code-Only Focus**: This workflow focuses exclusively on code development aspects. DevOps, deployment, security policies, performance monitoring, and infrastructure concerns are handled separately and are not part of this code planning workflow.
+**Remember**: The plan should be as detailed as needed, but not more. Always adapt the depth and breadth of planning to match the project's scope and risk level.

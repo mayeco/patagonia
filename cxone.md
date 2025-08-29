@@ -6,68 +6,36 @@ description: Ejecutar análisis de seguridad con Checkmarx One CLI
 
 Ejecutar análisis de seguridad en el proyecto actual usando Checkmarx One CLI con variables de entorno configuradas.
 
-# Checkmarx One CLI Scan Workflow
-
-Ejecutar análisis de seguridad en el proyecto actual usando Checkmarx One CLI con variables de entorno configuradas.
-
-## ⚠️ CRITICAL AI EXECUTION RULES
-
-**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete workflow within 8 steps maximum. If scan takes longer than expected, provide status update and continue monitoring.
-
-**SECURITY CONSTRAINTS**: 
-- NEVER execute validation commands like `which cx`, `command -v cx`
-- NEVER display or print environment variables (CX_CLIENT_SECRET, etc.)
-- STOP immediately if environment variables are missing
-
-**TERMINATION CONDITIONS**:
-- If `cx` command not found: Stop with error message
-- If environment variables missing: Stop with configuration error
-- If scan fails: Provide error details and stop
-- If scan succeeds: Generate report and complete
-
 ## Steps
 
-0. **LANGUAGE DETECTION**: Check for English keywords ("english", "scan", "security"). Default to Spanish.
+1. Setup environment:
+   - Assume `cx` is in PATH (ABSOLUTELY NO VALIDATION COMMANDS ALLOWED)
+   - BLOCKED: DO NOT EXECUTE `which cx`, `command -v cx`, or ANY path validation commands
+   - CRITICAL SECURITY: DO NOT print or display environment variables
+   - Use environment variables for authentication (CX_TENANT, CX_BASE_URI, CX_CLIENT_ID, CX_CLIENT_SECRET)
 
-1. **ENVIRONMENT VALIDATION**:
-   - Check required environment variables exist: CX_TENANT, CX_BASE_URI, CX_CLIENT_ID, CX_CLIENT_SECRET
-   - If any missing: STOP - "Missing required environment variables"
-   - If all present: Proceed to step 2
+2. Analyze project and prepare scan:
+   - Detect project structure and programming languages
+   - Set scan parameters (project name, branch, scan types: SAST, SCA)
+   - Branch detection: Default to "main", detect current branch only if explicitly requested
+   - IMPORTANT: Do NOT run git commands unless specifically requested by user
 
-2. **PROJECT ANALYSIS**:
-   - Scan current directory for source code files
-   - Detect primary programming languages (JavaScript, Python, Java, etc.)
-   - Set default project name from directory name
-   - Set default branch to "main"
+3. Execute Checkmarx One scan:
+   - Run `cx scan create --project-name "${PROJECT_NAME}" --file-source "." --scan-info-format "json" --branch "${BRANCH_NAME}" --agent "Panagonia" --file-filter "${FILE_FILTERS}"`
+   - CORRECT FLAGS: Use --file-source (NOT --source)
 
-3. **SCAN PARAMETER CONFIGURATION**:
-   - Project name: Use directory name or user-specified
-   - Branch: Use "main" default or user-specified
-   - Scan types: SAST and SCA by default
-   - File filters: Include common source file extensions
+4. Monitor and process results:
+   - Display scan progress and status
+   - Retrieve and categorize vulnerability findings (Critical, High, Medium, Low)
+   - Provide remediation suggestions
 
-4. **SCAN EXECUTION**:
-   - Execute: `cx scan create --project-name "${PROJECT_NAME}" --file-source "." --scan-info-format "json" --branch "${BRANCH_NAME}" --agent "Panagonia"`
-   - Capture scan ID from response
-   - Monitor scan progress (provide status updates)
-   - If command fails: STOP with error details
+5. Generate report:
+   - Create local report file with scan results
+   - Include executive summary and detailed findings
+   - Provide recommendations for fixing identified issues
+   - Display total number of findings
 
-5. **RESULT PROCESSING**:
-   - Retrieve scan results using scan ID
-   - Parse JSON output for vulnerabilities
-   - Categorize by severity: Critical, High, Medium, Low
-   - Extract vulnerability details and remediation suggestions
-
-6. **REPORT GENERATION**:
-   - Create structured report with findings
-   - Include executive summary with total counts
-   - Provide specific remediation steps for each vulnerability
-   - Save report to local file
-
-7. **FINAL RESPONSE**:
-   - Provide scan summary with key metrics
-   - List top 5 most critical vulnerabilities
-   - Suggest next steps for remediation
+10. PROVIDE ALL RESPONSES IN SPANISH by default (unless the user clearly specifies English)
 
 **Prerequisites:**
 - Checkmarx One CLI installed (`cx` command available)

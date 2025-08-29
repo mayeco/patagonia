@@ -10,68 +10,54 @@ description: Workflow for obtaining documentation of frameworks, libraries, lang
 
 Complete workflow for obtaining technical documentation of frameworks, libraries, programming languages and other technologies. This workflow helps find, access and use documentation efficiently.
 
-# Documentation Workflow
-
-Complete workflow for obtaining technical documentation of frameworks, libraries, programming languages and other technologies. This workflow helps find, access and use documentation efficiently.
-
-## ⚠️ CRITICAL AI EXECUTION RULES
-
-**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete workflow within 8 steps maximum. If search takes longer than expected, use first available results.
-
-**DECISION POINTS**: Make binary decisions quickly - use first relevant result found. Do not compare multiple options extensively.
-
-**TERMINATION CONDITIONS**:
-- If no documentation found after 3 search attempts: Provide best available alternative
-- If user specifies specific technology: Focus search on that technology only
-- If search commands fail: Use basic web search as fallback
-- If results found: Stop and present documentation
-
 ## Steps
 
-0. **LANGUAGE DETECTION**: Check for English keywords ("english", "documentation", "docs"). Default to Spanish.
+0. Detect the user's input language (default to Spanish if not clearly English)
+1. If no clear English indicators are found, default to Spanish for all responses
+2. Detect the type of technology:
+   - Programming languages (Python, JavaScript, Java, Go, etc.)
+   - Frameworks (React, Angular, Vue, Django, Spring, etc.)
+   - Libraries (NumPy, Pandas, Express, Lodash, etc.)
+   - Tools (Docker, Kubernetes, Terraform, etc.)
+   - Cloud services (AWS, GCP, Azure)
+   - Databases (MongoDB, PostgreSQL, Redis, etc.)
 
-1. **TECHNOLOGY IDENTIFICATION**:
-   - Extract technology name from user input
-   - Match against known categories: languages, frameworks, tools, databases
-   - If unclear: Ask user for clarification and STOP
-   - Set search scope to identified technology
+3. Identify the documentation source:
+   - Official project documentation
+   - Reference sites (MDN, DevDocs, etc.)
+   - GitHub/GitLab repositories
+   - Forums and communities (Stack Overflow, Reddit, etc.)
+   - Courses and tutorials (freeCodeCamp, Udemy, etc.)
+   - Technical blogs and articles
 
-2. **SOURCE PRIORITIZATION**:
-   - Priority 1: Official documentation (docs.*domain*, developer.*domain*)
-   - Priority 2: Reference sites (MDN, DevDocs, W3Schools)
-   - Priority 3: GitHub repositories (README, docs/ folder)
-   - Execute search in priority order
+4. Determine the access method:
+   - Online documentation (websites)
+   - Offline documentation (PDF files, eBooks)
+   - Integrated documentation (VS Code, IntelliJ, etc.)
+   - Command line (man pages, help commands)
+   - Documentation APIs
 
-3. **SEARCH EXECUTION**:
-   - Use MCP brave_web_search with specific queries:
-     - `brave_web_search "${TECHNOLOGY} documentation site:docs.${DOMAIN}"`
-     - `brave_web_search "${TECHNOLOGY} official docs"`
-   - Limit to 3 search attempts maximum
-   - If first search succeeds: Use results and proceed
-   - If fails: Try alternative query and proceed
+5. Prepare search query:
+   - Extract specific technical terms
+   - Identify version if relevant
+   - Consider usage context
+   - Prepare alternative queries
 
-4. **CONTENT EXTRACTION**:
-   - Extract key documentation sections: installation, usage, API reference
-   - Prioritize practical examples and code snippets
-   - Limit content to essential information only
-   - If content too long: Summarize key points
+6. Execute search and retrieval:
+   - Search official sources first
+   - Use MCP search brave_web_search for comprehensive web searches:
+     - `brave_web_search "python documentation site:docs.python.org"`
+     - `brave_web_search "react tutorial site:react.dev"`
+     - `brave_web_search "docker best practices"`
+   - Verify date and relevance
+   - Get direct links
+   - Download documentation if necessary
 
-5. **RESULT ORGANIZATION**:
-   - Structure by categories: Getting Started, Basic Usage, Advanced Features
-   - Include direct links to original documentation
-   - Add practical examples where available
-   - Remove redundant or outdated information
-
-6. **DELIVERY PREPARATION**:
-   - Format as clear, actionable documentation
-   - Include installation instructions if relevant
-   - Add troubleshooting section for common issues
-   - Verify all links are accessible
-
-7. **FINAL RESPONSE**:
-   - Provide organized documentation summary
-   - Include primary resource links
-   - Suggest next steps or related documentation
+7. Process and organize results:
+   - Filter relevant information
+   - Organize by categories (installation, basic usage, advanced, troubleshooting)
+   - Create executive summary
+   - Prepare practical examples
 
 **Language Support:**
 - **Spanish**: DEFAULT - Buscar y explicar documentación en español para TODA entrada

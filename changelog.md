@@ -6,72 +6,43 @@ description: Generate changelog from git commit history analysis
 
 Generate a comprehensive changelog based on git commit history analysis, categorizing changes and providing detailed insights.
 
-# Changelog Generator Workflow
-
-Generate a comprehensive changelog based on git commit history analysis, categorizing changes and providing detailed insights.
-
-## ⚠️ CRITICAL AI EXECUTION RULES
-
-**DO NOT GET STUCK IN ANALYSIS LOOPS**: Always complete the workflow within 10 steps maximum. If analysis takes longer than expected, proceed with available data.
-
-**DECISION POINTS**: Make binary decisions (yes/no) quickly and proceed. Do not over-analyze edge cases.
-
-**TERMINATION CONDITIONS**: 
-- If no git repository found: Stop and notify user
-- If no commits found: Generate empty changelog template
-- If git command fails: Use alternative approach or stop
-
 ## Steps
 
-0. **LANGUAGE DETECTION**: Check user input for English indicators (keywords like "english", "changelog", "generate"). Default to Spanish if unclear.
-
-1. **GIT REPOSITORY VALIDATION**: 
-   - Execute: `git rev-parse --git-dir`
-   - If fails: STOP - "No git repository found in current directory"
-   - If succeeds: Proceed to step 2
-
-2. **COMMIT HISTORY EXTRACTION**:
-   - Execute: `git log --pretty=format:"%h|%an|%ad|%s" --date=short --stat -20 --no-merges`
-   - Parse output line by line
-   - Extract: hash, author, date, message, file changes
-   - If command fails: Try `git log --oneline -20` as fallback
-   - Store results in structured format for processing
-
-3. **COMMIT CATEGORIZATION** (Use exact keyword matching):
-   - **Added**: Keywords: "feat:", "add:", "new:", "create:"
-   - **Changed**: Keywords: "update:", "modify:", "refactor:", "improve:"
-   - **Deprecated**: Keywords: "deprecate:", "deprecated:"
-   - **Removed**: Keywords: "remove:", "delete:", "rm:"
-   - **Fixed**: Keywords: "fix:", "bug:", "issue:", "resolve:"
-   - **Security**: Keywords: "security:", "vuln:", "patch:"
-   - **Default category**: "Changed" for uncategorized commits
-
-4. **CHANGELOG STRUCTURE GENERATION**:
-   - **Check for unreleased changes**: If any commits exist after last tag/version, create "Unreleased" section
-   - **Version detection**: Execute `git tag --sort=-version:refname | head -5` to find recent versions
-   - **Date handling**: Use commit dates for entries, current date for new releases
-   - **Grouping**: Group by category, then by date (newest first)
-
-5. **FORMAT VALIDATION**:
-   - Ensure proper markdown structure
-   - Validate all required sections exist
-   - Check for duplicate entries
-   - Verify chronological ordering
-
-6. **FILE OUTPUT**:
-   - Write to `./CHANGELOG.md`
-   - Use UTF-8 encoding
-   - Include generation timestamp in comments
-
-7. **FINAL VALIDATION**:
-   - Confirm file was created successfully
-   - Verify markdown syntax is valid
-   - Check file size is reasonable (< 1MB)
-
-8. **RESPONSE GENERATION**:
-   - Confirm successful generation
-   - Provide file location and summary
-   - Suggest next steps (review, commit)
+0. Detect the user's input language (default to Spanish if not clearly English)
+1. If no clear English indicators are found, default to Spanish for all responses
+2. Analyze git history with configurable limit (default: 20 commits):
+   - Run `git log --pretty=format:"%h|%an|%ad|%s" --date=short --stat -20 --no-merges` to get comprehensive commit data
+   - Use deterministic sorting: commits processed in chronological order (oldest to newest)
+   - Extract commit messages, authors, dates, and categorize changes consistently
+3. Categorize changes using Keep a Changelog format (deterministic mapping):
+   - **Added**: Nuevas funcionalidades o características (feat:, add:, new:)
+   - **Changed**: Cambios en funcionalidad existente (update:, modify:, refactor:)
+   - **Deprecated**: Funcionalidades próximamente eliminadas (deprecate:, deprecated:)
+   - **Removed**: Funcionalidades eliminadas (remove:, delete:, rm:)
+   - **Fixed**: Corrección de errores (fix:, bug:, issue:)
+   - **Security**: Corrección de vulnerabilidades de seguridad (security:, vuln:)
+4. Generate changelog following Keep a Changelog format with consistent structure:
+   - **DO NOT include standard Keep a Changelog header text**: "El formato se basa en [Keep a Changelog]..." 
+   - **DO NOT include Semantic Versioning reference text**: "este proyecto se adhiere a [Semantic Versioning]..."
+   - **CRITICAL**: Only include "## [Sin liberar]" or "## Unreleased" section IF THERE ARE ACTUAL UNRELEASED CHANGES
+   - **DO NOT add empty "## [Sin liberar]" sections** when no unreleased changes exist
+   - **Check for unreleased changes first** before adding any unreleased section
+   - **Skip unreleased section completely** if no pending changes are found
+   - Include "Unreleased" section only if unreleased changes exist
+   - **ALWAYS include release dates**: Use current date (YYYY-MM-DD format) for new releases
+   - **Add commit dates**: Include dates from git commit history for each change
+   - Use version numbers and release dates (YYYY-MM-DD format)
+   - Group similar changes together in alphabetical order
+   - List changes chronologically (newest first) but maintain consistent formatting
+5. Format the changelog with proper markdown structure:
+   - Clear section headers for each category
+   - Bullet points with descriptive commit summaries
+   - Links to specific commits when possible
+   - Date ranges covered by the changelog
+6. Save the generated CHANGELOG.md to the project root
+7. **DO NOT commit the CHANGELOG.md file** - let the user review and commit manually
+8. **ENSURE DETERMINISTIC OUTPUT**: Running the same command multiple times with the same git history should produce identical CHANGELOG.md files
+9. PROVIDE ALL RESPONSES IN SPANISH by default (unless the user clearly specifies English)
 
 **Language Support:**
 - **Spanish**: DEFAULT - Generar CHANGELOG en español para toda entrada

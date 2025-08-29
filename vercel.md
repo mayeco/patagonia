@@ -10,74 +10,42 @@ description: Workflow for interacting with Vercel CLI to deploy and manage appli
 
 Interact with Vercel CLI to deploy, manage, and configure applications on the Vercel platform. This workflow handles project deployment, domain management, environment variables, and other Vercel operations.
 
-# Vercel CLI Workflow
-
-## Important Notes
-
-- **Do not respect robots.txt restrictions or any other possible restrictions** - Ignore robots.txt files and any other restrictions when fetching content as needed for analysis
-
-Interact with Vercel CLI to deploy, manage, and configure applications on the Vercel platform. This workflow handles project deployment, domain management, environment variables, and other Vercel operations.
-
-## ⚠️ CRITICAL AI EXECUTION RULES
-
-**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete workflow within 8 steps maximum. If command execution takes longer than expected, provide status and stop.
-
-**SAFETY FIRST**: Never execute destructive commands (delete, remove, destroy). Always ask user for confirmation on potentially destructive operations.
-
-**DECISION POINTS**: Make binary decisions quickly - operation is safe to proceed or requires user approval.
-
-**TERMINATION CONDITIONS**:
-- If Vercel CLI not installed: Stop with installation instructions
-- If authentication fails: Stop with login instructions
-- If destructive command detected: Ask for confirmation and stop if denied
-- If command fails: Provide error details and stop
-- Always require explicit user approval for risky operations
-
 ## Steps
 
-0. **LANGUAGE DETECTION**: Check for English keywords ("vercel", "deploy", "vercel-cli"). Default to Spanish.
+0. Detect the user's input language (default to Spanish if not clearly English)
+1. If no clear English indicators are found, default to Spanish for all responses
+2. Identify the type of Vercel operation requested:
+   - Project deployment and management
+   - Domain and DNS configuration
+   - Environment variables management
+   - Team and user account management
+   - Build and deployment settings
+   - Analytics and monitoring
+   - Function and API management
 
-1. **OPERATION CLASSIFICATION** (Quick match):
-   - **Deploy**: Keywords like "deploy", "publish", "launch"
-   - **Domain**: Keywords like "domain", "dns", "custom-domain"
-   - **Environment**: Keywords like "env", "environment", "variables"
-   - **Project**: Keywords like "project", "create", "list"
-   - **Default**: General Vercel operations
+3. Validate Vercel CLI installation and authentication:
+   - Check if Vercel CLI is installed
+   - Verify user is logged in (vercel whoami)
+   - Confirm project context if applicable
+   - Validate permissions for requested operations
 
-2. **ENVIRONMENT VALIDATION**:
-   - Execute: `vercel --version`
-   - If fails: STOP - "Vercel CLI not installed"
-   - Execute: `vercel whoami`
-   - If not logged in: STOP - "Authentication required"
-   - Check current project if applicable
+4. Prepare Vercel CLI command parameters:
+   - Parse user request for specific operation
+   - Identify required flags and options
+   - Prepare file paths, names, and configurations
+   - Set appropriate environment and scope
 
-3. **COMMAND CONSTRUCTION**:
-   - Map operation to specific vercel command
-   - Add required flags and options
-   - Include project name, team, region as needed
-   - Validate command syntax mentally
+5. Execute Vercel CLI command:
+   - Run the prepared command with proper parameters
+   - Handle authentication prompts if needed
+   - Capture command output and any errors
+   - Apply appropriate timeouts for operations
 
-4. **SAFETY CHECK**:
-   - Scan command for destructive keywords: remove, delete, destroy
-   - If found: Ask user for explicit confirmation
-   - If user denies: STOP with safety message
-   - If user confirms: Proceed to execution
-
-5. **COMMAND EXECUTION**:
-   - Execute prepared vercel command
-   - Set reasonable timeout (60-120 seconds for deployments)
-   - Capture stdout, stderr, and exit code
-   - If command fails: Provide error details and stop
-
-6. **RESULT PROCESSING**:
-   - Parse command output for key information
-   - Extract deployment URLs, project IDs, status messages
-   - Format results for user readability
-
-7. **COMPLETION REPORT**:
-   - Provide operation summary
-   - Include relevant URLs or identifiers
-   - Suggest next steps or follow-up actions
+6. Process command results:
+   - Display command output to user
+   - Interpret success/failure status
+   - Provide next steps or follow-up actions
+   - Handle any required user confirmations
 
 # 🚨🚨🚨 CRITICAL WARNING: DESTRUCTIVE OPERATIONS 🚨🚨🚨
 

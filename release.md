@@ -6,78 +6,47 @@ description: Create new releases based on Semantic Versioning with automated wor
 
 Create new releases based on Semantic Versioning (semver) with automated version bumping, changelog generation, git tagging, and release management. This workflow handles the complete release process from version determination to publishing.
 
-# Release Workflow
-
-Create new releases based on Semantic Versioning (semver) with automated version bumping, changelog generation, git tagging, and release management. This workflow handles the complete release process from version determination to publishing.
-
-## ⚠️ CRITICAL AI EXECUTION RULES
-
-**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete release process within 10 steps maximum. If any step encounters issues, ask user for guidance and stop.
-
-**SAFETY FIRST**: Never execute destructive operations without explicit user confirmation. Always ask before making changes.
-
-**DECISION POINTS**: Make binary decisions - release type is determined or ask user to specify.
-
-**TERMINATION CONDITIONS**:
-- If project not in releasable state: Stop and provide requirements
-- If user denies confirmation: Stop immediately
-- If git operations fail: Stop with error details
-- If version conflict: Ask user for resolution
-- Always require explicit user approval for each major step
-
 ## Steps
 
-0. **LANGUAGE DETECTION**: Check for English keywords ("release", "version", "semver"). Default to Spanish.
+0. Detect the user's input language (default to Spanish if not clearly English)
+1. If no clear English indicators are found, default to Spanish for all responses
+2. Analyze current project state:
+   - Check current version from package.json, setup.py, or version files
+   - Review recent commits and changes since last release
+   - Validate project is in releasable state (tests pass, no breaking changes)
+   - Check if CHANGELOG.md exists and is up-to-date
 
-1. **PROJECT STATE VALIDATION**:
-   - Check current version from package.json or version files
-   - Verify git repository is clean (no uncommitted changes)
-   - Validate basic project structure exists
-   - If validation fails: STOP with specific requirements
+3. Determine release type based on semver:
+   - **MAJOR** (X.y.z): Breaking changes, incompatible API changes
+   - **MINOR** (x.Y.z): New features, backward compatible
+   - **PATCH** (x.y.Z): Bug fixes, backward compatible
+   - **PRE-RELEASE**: Alpha, beta, rc versions (x.y.z-alpha.1)
+   - Ask user to specify type if not clear from commits
 
-2. **RELEASE TYPE DETERMINATION**:
-   - Analyze recent commits for breaking changes, new features, bug fixes
-   - Suggest release type based on commit analysis
-   - Ask user to confirm or specify release type
-   - If user unclear: Provide examples and ask again
-
-3. **VERSION NUMBER GENERATION**:
-   - Increment version based on release type (major.minor.patch)
+4. Generate new version number:
+   - Increment appropriate version component based on release type
+   - Validate version format follows semver specification
    - Check version doesn't already exist in git tags
-   - Generate version string (e.g., "1.2.3")
-   - Validate semver format
+   - Generate pre-release versions if specified
 
-4. **USER CONFIRMATION**:
-   - Present proposed version number and release type
-   - Ask for explicit confirmation to proceed
-   - If denied: STOP and provide current status
-   - If confirmed: Proceed to next step
-
-5. **VERSION FILE UPDATES**:
+5. Update version files:
    - Update package.json version field
-   - Update any other version files (setup.py, constants)
-   - Commit changes with message "Bump version to X.Y.Z"
+   - Update setup.py or pyproject.toml version
+   - Update any version constants in source code
+   - Update documentation version references
+   - Commit version changes with descriptive message
 
-6. **CHANGELOG UPDATE**:
-   - Execute changelog workflow to generate entries
-   - Move unreleased changes to new version section
-   - Add release date
-   - Commit changelog changes
+6. Generate and update changelog:
+   - Run changelog workflow to generate new entries
+   - Move changes from "Unreleased" to new version section
+   - Format with proper release date (YYYY-MM-DD)
+   - Commit changelog updates
 
-7. **GIT OPERATIONS**:
-   - Create annotated git tag with version
-   - Push commits and tag to remote repository
-   - If push fails: Ask user for resolution
-
-8. **RELEASE CREATION** (Optional):
-   - Create GitHub/GitLab release if configured
-   - Attach changelog as release notes
-   - If platform not configured: Skip and notify user
-
-9. **COMPLETION REPORT**:
-   - Confirm successful release creation
-   - Provide version number and release links
-   - Suggest next steps (announcement, deployment)
+7. Create git release:
+   - Create and push version tag (v1.2.3 format)
+   - Push commits to main/master branch
+   - Create GitHub/GitLab release with changelog
+   - Generate release notes automatically
 
 8. Publish release:
    - Publish to package registries (npm, PyPI, etc.)

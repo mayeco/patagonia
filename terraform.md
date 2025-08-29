@@ -6,76 +6,48 @@ description: Scan projects and generate Terraform infrastructure as code automat
 
 Scan the current project and automatically detect infrastructure requirements through dependencies, environment variables, configuration files, and other indicators. Generate a complete /terraform folder with appropriate Terraform files for deploying the project.
 
-# Terraform Infrastructure Detection Workflow
-
-Scan the current project and automatically detect infrastructure requirements through dependencies, environment variables, configuration files, and other indicators. Generate a complete /terraform folder with appropriate Terraform files for deploying the project.
-
-## ⚠️ CRITICAL AI EXECUTION RULES
-
-**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete infrastructure detection within 10 steps maximum. If analysis takes too long, use basic configuration and proceed.
-
-**DECISION POINTS**: Make binary decisions quickly - resource is needed or not needed.
-
-**TERMINATION CONDITIONS**:
-- If no project structure found: Generate basic template and stop
-- If terraform command fails: Stop with error details
-- If user specifies cloud provider: Use that provider only
-- Always generate at least basic infrastructure configuration
-
 ## Steps
 
-0. **LANGUAGE DETECTION**: Check for English keywords ("terraform", "infrastructure", "cloud"). Default to Spanish.
+0. Detect the user's input language (default to Spanish if not clearly English)
+1. If no clear English indicators are found, default to Spanish for all responses
+2. Scan project structure and files:
+   - Analyze package.json, requirements.txt, pom.xml, go.mod for dependencies
+   - Check for environment variables in .env files, docker-compose.yml
+   - Identify framework and runtime (Node.js, Python, Java, Go, etc.)
+   - Detect database usage from ORM configurations, connection strings
+   - Check for cloud service integrations (AWS SDK, Google Cloud client libraries)
+   - Analyze Docker files for containerization requirements
+   - Review CI/CD files for deployment patterns
 
-1. **PROJECT ANALYSIS**:
-   - Scan current directory for project files
-   - Identify main programming language and framework
-   - Read package.json, requirements.txt, or similar dependency files
-   - Check for existing configuration files (.env, docker-compose.yml)
+3. Detect infrastructure components needed:
+   - **Compute Resources**: EC2 instances, Lambda functions, App Engine, Cloud Run
+   - **Storage**: S3 buckets, Cloud Storage, databases (RDS, Cloud SQL)
+   - **Networking**: VPC, subnets, security groups, load balancers
+   - **Security**: IAM roles, service accounts, API keys management
+   - **Monitoring**: CloudWatch, Cloud Monitoring, logging
+   - **CDN**: CloudFront, Cloud CDN for static assets
 
-2. **DEPENDENCY ANALYSIS**:
-   - Extract database dependencies from connection strings
-   - Identify cloud service integrations (AWS SDK, Google Cloud libraries)
-   - Check for containerization (Docker files)
-   - Analyze environment variables for external services
+4. Determine cloud provider preferences:
+   - Check for existing cloud configurations (AWS credentials, GCP service accounts)
+   - Analyze SDK imports and API calls
+   - Consider cost optimization and regional preferences
+   - **DEFAULT TO GOOGLE CLOUD** if no specific provider is detected or specified
 
-3. **INFRASTRUCTURE DETECTION**:
-   - **Compute**: Web server, API server, background workers
-   - **Storage**: Database, file storage, cache
-   - **Networking**: Load balancer, domain, SSL certificate
-   - **Security**: Basic authentication, firewall rules
-
-4. **CLOUD PROVIDER SELECTION**:
-   - Check for existing cloud configurations
-   - Analyze SDK imports for provider hints
-   - Default to Google Cloud if no preference detected
-   - Ask user to confirm provider selection
-
-5. **TERRAFORM CONFIGURATION GENERATION**:
+5. Generate Terraform configuration:
    - Create main.tf with detected resources
    - Generate variables.tf for configurable parameters
    - Create outputs.tf for resource references
    - Generate terraform.tfvars with detected values
+   - Create provider.tf with appropriate cloud provider configuration
 
-6. **SUPPORTING FILES CREATION**:
+6. Create supporting files:
    - Generate .terraformignore file
    - Create README.md with deployment instructions
-   - Generate deployment scripts (plan, apply, destroy)
+   - Generate scripts for common operations (plan, apply, destroy)
    - Create .env.example for environment variables
 
-7. **CONFIGURATION VALIDATION**:
-   - Execute `terraform validate` on generated files
-   - Check for syntax errors and missing resources
-   - If validation fails: Fix errors and re-validate
-
-8. **FILE OUTPUT**:
-   - Create /terraform directory structure
-   - Save all generated files
-   - Provide summary of generated infrastructure
-
-9. **COMPLETION REPORT**:
-   - Confirm successful generation
-   - Provide file locations and next steps
-   - Suggest manual review before deployment
+7. Validate generated configuration:
+   - Run terraform validate to check syntax
    - Verify resource dependencies and references
    - Check for security best practices
    - Validate variable definitions and defaults
