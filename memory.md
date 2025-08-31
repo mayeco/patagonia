@@ -8,7 +8,7 @@ Guidelines for using the memory tool to persist important context across session
 
 ## ⚠️ CRITICAL AI EXECUTION RULES
 
-**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete backlog creation within 6 steps maximum. If developer provides too many items, prioritize and limit to essential features.
+**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete backlog creation within 10 steps maximum. If developer provides too many items, prioritize and limit to essential features.
 
 **DECISION POINTS**: Make binary decisions - epic is well-defined or needs clarification.
 
@@ -24,6 +24,7 @@ Guidelines for using the memory tool to persist important context across session
 
 0. **LANGUAGE DETECTION**:
    - Detect the user's input language (default to Spanish if not clearly English)
+   - Additionally, infer from the language used in recent previous messages; if unclear, default to Spanish.
    - If no clear English indicators are found, default to Spanish for all responses
    - Always provide responses in Spanish by default, unless the developer clearly specifies English.
 
@@ -35,13 +36,14 @@ Guidelines for using the memory tool to persist important context across session
    - Search for semantically related memories.
    - If related memory exists, prefer update/append over create.
 
-3. **PREPARE MEMORY PAYLOAD**:
+3. **PREPARE MEMORY PAYLOAD (from most recent conversations)**:
+   - Source window: extract durable, high-signal facts from the latest conversation turns (typically last 5–10 relevant messages).
    - Title: concise, descriptive.
-   - Content: clear, specific details that will help future tasks.
+   - Content: clear, specific details that capture what is currently being discussed and that will help future tasks (e.g., decisions, confirmed preferences, constraints, standards).
    - Tags: snake_case keywords for retrieval.
    - UserTriggered: true only if the developer explicitly asked to save/update memory.
    - For delete operations: leave Content blank and set Action to delete with the target Id.
-   - CorpusNames: `mayeco_codeium_global_workflows` (only when creating)
+   - CorpusNames: `patagonia_workflows` (only when creating)
 
 4. **EXECUTE MEMORY OPERATION**:
    - Create when no related memory exists.

@@ -1,4 +1,4 @@
-# Global AI Workflows
+# PatagonAI Workflows
 
 Centralized workflows to standardize common tasks across projects (planning, implementation, docs, security, deployments, schema discovery, etc.). Use these via slash-commands in your IDE assistant.
 

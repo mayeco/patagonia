@@ -25,6 +25,7 @@ Persist developer-provided instructions and preferences to memory (scoped to thi
 
 0. **LANGUAGE DETECTION**:
    - Detect the user's input language (default to Spanish if not clearly English)
+   - Additionally, infer from the language used in recent previous messages; if unclear, default to Spanish.
    - If no clear English indicators are found, default to Spanish for all responses
    - Always provide responses in Spanish by default, unless the developer clearly specifies English.
 
@@ -42,7 +43,7 @@ Persist developer-provided instructions and preferences to memory (scoped to thi
      - Title: `Remember: <short title>`
      - Content: structured block including instructions, scope (`workspace`), applicability (`all tasks unless conflict`), and any examples.
      - Tags: `remember`, `workspace_prefs`, `guideline`
-     - CorpusNames: `mayeco_codeium_global_workflows` (only when creating)
+     - CorpusNames: `patagonia_workflows` (only when creating)
      - UserTriggered: `true`
 
 4. **CONFIRM STORAGE**:
