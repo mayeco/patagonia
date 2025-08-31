@@ -6,11 +6,14 @@ description: Scan projects and generate Terraform infrastructure as code automat
 
 Scan the current project and automatically detect infrastructure requirements through dependencies, environment variables, configuration files, and other indicators. Generate a complete /terraform folder with appropriate Terraform files for deploying the project.
 
-## Steps
+## STEPS
 
-0. Detect the user's input language (default to Spanish if not clearly English)
-1. If no clear English indicators are found, default to Spanish for all responses
-2. Scan project structure and files:
+0. **LANGUAGE DETECTION**:
+   - Detect the user's input language (default to Spanish if not clearly English)
+   - If no clear English indicators are found, default to Spanish for all responses
+   - Always provide responses in Spanish by default, unless the developer clearly specifies English.
+
+1. **SCAN PROJECT STRUCTURE AND FILES**:
    - Analyze package.json, requirements.txt, pom.xml, go.mod for dependencies
    - Check for environment variables in .env files, docker-compose.yml
    - Identify framework and runtime (Node.js, Python, Java, Go, etc.)
@@ -19,7 +22,7 @@ Scan the current project and automatically detect infrastructure requirements th
    - Analyze Docker files for containerization requirements
    - Review CI/CD files for deployment patterns
 
-3. Detect infrastructure components needed:
+2. **DETECT INFRASTRUCTURE COMPONENTS NEEDED**:
    - **Compute Resources**: EC2 instances, Lambda functions, App Engine, Cloud Run
    - **Storage**: S3 buckets, Cloud Storage, databases (RDS, Cloud SQL)
    - **Networking**: VPC, subnets, security groups, load balancers
@@ -27,37 +30,37 @@ Scan the current project and automatically detect infrastructure requirements th
    - **Monitoring**: CloudWatch, Cloud Monitoring, logging
    - **CDN**: CloudFront, Cloud CDN for static assets
 
-4. Determine cloud provider preferences:
+3. **DETERMINE CLOUD PROVIDER PREFERENCES**:
    - Check for existing cloud configurations (AWS credentials, GCP service accounts)
    - Analyze SDK imports and API calls
    - Consider cost optimization and regional preferences
    - **DEFAULT TO GOOGLE CLOUD** if no specific provider is detected or specified
 
-5. Generate Terraform configuration:
+4. **GENERATE TERRAFORM CONFIGURATION**:
    - Create main.tf with detected resources
    - Generate variables.tf for configurable parameters
    - Create outputs.tf for resource references
    - Generate terraform.tfvars with detected values
    - Create provider.tf with appropriate cloud provider configuration
 
-6. Create supporting files:
+5. **CREATE SUPPORTING FILES**:
    - Generate .terraformignore file
    - Create README.md with deployment instructions
    - Generate scripts for common operations (plan, apply, destroy)
    - Create .env.example for environment variables
 
-7. **CONFIGURATION VALIDATION**:
+6. **CONFIGURATION VALIDATION**:
    - Execute: `terraform validate`
    - If command fails: STOP - "Terraform validation failed - check configuration syntax and fix errors"
    - Check for syntax errors and missing resources
    - If validation fails: Fix errors and re-validate
 
-8. **FILE OUTPUT**:
+7. **FILE OUTPUT**:
    - Create /terraform directory structure
    - Save all generated files
    - Provide summary of generated infrastructure
 
-9. **COMPLETION REPORT**:
+8. **COMPLETION REPORT**:
    - Confirm successful generation
    - Provide file locations and next steps
    - Suggest manual review before deployment guide
@@ -65,7 +68,7 @@ Scan the current project and automatically detect infrastructure requirements th
    - Include cost estimation commands
    - Provide rollback procedures
 
-9. Create infrastructure modules:
+9. **CREATE INFRASTRUCTURE MODULES**:
    - Generate reusable modules for common patterns
    - Create environment-specific configurations
    - Include monitoring and alerting setup
@@ -417,16 +420,8 @@ terraform plan -refresh-only
 
 # Debug issues
 TF_LOG=DEBUG terraform apply
-```
 
-**IMPORTANT:** Always provide responses in Spanish by default, unless the developer clearly specifies English.
-
-**Language Support:**
-- **Spanish**: DEFAULT - Escanear proyecto y generar Terraform en español para TODA entrada
-- **English**: Generate Terraform in English only if explicitly requested
-- **Other**: Generate Terraform in Spanish as default, but adapt to detected language when possible
-
-**Prerequisites:**
+## Prerequisites:
 - Terraform CLI installed (version 1.0+)
 - Cloud provider credentials configured
 - Project files accessible for scanning

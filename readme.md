@@ -6,26 +6,45 @@ description: Generate or update README.md based on current application analysis
 
 Generate or update a comprehensive README.md file based on the current application/project structure and code analysis.
 
-## Steps
+## ⚠️ CRITICAL AI EXECUTION RULES
 
-0. Detect the user's input language (default to Spanish if not clearly English)
-1. If no clear English indicators are found, default to Spanish for all responses
-2. Analyze the project structure and identify key components:
+**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete README generation within 8 steps maximum.
+
+**DECISION POINTS**: Make binary decisions - project structure is clear or needs clarification.
+
+**VALIDATION**: Validate project files and structure before generation.
+
+**TERMINATION CONDITIONS**:
+- If no project structure found: Ask the developer for details and STOP
+- If language detection fails: Default to Spanish and continue
+- Always generate README in detected language
+
+## STEPS
+
+0. **LANGUAGE DETECTION**:
+   - Detect the user's input language (default to Spanish if not clearly English)
+   - If no clear English indicators are found, default to Spanish for all responses
+   - Always provide responses in Spanish by default, unless the developer clearly specifies English.
+
+1. **ANALYZE PROJECT STRUCTURE**:
    - Project type (web app, API, library, CLI tool, etc.)
    - Main programming languages and frameworks used
    - Key directories and their purposes
    - Configuration files and their roles
    - Entry points and main application files
-3. Examine package.json, requirements.txt, or similar dependency files to understand:
+
+2. **EXAMINE DEPENDENCY FILES**:
    - Project dependencies and their purposes
    - Available scripts and commands
    - Project metadata (name, version, description, author)
-4. Analyze key source files to understand:
+
+3. **ANALYZE KEY SOURCE FILES**:
    - Main functionality and features
    - Architecture patterns used
    - API endpoints or main functions (if applicable)
    - Database models or data structures
-5. Generate a comprehensive README.md in the detected language with sections:
+
+4. **GENERATE README CONTENT**:
    - Project title and description
    - Installation instructions
    - Usage examples
@@ -35,20 +54,10 @@ Generate or update a comprehensive README.md file based on the current applicati
    - Development setup
    - Contributing guidelines
    - License information
-6. Include appropriate badges and links based on project type
-7. Save the generated README.md to the project root
-8. PROVIDE ALL RESPONSES IN SPANISH by default (unless the user clearly specifies English)
 
-**Language Support:**
-- **Spanish**: DEFAULT - Generar README en español para toda entrada
-- **English**: Generate README in English only if explicitly requested
-- **Other**: Generate README in Spanish as default, but adapt to detected language when possible
+5. **ADD BADGES AND LINKS**:
+   - Include appropriate badges and links based on project type
 
-**README Sections Generated:**
-- Título del proyecto y descripción
-- Instalación y requisitos
-- Uso y ejemplos
-- Estructura del proyecto
-- API (si aplica)
-- Desarrollo y contribución
-- Licencia
+6. **SAVE README**:
+   - Save the generated README.md to the project root
+   - Ensure correct file encoding and formatting

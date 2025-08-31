@@ -15,26 +15,29 @@ Create high-level epics that contain multiple features and user stories. Epics a
 **TERMINATION CONDITIONS**:
 - If no epic description provided: Ask and STOP
 - If epic is too vague: Ask for more details and STOP
-- Always require user confirmation before creating
+- Always require developer confirmation before creating
 
-## Steps
+## STEPS
 
-0. **LANGUAGE DETECTION**: Check for English keywords ("epic", "initiative", "large feature"). Default to Spanish.
+0. **LANGUAGE DETECTION**:
+   - Detect the user's input language (default to Spanish if not clearly English)
+   - If no clear English indicators are found, default to Spanish for all responses
+   - Always provide responses in Spanish by default, unless the developer clearly specifies English.
 
 1. **EPIC CAPTURE**:
-   - Ask user for epic title and high-level description
+   - Ask the developer for epic title and high-level description
    - Validate epic represents multiple features (not a single feature)
    - If too narrow: STOP - "This seems like a feature, not an epic"
 
 2. **EPIC TYPE DETECTION**:
    - Analyze epic description for type indicators:
-     - **Strategic**: Keywords like "strategic", "business goal", "company objective", "market expansion"
-     - **Operational**: Keywords like "operational", "process improvement", "efficiency", "workflow"
-     - **Technical**: Keywords like "technical", "architecture", "infrastructure", "platform"
-     - **Product**: Keywords like "product", "user experience", "feature set", "customer value"
-     - **Compliance**: Keywords like "compliance", "regulatory", "security", "standards"
+      - **Strategic**: Keywords like "strategic", "business goal", "company objective", "market expansion"
+      - **Operational**: Keywords like "operational", "process improvement", "efficiency", "workflow"
+      - **Technical**: Keywords like "technical", "architecture", "infrastructure", "platform"
+      - **Product**: Keywords like "product", "user experience", "feature set", "customer value"
+      - **Compliance**: Keywords like "compliance", "regulatory", "security", "standards"
    - Validate epic type against description
-   - If unclear: Ask user to specify epic type and STOP
+   - If unclear: Ask the developer to specify epic type and STOP
 
 3. **SCOPE DEFINITION**:
    - Identify major themes and user goals based on epic type
@@ -63,20 +66,20 @@ Create high-level epics that contain multiple features and user stories. Epics a
 
 6. **SUCCESS METRICS DEFINITION**:
    - Define specific KPIs based on epic type:
-     - **Strategic**: Revenue impact, market share, customer acquisition
-     - **Operational**: Efficiency metrics, cost savings, process time reduction
-     - **Technical**: Performance benchmarks, error rates, technical debt reduction
-     - **Product**: User engagement, feature adoption, satisfaction scores
-     - **Compliance**: Audit results, security assessments, compliance coverage
+      - **Strategic**: Revenue impact, market share, customer acquisition
+      - **Operational**: Efficiency metrics, cost savings, process time reduction
+      - **Technical**: Performance benchmarks, error rates, technical debt reduction
+      - **Product**: User engagement, feature adoption, satisfaction scores
+      - **Compliance**: Audit results, security assessments, compliance coverage
    - Set measurable success criteria and acceptance thresholds
 
 7. **RISK ASSESSMENT**:
    - Identify epic-specific risks based on type:
-     - **Strategic**: Market changes, competitive response, resource availability
-     - **Operational**: Process disruption, training requirements, change resistance
-     - **Technical**: Technical complexity, integration challenges, scalability issues
-     - **Product**: User acceptance, feature usability, market fit
-     - **Compliance**: Regulatory changes, security vulnerabilities, audit findings
+      - **Strategic**: Market changes, competitive response, resource availability
+      - **Operational**: Process disruption, training requirements, change resistance
+      - **Technical**: Technical complexity, integration challenges, scalability issues
+      - **Product**: User acceptance, feature usability, market fit
+      - **Compliance**: Regulatory changes, security vulnerabilities, audit findings
    - Define mitigation strategies and contingency plans
 8. **EPIC STRUCTURE CREATION**:
    - Create epic with title, description, success criteria
@@ -84,15 +87,15 @@ Create high-level epics that contain multiple features and user stories. Epics a
    - Include stakeholder analysis and success metrics
    - Assign unique epic identifier
 
-9. **USER CONFIRMATION**:
+9. **DEVELOPER CONFIRMATION**:
    - Present complete epic structure
    - Ask for explicit confirmation to create
    - If declined: STOP without creating
 
 10. **EPIC STORAGE**:
-    - Save to `/epics/{{date}}-{{epic_name | slugify}}.md`
-    - Confirm creation successful
-    - Suggest next steps (break into projects or features)
+   - Save to `/epics/{{date}}-{{epic_name | slugify}}.md`
+   - Confirm creation successful
+   - Suggest next steps (break into projects or features)
 
 ## Epic Type Implementation Guidelines
 

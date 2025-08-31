@@ -10,50 +10,53 @@ description: Workflow for interacting with Vercel CLI to deploy and manage appli
 
 Interact with Vercel CLI to deploy, manage, and configure applications on the Vercel platform. This workflow handles project deployment, domain management, environment variables, and other Vercel operations.
 
-## Steps
+## STEPS
 
-0. Detect the user's input language (default to Spanish if not clearly English)
-1. If no clear English indicators are found, default to Spanish for all responses
-2. Identify the type of Vercel operation requested:
+0. **LANGUAGE DETECTION**:
+   - Detect the user's input language (default to Spanish if not clearly English)
+   - If no clear English indicators are found, default to Spanish for all responses
+   - Always provide responses in Spanish by default, unless the developer clearly specifies English.
+
+1. **OPERATION IDENTIFICATION**: Identify the type of Vercel operation requested:
    - Project deployment and management
    - Domain and DNS configuration
    - Environment variables management
-   - Team and user account management
+   - Team and developer account management
    - Build and deployment settings
    - Analytics and monitoring
    - Function and API management
 
-3. **ENVIRONMENT VALIDATION**:
+2. **ENVIRONMENT VALIDATION**:
    - Execute: `vercel --version`
    - If command fails: STOP - "Vercel CLI not installed - ensure vercel is available"
    - Execute: `vercel whoami`
    - If command fails: STOP - "Not logged in to Vercel - run 'vercel login' first"
    - Check current project if applicable
 
-4. **COMMAND CONSTRUCTION**:
+3. **COMMAND CONSTRUCTION**:
    - Map operation to specific vercel command
    - Add required flags and options
    - Include project name, team, region as needed
    - Validate command syntax mentally
 
-5. **SAFETY CHECK**:
+4. **SAFETY CHECK**:
    - Scan command for destructive keywords: remove, delete, destroy
-   - If found: Ask user for explicit confirmation
-   - If user denies: STOP with safety message
-   - If user confirms: Proceed to execution
+   - If found: Ask developer for explicit confirmation
+   - If developer denies: STOP with safety message
+   - If developer confirms: Proceed to execution
 
-6. **COMMAND EXECUTION**:
+5. **COMMAND EXECUTION**:
    - Execute prepared vercel command
    - Set reasonable timeout (60-120 seconds for deployments)
    - Capture stdout, stderr, and exit code
    - If command fails: Parse error output and STOP with specific error message
    - Do NOT attempt alternative commands or installations
 
-7. Process command results:
-   - Display command output to user
+6. **RESULT PROCESSING**: Process command results:
+   - Display command output to developer
    - Interpret success/failure status
    - Provide next steps or follow-up actions
-   - Handle any required user confirmations
+   - Handle any required developer confirmations
 
 # 🚨🚨🚨 CRITICAL WARNING: DESTRUCTIVE OPERATIONS 🚨🚨🚨
 
@@ -69,19 +72,19 @@ Interact with Vercel CLI to deploy, manage, and configure applications on the Ve
 
 ### 🛡️ SAFETY MEASURES:
 1. **ALWAYS PRINT the command first** - Never execute directly
-2. **CONFIRM with user** before any destructive action
+2. **CONFIRM with developer** before any destructive action
 3. **Show preview** of what will be deleted/destroyed
 4. **Provide rollback options** when possible
 5. **Document consequences** clearly
 
 ### 📋 DESTRUCTIVE COMMAND EXAMPLES (PRINT ONLY):
 ```bash
-# ❌ NEVER EXECUTE - Only print for user review
+# ❌ NEVER EXECUTE - Only print for developer review
 vercel remove https://my-app.vercel.app
 vercel domains rm example.com
 vercel env rm DATABASE_URL
 vercel rollback https://my-app.vercel.app
-vercel teams rm user@example.com
+vercel teams rm developer@example.com
 ```
 
 ### 🎯 EXECUTION PROTOCOL:
@@ -89,7 +92,7 @@ vercel teams rm user@example.com
 2. **PRINT** the command (do not execute)
 3. **WARN** about consequences
 4. **ASK** for explicit confirmation
-5. **Only execute** after user approval
+5. **Only execute** after developer approval
 6. **Provide** rollback information
 
 **REMEMBER: SAFETY FIRST! Always err on the side of caution with destructive operations!**
@@ -541,13 +544,6 @@ deploy:
 - Set up billing alerts
 - Review deployment frequency
 - Optimize function execution times
-
-**IMPORTANT:** Always provide responses in Spanish by default, unless the developer clearly specifies English.
-
-**Language Support:**
-- **Spanish**: DEFAULT - Interactuar con Vercel CLI y explicar en español para TODA entrada
-- **English**: Interact with Vercel CLI in English only if explicitly requested
-- **Other**: Interact with Vercel CLI in Spanish as default, but adapt to detected language when possible
 
 **Prerequisites:**
 - Node.js installed (version 14+)

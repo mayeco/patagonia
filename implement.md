@@ -14,20 +14,23 @@ Start implementing a feature, epic, project based on existing plans, or process 
 
 **PLAN IDENTIFICATION**: Always identify input type (epic/feature/project/plan/open text) and adapt implementation approach.
 
-**ITERATION HANDLING**: If clarifications needed, edit existing plan or create structured plan from open text unless user explicitly requests "new one".
+**ITERATION HANDLING**: If clarifications needed, edit existing plan or create structured plan from open text unless the developer explicitly requests "new one".
 
 **TERMINATION CONDITIONS**:
-- If no input specified: Ask user for description or plan reference and STOP
+- If no input specified: Ask the developer for description or plan reference and STOP
 - If plan file doesn't exist: Create plan from open text description and save to `/plans/`
-- If implementation hits blocker: Ask for clarification and STOP
-- Never proceed without user confirmation
+- If implementation hits blocker: Ask the developer for clarification and STOP
+- Never proceed without developer confirmation
 
-## Steps
+## STEPS
 
-0. **LANGUAGE DETECTION**: Check for English keywords ("implement", "start", "execute", "do"). Default to Spanish.
+0. **LANGUAGE DETECTION**:
+   - Detect the user's input language (default to Spanish if not clearly English)
+   - If no clear English indicators are found, default to Spanish for all responses
+   - Always provide responses in Spanish by default, unless the developer clearly specifies English.
 
 1. **INPUT TYPE DETECTION**:
-   - Analyze user input for input type indicators:
+   - Analyze developer input for input type indicators:
      - **Epic**: Keywords like "epic", "large initiative", "strategic", "company objective"
      - **Project**: Keywords like "project", "initiative", "program", "implementation"
      - **Feature**: Keywords like "feature", "small", "task", "functionality"
@@ -38,7 +41,7 @@ Start implementing a feature, epic, project based on existing plans, or process 
 2. **PLAN DISCOVERY** (For Structured Plans):
    - Scan all plan directories: `/plans/`, `/epics/`, `/features/`, `/projects/`
    - If specific plan mentioned: Look for exact match
-   - If no specific plan: List available plans by type and ask user to select
+   - If no specific plan: List available plans by type and ask the developer to select
    - Validate plan file exists and is readable
 
 3. **OPEN TEXT PROCESSING** (For Unstructured Input):
@@ -69,9 +72,9 @@ Start implementing a feature, epic, project based on existing plans, or process 
 
 4. **CLARIFICATION HANDLING**:
    - If plan has unclear sections: Identify specific areas needing clarification
-   - For open text: Ask user for missing technical details, constraints, or success criteria
-   - Edit existing plan with clarifications unless user requests "new one"
-   - Ask user for missing information and update plan accordingly
+   - For open text: Ask the developer for missing technical details, constraints, or success criteria
+   - Edit existing plan with clarifications unless the developer requests "new one"
+   - Ask the developer for missing information and update plan accordingly
 
 5. **IMPLEMENTATION PREPARATION** (Type-Adapted):
    - **Epic**: Create project breakdown and prioritize features
@@ -107,8 +110,3 @@ Start implementing a feature, epic, project based on existing plans, or process 
     - Suggest next implementation phases
     - Identify potential improvements for future plans
     - Archive completed plan with implementation results
-
-**Language Support:**
-- **Spanish**: Responder en español para entrada en español (default)
-- **English**: Respond in English for English input
-- **Other**: Respond in Spanish as default, but adapt to detected language when possible

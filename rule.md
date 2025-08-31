@@ -18,6 +18,18 @@ description: AI-Optimized Pure Coding Rules - Machine Readable Format
 - If rule interpretation unclear: Ask user for clarification
 - Always ensure code meets all specified criteria
 
+## Steps
+
+1. **Review Code**: Analyze provided code against all coding rules and guidelines.
+
+2. **Identify Violations**: Detect any rule violations in the code structure, naming, patterns, or practices.
+
+3. **Apply Corrections**: Suggest specific fixes for identified violations with code examples.
+
+4. **Validate Compliance**: Ensure all corrections maintain code functionality and follow best practices.
+
+5. **Provide Summary**: Document all changes made and rules applied for transparency.
+
 ## CORE CODING DIRECTIVES
 
 ### CODE_GENERATION

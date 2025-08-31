@@ -6,9 +6,25 @@ description: Check the current Git status and analyze any pending changes in the
 
 Check the current Git status and analyze any pending changes in the repository.
 
-## Steps
+## ⚠️ CRITICAL AI EXECUTION RULES
 
-0. **LANGUAGE DETECTION**: Check for English keywords ("git", "status", "changes"). Default to Spanish.
+**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete git status analysis within 5 steps maximum.
+
+**DECISION POINTS**: Make binary decisions - repository is valid or not.
+
+**VALIDATION**: Check git installation and repository state.
+
+**TERMINATION CONDITIONS**:
+- If not a git repository: Ask developer to navigate to repo and STOP
+- If git not installed: Ask developer to install and STOP
+- Always provide summary even with errors
+
+## STEPS
+
+0. **LANGUAGE DETECTION**:
+   - Detect the user's input language (default to Spanish if not clearly English)
+   - If no clear English indicators are found, default to Spanish for all responses
+   - Always provide responses in Spanish by default, unless the developer clearly specifies English.
 
 1. **REPOSITORY VALIDATION**:
    - Execute: `git rev-parse --git-dir`
@@ -39,8 +55,3 @@ Check the current Git status and analyze any pending changes in the repository.
    - Present organized summary in detected language
    - Highlight any critical changes or issues
    - Suggest next steps (commit, review, etc.)
-
-**Language Support:**
-- **Spanish**: Responder en español para entrada en español (default)
-- **English**: Respond in English for English input
-- **Other**: Respond in Spanish as default, but adapt to detected language when possible

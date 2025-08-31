@@ -6,25 +6,47 @@ description: Fix all TypeScript compiler errors and type issues
 
 Fix all TypeScript compiler (TSC) errors including type errors, syntax errors, module resolution errors, and compilation issues in TypeScript files.
 
-## Steps
+## ⚠️ CRITICAL AI EXECUTION RULES
 
-0. Detect TypeScript files and compilation errors (default to Spanish if not specified)
-1. If no clear language indicators, default to Spanish for all responses
-2. Identify TypeScript content to analyze:
+**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete TSC error fixing within 7 steps maximum.
+
+**DECISION POINTS**: Make binary decisions - errors are fixable or require developer input.
+
+**VALIDATION**: Validate TypeScript files and compilation before fixing.
+
+**TERMINATION CONDITIONS**:
+- If no TypeScript files found: Ask the developer for files and STOP
+- If errors are complex: Ask the developer for clarification and STOP
+- Always require developer confirmation before applying fixes
+
+## STEPS
+
+0. **LANGUAGE DETECTION**:
+   - Detect the user's input language (default to Spanish if not clearly English)
+   - If no clear English indicators are found, default to Spanish for all responses
+   - Always provide responses in Spanish by default, unless the developer clearly specifies English.
+
+1. **DETECT TYPESCRIPT FILES AND COMPILATION ERRORS**:
+   - Detect TypeScript files and compilation errors
+
+2. **IDENTIFY TYPESCRIPT CONTENT TO ANALYZE**:
    - If input is a .ts/.tsx file path, read the file content
    - If input is a directory path, scan for TypeScript files and tsconfig.json
    - If input contains TypeScript code, analyze for compilation errors
    - If input mentions TSC errors, focus on those specific compilation issues
-3. Analyze for all TypeScript compiler errors:
+
+3. **ANALYZE TYPESCRIPT COMPILER ERRORS**:
    - **Type Errors**: Property access, type assignments, argument mismatches
    - **Module Errors**: Cannot find modules, wrong import paths
    - **Declaration Errors**: Cannot find names, missing declarations
    - Ensure type safety is maintained across all files
    - Verify no new compilation errors were introduced
 
-5. PROVIDE THE CORRECTED VERSION with comprehensive TypeScript error explanations
-6. If multiple TypeScript files are involved, provide a summary of all compilation fixes
-7. Ask if the user wants to apply the TypeScript compilation fixes
+4. **PROVIDE THE CORRECTED VERSION** with comprehensive TypeScript error explanations
+
+5. **SUMMARIZE MULTI-FILE FIXES**: If multiple TypeScript files are involved, provide a summary of all compilation fixes
+
+6. **DEVELOPER CONFIRMATION**: Ask if the developer wants to apply the TypeScript compilation fixes
 
 ## Comprehensive TSC Error Categories
 
@@ -119,13 +141,6 @@ Fix all TypeScript compiler (TSC) errors including type errors, syntax errors, m
 - Configure module resolution settings
 - Enable/disable strict mode features appropriately
 - Set proper target and module compilation settings
-
-**Language Support:**
-- **Spanish**: DEFAULT - Corregir errores de TSC y explicar en español
-- **English**: SOLO si el usuario especifica claramente "fix TSC errors in English"
-- **Other**: Siempre responder en español por defecto
-
-**IMPORTANT:** Always default to Spanish corrections and explanations unless the user explicitly requests English.
 
 **TSC-FIX Style Guidelines:**
 - Focus on all TypeScript compiler errors and compilation issues

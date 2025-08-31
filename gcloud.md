@@ -6,11 +6,28 @@ description: Execute Google Cloud CLI commands based on developer requests
 
 Execute Google Cloud CLI (gcloud) commands based on developer requests. This workflow handles common GCP operations like authentication, project management, deployments, and resource configuration.
 
-## Steps
+## ⚠️ CRITICAL AI EXECUTION RULES
 
-0. Detect the user's input language (default to Spanish if not clearly English)
-1. If no clear English indicators are found, default to Spanish for all responses
-2. Detect type of GCP operation:
+**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete GCP operation within 6 steps maximum.
+
+**DECISION POINTS**: Make binary decisions - command is safe or requires confirmation.
+
+**SAFETY VALIDATION**: Validate command safety and developer permissions before execution.
+
+**TERMINATION CONDITIONS**:
+- If gcloud not installed: Ask developer to install and STOP
+- If not authenticated: Ask developer to authenticate and STOP
+- If destructive command: Ask for confirmation and STOP if denied
+- Always require developer confirmation for destructive operations
+
+## STEPS
+
+0. **LANGUAGE DETECTION**:
+   - Detect the user's input language (default to Spanish if not clearly English)
+   - If no clear English indicators are found, default to Spanish for all responses
+   - Always provide responses in Spanish by default, unless the developer clearly specifies English.
+
+1. **OPERATION DETECTION**: Detect type of GCP operation:
    - Authentication and initial configuration
    - Project management (create, list, configure)
    - Resource management (compute, storage, networking)
@@ -24,7 +41,7 @@ Execute Google Cloud CLI (gcloud) commands based on developer requests. This wor
    - Execute: `gcloud auth list`
    - If command fails: STOP - "Not authenticated with Google Cloud - run 'gcloud auth login' first"
    - Execute: `gcloud config get-value project`
-   - If no project: Ask user to set project
+   - If no project: Ask developer to set project
 
 3. **COMMAND CONSTRUCTION**:
    - Map operation to specific gcloud command
@@ -34,9 +51,9 @@ Execute Google Cloud CLI (gcloud) commands based on developer requests. This wor
 
 4. **SAFETY CHECK**:
    - Scan command for destructive keywords: delete, remove, destroy, rm
-   - If found: Ask user for explicit confirmation
-   - If user denies: STOP with safety message
-   - If user confirms: Proceed to execution
+   - If found: Ask developer for explicit confirmation
+   - If developer denies: STOP with safety message
+   - If developer confirms: Proceed to execution
 
 5. **COMMAND EXECUTION**:
    - Execute prepared gcloud command
@@ -45,7 +62,7 @@ Execute Google Cloud CLI (gcloud) commands based on developer requests. This wor
    - If command fails: Parse error output and STOP with specific error message
    - Do NOT attempt alternative commands or installations
 
-6. Process results:
+6. **RESULT PROCESSING**: Process results:
    - Display command output
    - Interpret exit codes
    - Provide feedback to developer
@@ -66,14 +83,14 @@ Execute Google Cloud CLI (gcloud) commands based on developer requests. This wor
 
 ### 🛡️ SAFETY MEASURES:
 1. **ALWAYS PRINT the command first** - Never execute directly
-2. **CONFIRM with user** before any destructive action
+2. **CONFIRM with developer** before any destructive action
 3. **Show preview** of what will be deleted/destroyed
 4. **Provide rollback options** when possible
 5. **Document consequences** clearly
 
 ### 📋 DESTRUCTIVE COMMAND EXAMPLES (PRINT ONLY):
 ```bash
-# ❌ NEVER EXECUTE - Only print for user review
+# ❌ NEVER EXECUTE - Only print for developer review
 gcloud projects delete my-project-id
 gcloud compute instances delete my-instance --zone=us-central1-a
 gcloud storage buckets delete gs://my-bucket
@@ -87,8 +104,8 @@ gcloud compute disks delete my-disk --zone=us-central1-a
 1. **Parse** destructive command request
 2. **PRINT** the command (do not execute)
 3. **WARN** about consequences
-4. **ASK** for explicit confirmation
-5. **Only execute** after user approval
+4. **ASK** the developer for explicit confirmation
+5. **Only execute** after developer approval
 6. **Provide** rollback information
 
 **REMEMBER: SAFETY FIRST! Always err on the side of caution with destructive operations!**
@@ -254,13 +271,6 @@ gcloud config get-value project
 gcloud config get-value compute/zone
 gcloud config get-value compute/region
 ```
-
-**IMPORTANT:** Always provide responses in Spanish by default, unless the developer clearly specifies English.
-
-**Language Support:**
-- **Spanish**: DEFAULT - Ejecutar comandos y explicar en español para TODA entrada
-- **English**: ONLY if the user clearly specifies "explain in English" or uses English technical terms
-- **Other**: Always respond in Spanish by default
 
 **Prerequisites:**
 - Google Cloud SDK installed (`gcloud` command available)

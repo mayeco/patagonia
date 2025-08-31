@@ -19,42 +19,48 @@ Explain any concept, web, plan, backlog, or input in simple terms as if explaini
 **CONTENT LIMITATIONS**: Keep explanations simple and short. Use analogies appropriate for a 5-year-old.
 
 **TERMINATION CONDITIONS**:
-- If content type unclear: Ask user for clarification and STOP
+- If content type unclear: Ask the developer for clarification and STOP
 - If explanation becomes too complex: Simplify and provide basic explanation
-- If user requests specific format: Adapt and complete
+- If the developer requests specific format: Adapt and complete
 - Always provide explanation within 5 minutes of processing
 
-## Steps
+## STEPS
 
-0. Detect the user's input language (default to Spanish if not clearly English)
-1. If no clear English indicators are found, default to Spanish for all responses
-2. Identify the type of content to explain:
+0. **LANGUAGE DETECTION**:
+   - Detect the user's input language (default to Spanish if not clearly English)
+   - If no clear English indicators are found, default to Spanish for all responses
+   - Always provide responses in Spanish by default, unless the developer clearly specifies English.
+
+1. **IDENTIFY CONTENT TYPE**:
    - If input mentions "web" or contains URLs, explain the website/technology simply
    - If input mentions "plan" or contains "plans/", explain the plan in simple terms
    - If input mentions "backlog", explain the backlog items from memory simply
    - Otherwise, explain the provided input or concept in simple terms
-3. Retrieve the relevant content:
+
+2. **RETRIEVE RELEVANT CONTENT**:
    - For plans: read the specified plan file from `/plans/`
    - For backlog: retrieve current backlog items from system memory
    - For web/technology: analyze the web concept or technology mentioned
    - For general input: understand the concept to be explained
-4. Break down the concept into the simplest possible terms using analogies a 5-year-old would understand
-5. Explain using simple words, short sentences, and relatable examples (toys, games, everyday activities)
+
+3. **BREAK DOWN THE CONCEPT**:
+   - Use analogies a 5-year-old would understand
+
+4. **EXPLAIN SIMPLY**:
+   - Use simple words, short sentences, and relatable examples (toys, games, everyday activities)
    - Use MCP search brave_web_search for comprehensive web searches:
-     - `brave_web_search "explain like i'm five {concept}"`
-     - `brave_web_search "{concept} explanation for children"`
-     - `brave_web_search "easy explanation of {concept}"`
-6. Use visual metaphors and avoid technical jargon completely
-7. PROVIDE THE EXPLANATION IN SPANISH by default (unless the user clearly specifies English)
-8. If the explanation is too complex, simplify it further until it's truly understandable to a child
-9. Ask if the explanation needs to be even simpler or if they have questions
+      - `brave_web_search "explain like i'm five {concept}"`
+      - `brave_web_search "{concept} explanation for children"`
+      - `brave_web_search "easy explanation of {concept}"`
 
-**Language Support:**
-- **Spanish**: DEFAULT - Explicar en español para TODA entrada, usando lenguaje infantil simple
-- **English**: SOLO si el usuario especifica claramente "explain in English" o usa términos técnicos en inglés
-- **Other**: Siempre responder en español por defecto
+5. **USE VISUAL METAPHORS**:
+   - Avoid technical jargon completely
 
-**IMPORTANT:** Always default to Spanish explanations unless the user explicitly requests English.
+6. **SIMPLIFY IF NEEDED**:
+   - If the explanation is too complex, simplify it further until it's truly understandable to a child
+
+7. **CHECK UNDERSTANDING**:
+   - Ask if the explanation needs to be even simpler or if they have questions
 
 **ELI5 Style Guidelines:**
 - Use words a 5-year-old knows (no technical terms)

@@ -15,14 +15,17 @@ Generate comprehensive project plans that span multiple features and milestones.
 **TERMINATION CONDITIONS**:
 - If no project description provided: Ask and STOP
 - If project scope unclear: Ask for clarification and STOP
-- Always require user confirmation before creating
+- Always require developer confirmation before creating
 
-## Steps
+## STEPS
 
-0. **LANGUAGE DETECTION**: Check for English keywords ("project", "initiative", "program"). Default to Spanish.
+0. **LANGUAGE DETECTION**:
+   - Detect the user's input language (default to Spanish if not clearly English)
+   - If no clear English indicators are found, default to Spanish for all responses
+   - Always provide responses in Spanish by default, unless the developer clearly specifies English.
 
 1. **PROJECT CAPTURE**:
-   - Ask user for project title and comprehensive description
+   - Ask the developer for project title and comprehensive description
    - Validate project involves multiple features (not a single feature)
    - If too narrow: STOP - "This seems like a feature, not a project"
 
@@ -37,7 +40,7 @@ Generate comprehensive project plans that span multiple features and milestones.
      - **Integration**: Keywords like "integrate", "connect", "third-party", "external service"
      - **Research/Spike**: Keywords like "research", "investigate", "explore", "spike", "proof of concept"
    - Validate project type against description
-   - If unclear: Ask user to specify project type and STOP
+   - If unclear: Ask the developer to specify project type and STOP
 
 3. **SCOPE DEFINITION**:
    - Identify project objectives and success criteria based on project type
@@ -55,27 +58,27 @@ Generate comprehensive project plans that span multiple features and milestones.
    - Plan infrastructure and deployment requirements
 
 5. **MILESTONE PLANNING** (Adapted to Project Type):
-   - Create milestones appropriate for project type
-   - **MVP**: Focus on core functionality milestones
-   - **Refactor**: Code quality improvement milestones
-   - **New Feature**: Feature development and integration milestones
-   - **Maintenance**: Risk mitigation and rollback milestones
+   - Create milestones appropriate for project type:
+      - **MVP**: Focus on core functionality milestones
+      - **Refactor**: Code quality improvement milestones
+      - **New Feature**: Feature development and integration milestones
+      - **Maintenance**: Risk mitigation and rollback milestones
    - Assign features to milestones based on project type priorities
 
 6. **RESOURCE PLANNING** (Type-Specific):
-   - Identify required team roles and skills based on project type
-   - **MVP**: Minimal team, focus on core development
-   - **Refactor**: Code quality experts, testing specialists
-   - **New Feature**: Full-stack developers, UX designers
-   - **Maintenance**: Security experts, QA specialists
+   - Identify required team roles and skills based on project type:
+      - **MVP**: Minimal team, focus on core development
+      - **Refactor**: Code quality experts, testing specialists
+      - **New Feature**: Full-stack developers, UX designers
+      - **Maintenance**: Security experts, QA specialists
    - Estimate effort and timeline for each milestone
 
 7. **RISK ASSESSMENT** (Type-Based):
-   - Identify potential risks specific to project type
-   - **MVP**: Market validation, technical feasibility
-   - **Refactor**: Regression risks, performance impacts
-   - **New Feature**: Integration complexity, user adoption
-   - **Maintenance**: Security vulnerabilities, system stability
+   - Identify potential risks specific to project type:
+      - **MVP**: Market validation, technical feasibility
+      - **Refactor**: Regression risks, performance impacts
+      - **New Feature**: Integration complexity, user adoption
+      - **Maintenance**: Security vulnerabilities, system stability
    - Define mitigation strategies and plan contingencies
 
 8. **PROJECT STRUCTURE CREATION**:
@@ -84,15 +87,15 @@ Generate comprehensive project plans that span multiple features and milestones.
    - Add stakeholder analysis and communication plan
    - Assign unique project identifier
 
-9. **USER CONFIRMATION**:
+9. **DEVELOPER CONFIRMATION**:
    - Present complete project structure
    - Ask for explicit confirmation to create
    - If declined: STOP without creating
 
 10. **PROJECT STORAGE**:
-    - Save to `/projects/{{date}}-{{project_name | slugify}}.md`
-    - Confirm creation successful
-    - Suggest next steps (create epics or features)
+   - Save to `/projects/{{date}}-{{project_name | slugify}}.md`
+   - Confirm creation successful
+   - Suggest next steps (create epics or features)
 
 ## Project Template Format
 

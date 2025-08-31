@@ -6,55 +6,71 @@ description: Create new releases based on Semantic Versioning with automated wor
 
 Create new releases based on Semantic Versioning (semver) with automated version bumping, changelog generation, git tagging, and release management. This workflow handles the complete release process from version determination to publishing.
 
-## Steps
+## ⚠️ CRITICAL AI EXECUTION RULES
 
-0. Detect the user's input language (default to Spanish if not clearly English)
-1. If no clear English indicators are found, default to Spanish for all responses
-2. Analyze current project state:
+**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete release process within 9 steps maximum.
+
+**DECISION POINTS**: Make binary decisions - release type is appropriate or not.
+
+**VALIDATION**: Validate project state and version before release.
+
+**TERMINATION CONDITIONS**:
+- If project not ready: Ask the developer to prepare and STOP
+- If version conflict: Ask the developer to resolve and STOP
+- Always require developer confirmation for release
+
+## STEPS
+
+0. **LANGUAGE DETECTION**:
+   - Detect the user's input language (default to Spanish if not clearly English)
+   - If no clear English indicators are found, default to Spanish for all responses
+   - Always provide responses in Spanish by default, unless the developer clearly specifies English.
+
+1. **ANALYZE CURRENT PROJECT STATE**:
    - Check current version from package.json, setup.py, or version files
    - Review recent commits and changes since last release
    - Validate project is in releasable state (tests pass, no breaking changes)
    - Check if CHANGELOG.md exists and is up-to-date
 
-3. Determine release type based on semver:
+2. **DETERMINE RELEASE TYPE BASED ON SEMVER**:
    - **MAJOR** (X.y.z): Breaking changes, incompatible API changes
    - **MINOR** (x.Y.z): New features, backward compatible
    - **PATCH** (x.y.Z): Bug fixes, backward compatible
    - **PRE-RELEASE**: Alpha, beta, rc versions (x.y.z-alpha.1)
-   - Ask user to specify type if not clear from commits
+   - Ask the developer to specify type if not clear from commits
 
-4. Generate new version number:
+3. **GENERATE NEW VERSION NUMBER**:
    - Increment appropriate version component based on release type
    - Validate version format follows semver specification
    - Check version doesn't already exist in git tags
    - Generate pre-release versions if specified
 
-5. **VERSION FILE UPDATES**:
+4. **VERSION FILE UPDATES**:
    - Update package.json version field
    - Update any other version files (setup.py, constants)
    - Execute: `git add . && git commit -m "Bump version to X.Y.Z"`
    - If command fails: STOP - "Git commit failed - check repository status"
 
-6. **CHANGELOG UPDATE**:
+5. **CHANGELOG UPDATE**:
    - Execute changelog workflow to generate entries
    - Move unreleased changes to new version section
    - Add release date
    - Execute: `git add CHANGELOG.md && git commit -m "Update changelog for vX.Y.Z"`
    - If command fails: STOP - "Git commit failed for changelog"
 
-7. **GIT OPERATIONS**:
+6. **GIT OPERATIONS**:
    - Execute: `git tag -a vX.Y.Z -m "Release vX.Y.Z"`
    - If command fails: STOP - "Git tag creation failed"
    - Execute: `git push origin main && git push origin vX.Y.Z`
    - If command fails: STOP - "Git push failed - check remote repository access"
 
-8. Publish release:
+7. **PUBLISH RELEASE**:
    - Publish to package registries (npm, PyPI, etc.)
    - Upload artifacts if applicable
    - Notify team channels or integrations
    - Update documentation sites if needed
 
-9. Post-release cleanup:
+8. **POST-RELEASE CLEANUP**:
    - Create new "Unreleased" section in changelog for future changes
    - Update development version if needed
    - Archive release artifacts
@@ -217,14 +233,7 @@ npm version major -m "Release %s"
 3. Update changelog to remove release section
 4. Notify team of rollback
 
-**IMPORTANT:** Always provide responses in Spanish by default, unless the developer clearly specifies English.
-
-**Language Support:**
-- **Spanish**: DEFAULT - Crear releases y explicar en español para TODA entrada
-- **English**: Create releases in English only if explicitly requested
-- **Other**: Create releases in Spanish as default, but adapt to detected language when possible
-
-**Prerequisites:**
+## Prerequisites
 - Git repository with proper setup
 - Version file (package.json, setup.py, etc.)
 - CHANGELOG.md file (recommended)
