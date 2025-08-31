@@ -48,11 +48,13 @@ Create new releases based on Semantic Versioning (semver) with automated version
 4. **VERSION FILE UPDATES**:
    - Update package.json version field
    - Update any other version files (setup.py, constants)
+   - Create or update `VERSION` file with the new version string (e.g., `vX.Y.Z` or `vX.Y.Z-<pre>`) and ensure a trailing newline
+   - Example: `printf 'vX.Y.Z\\n' > VERSION`
    - Execute: `git add . && git commit -m "Bump version to X.Y.Z"`
    - If command fails: STOP - "Git commit failed - check repository status"
 
 5. **CHANGELOG UPDATE**:
-   - Execute changelog workflow to generate entries
+   - Execute generate-changelog workflow to generate entries
    - Move unreleased changes to new version section
    - Add release date
    - Execute: `git add CHANGELOG.md && git commit -m "Update changelog for vX.Y.Z"`
@@ -235,7 +237,7 @@ npm version major -m "Release %s"
 
 ## Prerequisites
 - Git repository with proper setup
-- Version file (package.json, setup.py, etc.)
+- Version file (package.json, setup.py, VERSION, etc.)
 - CHANGELOG.md file (recommended)
 - Publishing credentials for registries
 - CI/CD pipeline (recommended)
