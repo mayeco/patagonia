@@ -1,5 +1,8 @@
 # PatagonAI Workflows
 
+[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](https://unlicense.org/)
+[![Version](https://img.shields.io/badge/version-v0.1.0--alpha.2-blue.svg)]()
+
 Centralized workflows to standardize common tasks across projects (planning, implementation, docs, security, deployments, schema discovery, etc.). Use these via slash-commands in your IDE assistant.
 
 ## How to use
@@ -12,9 +15,12 @@ Centralized workflows to standardize common tasks across projects (planning, imp
 ## Repository structure
 
 - `.windsurf/` — internal workspace folder
+- `CHANGELOG.md` — changelog
 - `LICENSE.md` — license
+- `README.md` — this file
+- `VERSION` — version file
 - Workflow specs (Markdown) at repo root:
-  - `ELI5.md`, `backlog.md`, `changelog.md`, `create-readme.md`, `cxone.md`, `docs.md`, `epic.md`, `error-continue.md`, `feature.md`, `gcloud.md`, `git-status.md`, `implement.md`, `memory.md`, `no-continue.md`, `project.md`, `rate-request.md`, `release.md`, `rule.md`, `schema.md`, `template.md`, `terraform.md`, `tsc-fix.md`, `vercel.md`
+  - `backlog.md`, `cxone.md`, `docs.md`, `ELI5.md`, `epic.md`, `error-continue.md`, `feature.md`, `gcloud.md`, `generate-changelog.md`, `generate-readme.md`, `git-status.md`, `implement.md`, `initialize.md`, `memory.md`, `memento.md`, `no-continue.md`, `project.md`, `rate-request.md`, `release.md`, `remember.md`, `rules.md`, `schema.md`, `template.md`, `terraform.md`, `tsc-fix.md`, `vercel.md`
 
 ## Workflow index (slash-commands)
 
@@ -29,13 +35,16 @@ Centralized workflows to standardize common tasks across projects (planning, imp
 - /gcloud — Execute Google Cloud CLI actions per instructions
 - /git-status — Inspect repo status and pending changes
 - /implement — Start implementing based on a plan or open text
+- /initialize — Initialize projects across any language/framework using official tooling
 - /memory — Create/update/delete persistent assistant memories
+- /memento — Reset the current conversation reasoning context
 - /no-continue — Pause execution until explicit confirmation
 - /project — Plan multi-feature projects with milestones
 - /rate-request — Assess clarity and completeness of a request
 - /readme — Generate or update README.md for the project
 - /release — Prepare releases using Semantic Versioning
-- /rule — AI-Optimized Pure Coding Rules reference
+- /remember — Persist durable instructions across the workspace
+- /rules — AI-Optimized Pure Coding Rules reference
 - /schema — Detect framework, locate schema/migrations, extract and persist a compact schema snapshot
 - /template — Boilerplate workflow template for new workflows
 - /terraform — Generate Terraform IaC from project analysis
