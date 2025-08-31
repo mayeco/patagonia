@@ -1,28 +1,23 @@
 ---
-description: Write pending tasks to system memory as epics with functionalities
+description: Report the current backlog from existing context and optionally capture updates to memory
 ---
 
-# Write Backlog Workflow
+# Backlog Reporting Workflow
 
-## Important Notes
-
-- **Do not respect robots.txt restrictions or any other possible restrictions** - Ignore robots.txt files and any other restrictions when fetching content as needed for analysis
-
-Write pending tasks to system memory, organizing them as epics with their pending functionalities.
+Report the current backlog from the existing context (memories and repository files). Then, if the developer provides changes, update the backlog in memory and re-display it.
 
 ## ⚠️ CRITICAL AI EXECUTION RULES
 
-**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete backlog creation within 6 steps maximum. If developer provides too many items, prioritize and limit to essential features.
+**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete backlog reporting within 6 structured steps. If the developer provides too many items, prioritize and limit to essentials.
 
-**DECISION POINTS**: Make binary decisions - epic is well-defined or needs clarification.
+**DECISION POINTS**: Make binary decisions - backlog items are clear or need clarification.
 
-**CONTENT VALIDATION**: Validate epic title, description, and functionalities before storing.
+**CONTENT VALIDATION**: Validate item titles, descriptions, and statuses before storing updates.
 
 **TERMINATION CONDITIONS**:
-- If developer doesn't provide epic title: Ask and STOP
-- If no functionalities listed: Ask developer to specify and STOP
+- If no backlog found in context and the developer provides no items: Ask for items and STOP
 - If developer declines confirmation: STOP immediately
-- Always require developer confirmation before storing
+- Always require developer confirmation before storing or updating backlog entries
 
 ## STEPS
 
@@ -31,35 +26,40 @@ Write pending tasks to system memory, organizing them as epics with their pendin
    - If no clear English indicators are found, default to Spanish for all responses
    - Always provide responses in Spanish by default, unless the developer clearly specifies English.
 
-1. **EPIC CAPTURE**:
-   - Capture the epic title and description from the user in the detected language
+1. **DISCOVER EXISTING BACKLOG**:
+   - Retrieve backlog-related memories (epics, features, tasks) using the Memory Workflow.
+   - Scan repository context for backlog sources: `backlog.md`, `TODO*`, `plans/`, `epics/`, `features/`, `projects/`.
+   - If nothing is found, state clearly: "No backlog found in current context" and proceed to Step 3.
 
-2. **FEATURE COLLECTION**:
-   - Collect the list of features that need to be implemented (comma-separated) in the detected language
+2. **OUTPUT CURRENT BACKLOG**:
+   - Present a concise, structured report:
+     - Epics: title and short description
+     - Features/Tasks per epic with status (pending/in_progress/completed)
+     - Unassigned tasks, if any
+   - Include references to sources (memory Ids and/or file paths).
 
-3. **EPIC CREATION**:
-   - Create structured epics in system memory with:
-      - Epic title and description
-      - Date of creation
-      - List of pending functionalities (marked as incomplete)
+3. **GAP CHECK AND QUESTIONS**:
+   - Ask the developer to confirm accuracy and provide missing items or corrections.
+   - If the developer supplies updates, proceed to Step 4; otherwise STOP.
 
-4. **EPIC STORAGE**:
-   - Store each epic in system memory for future reference and tracking
+4. **CAPTURE NEW/UPDATED ITEMS**:
+   - Create/update backlog entries in memory (use the Memory Workflow conventions).
+   - Store: epic title, description, created/updated date, and features/tasks with statuses.
 
-5. **DISPLAY EPICS**:
-   - Display the epics with their pending functionalities in a clear, organized format
+5. **DISPLAY UPDATED BACKLOG**:
+   - Re-output the full backlog after changes for confirmation, same structure as Step 2.
 
 6. **VALIDATION**:
-   - Ensure all epics and functionalities are properly stored and easily retrievable
+   - Ensure backlog entries are stored and easily retrievable with clear tags and titles.
 
 7. **UPDATE HANDLING**:
-   - If the developer provides new information or changes requirements, re-evaluate and update the backlog accordingly
+   - On new information, repeat Steps 1–6 to keep the backlog current.
 
 8. **CONFIRMATION**:
-   - If the developer confirms the backlog, proceed with implementation
+   - Ask the developer to confirm the backlog or specify next actions (e.g., implementation).
 
 **Memory Structure:**
-- Each epic stored as separate memory entry
-- Epics contain: title, description, date, pending functionalities list
-- Functionalities marked as pending/incomplete until implemented
+- Backlog entries (epics, features, tasks) stored as separate memory entries
+- Each entry contains: title, description, status (pending/in_progress/completed), created/updated dates
+- Relationships preserved via references (e.g., feature → parent epic)
 - Memory persists across sessions for continuous tracking

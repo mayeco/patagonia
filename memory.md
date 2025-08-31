@@ -41,6 +41,7 @@ Guidelines for using the memory tool to persist important context across session
    - Tags: snake_case keywords for retrieval.
    - UserTriggered: true only if the developer explicitly asked to save/update memory.
    - For delete operations: leave Content blank and set Action to delete with the target Id.
+   - CorpusNames: `mayeco_codeium_global_workflows` (only when creating)
 
 4. **EXECUTE MEMORY OPERATION**:
    - Create when no related memory exists.
