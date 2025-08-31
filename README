@@ -1,0 +1,48 @@
+# Global AI Workflows
+
+Centralized workflows to standardize common tasks across projects (planning, implementation, docs, security, deployments, schema discovery, etc.). Use these via slash-commands.
+
+## How to use
+
+- Run a workflow: type its slash-command in chat, optionally with a target file/path.
+  - Example: `/readme` to generate a README
+  - Example: `/schema` to detect the framework and persist a schema snapshot
+- Language handling is defined only in Step 0 of each workflow. Default to Spanish unless the input is clearly English.
+
+## Workflow index
+
+- /ELI5: Explain concepts simply.
+- /backlog: Create backlog epics/features with priorities.
+- /changelog: Generate changelog from git history.
+- /cxone: Run Checkmarx One CLI security analysis.
+- /docs: Retrieve and summarize technology documentation.
+- /epic: Create high-level epics from goals.
+- /error-continue: Continue after an IDE/tooling error with safe guardrails.
+- /feature: Draft a focused feature spec.
+- /gcloud: Execute Google Cloud CLI actions per instructions.
+- /git-status: Inspect repo status and pending changes.
+- /implement: Start implementing based on a plan or open text.
+- /memory: Create/update/delete persistent assistant memories.
+- /no-continue: Pause execution until explicit confirmation.
+- /project: Plan multi-feature projects with milestones.
+- /rate-request: Assess clarity and completeness of a request.
+- /readme: Generate or update README.md for the project.
+- /release: Prepare releases using Semantic Versioning.
+- /rule: AI-Optimized Pure Coding Rules reference.
+- /schema: Detect framework, locate schema/migrations, extract and persist a compact schema snapshot.
+- /template: Boilerplate workflow template for new workflows.
+- /terraform: Generate Terraform IaC from project analysis.
+- /tsc-fix: Fix TypeScript compiler errors automatically.
+- /vercel: Deploy/manage apps with Vercel CLI.
+
+## Contributing a new workflow
+
+- Start from [template.md](cci:7://file:///Users/myoung/.codeium/global_workflows/template.md:0:0-0:0) and adjust:
+  - Frontmatter `description` succinctly explains the workflow.
+  - Add a domain-specific “⚠️ CRITICAL AI EXECUTION RULES” section.
+  - Steps: put all language handling in Step 0 only. Keep steps actionable and bounded.
+- Save as `<name>.md` and register its slash-command by referencing the filename.
+
+## Notes
+
+- These workflows are workspace-agnostic but can store context using the Memory Workflow, scoped to the current workspace corpus.
