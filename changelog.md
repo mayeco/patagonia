@@ -2,6 +2,10 @@
 
 Rango de fechas cubierto: 2025-08-29 — 2025-08-31
 
+## v0.1.0-alpha.2 — 2025-08-31
+
+Sin cambios desde `v0.1.0-alpha.1`.
+
 ## v0.1.0-alpha.1 — 2025-08-31
 
 ### ✨ Added

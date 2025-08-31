@@ -61,9 +61,11 @@ Create new releases based on Semantic Versioning (semver) with automated version
    - If command fails: STOP - "Git commit failed for changelog"
 
 6. **GIT OPERATIONS**:
+   - Execute: `git branch`
+   - If command fails: STOP - "Git branch creation failed"
    - Execute: `git tag -a vX.Y.Z -m "Release vX.Y.Z"`
    - If command fails: STOP - "Git tag creation failed"
-   - Execute: `git push origin main && git push origin vX.Y.Z`
+   - Execute: `git push origin CURRENT_BRANCH && git push origin vX.Y.Z`
    - If command fails: STOP - "Git push failed - check remote repository access"
 
 7. **PUBLISH RELEASE**:
