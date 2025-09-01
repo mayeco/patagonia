@@ -1,7 +1,7 @@
 # PatagonAI Workflows
 
 [![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](https://unlicense.org/)
-[![Version](https://img.shields.io/badge/version-v0.1.0--alpha.2-blue.svg)]()
+[![Version](https://img.shields.io/badge/version-v0.1.0--alpha.5-blue.svg)](https://github.com/mayeco/patagonia/releases/tag/v0.1.0-alpha.5)
 
 Centralized workflows to standardize common tasks across projects (planning, implementation, docs, security, deployments, schema discovery, etc.). Use these via slash-commands in your IDE assistant.
 
