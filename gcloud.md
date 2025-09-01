@@ -6,7 +6,7 @@ description: Execute Google Cloud CLI commands based on developer requests
 
 Execute Google Cloud CLI (gcloud) commands based on developer requests. This workflow handles common GCP operations like authentication, project management, deployments, and resource configuration.
 
-## Important Rules: 
+## Important Rules
 - TARGET_ACTIVE_SHELL_COMMANDS
 
 ## ⚠️ CRITICAL AI EXECUTION RULES

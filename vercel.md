@@ -6,7 +6,7 @@ description: Workflow for interacting with Vercel CLI to deploy and manage appli
 
 Vercel CLI is a command-line interface for interacting with the Vercel platform. It allows you to deploy and manage applications on the Vercel platform.
 
-## Important Rules: 
+## Important Rules
 - TARGET_ACTIVE_SHELL_COMMANDS
 
 ## Important Notes

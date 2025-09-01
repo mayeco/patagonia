@@ -8,7 +8,7 @@ auto_execution_mode: 3
 Execute security analysis on the current project using Checkmarx One CLI with configured environment variables.
 
 
-## Important Rules: 
+## Important Rules
 - TARGET_ACTIVE_SHELL_COMMANDS
 
 ## ⚠️ CRITICAL AI EXECUTION RULES

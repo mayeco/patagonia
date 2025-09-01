@@ -7,7 +7,7 @@ auto_execution_mode: 3
 
 Check the current Git status and analyze any pending changes in the repository.
 
-## Important Rules: 
+## Important Rules
 - TARGET_ACTIVE_SHELL_COMMANDS
 
 ## ⚠️ CRITICAL AI EXECUTION RULES

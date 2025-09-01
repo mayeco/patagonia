@@ -7,7 +7,7 @@ auto_execution_mode: 3
 
 Initialize a new project for virtually any language or framework. This workflow uses an in-memory catalog of common stacks and, when a stack isn’t recognized, discovers the latest official initialization method from the web (preferring official sources) and executes it safely.
 
-## Important Rules: 
+## Important Rules
 - TARGET_ACTIVE_SHELL_COMMANDS
 
 ## ⚠️ CRITICAL AI EXECUTION RULES
