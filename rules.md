@@ -2,10 +2,9 @@
 
 ## TARGET_ACTIVE_SHELL_COMMANDS
 
-### SHELL_DETECTION
+### SHELL_DETECTION_AND_TARGETING
+  - Do not assume a shell is POSIX-compliant.
   - Use `echo $SHELL` to identify the current login shell.
-
-### SHELL_TARGETING
   - Prefer shell-agnostic forms.
   - If a snippet requires a specific shell, execute it explicitly:
     - Bash: `bash -lc 'snippet'`
@@ -158,75 +157,6 @@
 - CACHE_STRATEGY: Implement for expensive operations
 - ASYNC_OPERATIONS: Non-blocking for I/O
 
-## LANGUAGE_PATTERNS
-
-### JAVASCRIPT_TYPESCRIPT
-```javascript
-// ✅ PREFERRED: Clear, typed, documented
-/**
- * @param {string} userId - User identifier
- * @param {Product[]} products - Product list
- * @returns {Promise<Order>} Created order
- * @throws {ValidationError} If validation fails
- */
-export async function createOrder(userId: string, products: Product[]): Promise<Order> {
-  validateUser(userId);
-  validateProducts(products);
-  
-  const order = await orderRepository.create({
-    userId,
-    products: products.map(p => p.id),
-    total: calculateTotal(products),
-    status: 'pending'
-  });
-  
-  await sendOrderConfirmation(order);
-  return order;
-}
-
-// ❌ AVOID: Unclear, untyped, undocumented
-function x(u, p) {
-  return db.create({u, p, t: p.reduce((s, i) => s + i.price, 0)});
-}
-```
-
-### PYTHON
-```python
-# ✅ PREFERRED: Type hinted, documented, error handling
-from typing import List, Optional
-import logging
-
-def process_user_data(user_id: str, data: dict) -> Optional[User]:
-    """
-    Process and validate user data.
-    
-    Args:
-        user_id: Unique user identifier
-        data: User data dictionary
-        
-    Returns:
-        Updated User object or None if invalid
-        
-    Raises:
-        ValidationError: If data validation fails
-    """
-    try:
-        validated_data = validate_user_data(data)
-        user = update_user(user_id, validated_data)
-        logging.info(f"User {user_id} updated successfully")
-        return user
-    except ValidationError as e:
-        logging.error(f"Validation failed for user {user_id}: {e}")
-        return None
-    except Exception as e:
-        logging.error(f"Unexpected error for user {user_id}: {e}")
-        raise
-
-# ❌ AVOID: No types, no error handling, unclear
-def process_data(uid, d):
-    return update_user(uid, d)
-```
-
 ## AI_CODE_SPECIFIC
 
 ### GENERATION_RULES
@@ -248,9 +178,57 @@ MANDATORY_CHECKS:
 - Documentation adequacy
 ```
 
+## AI_CODE_GENERATION_CONSTRAINTS
+
+### LOOP_PREVENTION
+```
+CRITICAL_CONSTRAINTS:
+├── MAX_ITERATIONS: 10 per reasoning cycle
+├── MAX_DEPTH: 5 levels of reasoning
+├── MAX_BRANCHES: 3 options per decision
+├── TERMINATION: Quality metrics achieved or timeout
+├── CYCLE_DETECTION: Hash-based state tracking
+└── ESCALATION: Fallback to simpler approaches
+```
+
+### EFFICIENT_RESOURCE_USAGE
+```
+OPTIMIZATION_GUIDELINES:
+├── CONTEXT_OPTIMIZATION: Use context window efficiently for reasoning
+├── TOKEN_EFFICIENCY: Maximize information density per token
+├── OUTPUT_QUALITY: Prioritize quality over length
+├── PROCESSING_INTELLIGENCE: Smart reasoning over brute force
+├── MEMORY_MANAGEMENT: Efficient data structures and algorithms
+└── COMPUTATIONAL_WISDOM: Choose optimal approaches for complexity
+```
+
+### CODE_GENERATION_LIMITS
+```
+HARD_LIMITS (non-negotiable, fail if exceeded):
+- Cyclomatic complexity: <= 10 per function
+- Function length: < 100 lines
+- Class length: < 500 lines
+- Error rate: < 2%
+
+SOFT_LIMITS (strongly recommended, warn if exceeded):
+- Cyclomatic complexity: <= 10 per function
+- Function length: < 50 lines
+- Class length: < 200 lines
+- Error rate: < 1%
+```
+
 ## PURE_CODING_STANDARDS
 
 ### INLINE_CODE_READABILITY
+
+#### INLINE_READABILITY_RULES (non-negotiable, fail if not met)
+- **MAX_INLINE_COMPLEXITY**: Keep inline expressions to 3 operations maximum
+- **AVOID_NESTED_TERNARIES**: Use if/else or helper functions instead
+- **EXTRACT_COMPLEX_LOGIC**: Move complex calculations to named functions
+- **USE_DESCRIPTIVE_NAMES**: Variables in expressions should be self-explanatory
+- **CONSIDER_READABILITY**: Code is read more than written - prioritize understanding
+- **BREAK_DOWN_CHAINING**: Split long method chains into multiple lines
+
 ```javascript
 // ✅ PREFERRED: Clear, readable expressions
 const userAge = calculateAge(user.birthDate);
@@ -297,15 +275,22 @@ def calc_disc(u, p):
     return 0 if u.get('age', 0) < 18 or u.get('blocked', False) else (0.1 if u.get('premium', False) else (0.05 if u.get('student', False) else 0)) * p
 ```
 
-### INLINE_READABILITY_RULES
-- **MAX_INLINE_COMPLEXITY**: Keep inline expressions to 3 operations maximum
-- **AVOID_NESTED_TERNARIES**: Use if/else or helper functions instead
-- **EXTRACT_COMPLEX_LOGIC**: Move complex calculations to named functions
-- **USE_DESCRIPTIVE_NAMES**: Variables in expressions should be self-explanatory
-- **CONSIDER_READABILITY**: Code is read more than written - prioritize understanding
-- **BREAK_DOWN_CHAINING**: Split long method chains into multiple lines
-
 ### VARIABLE_NAMING_CONSISTENCY
+
+#### VARIABLE_NAMING_RULES (non-negotiable, fail if not met)
+- **LANGUAGE_SPECIFIC**: Use language conventions, don't choose your own style
+- **JAVASCRIPT_TYPESCRIPT**: camelCase for variables, functions, properties
+- **PYTHON**: snake_case for variables, functions, methods
+- **JAVA**: camelCase for variables, methods; PascalCase for classes
+- **CSHARP**: camelCase for variables, methods; PascalCase for classes, properties
+- **RUBY**: snake_case for variables, methods; CamelCase for classes/modules
+- **GO**: camelCase for unexported, PascalCase for exported names
+- **AVOID_ABBREVIATIONS**: Use full words (userId not uid, calculate not calc)
+- **BE_DESCRIPTIVE**: Names should explain purpose, not just type
+- **CONSISTENT_PREFIXES**: Use consistent prefixes (is_, has_, get_, set_)
+- **BOOLEAN_CLARITY**: Boolean variables should read as yes/no questions
+- **COLLECTION_NAMES**: Use plural for arrays/lists, singular for single items
+
 ```javascript
 // ✅ JAVASCRIPT/TYPESCRIPT: camelCase for variables and functions
 const userProfile = getUserProfile();
@@ -384,21 +369,17 @@ user_profile := getUserProfile()  # Wrong for Go
 is_profile_complete := profileData.IsComplete  # Wrong for Go
 ```
 
-### VARIABLE_NAMING_RULES
-- **LANGUAGE_SPECIFIC**: Use language conventions, don't choose your own style
-- **JAVASCRIPT_TYPESCRIPT**: camelCase for variables, functions, properties
-- **PYTHON**: snake_case for variables, functions, methods
-- **JAVA**: camelCase for variables, methods; PascalCase for classes
-- **CSHARP**: camelCase for variables, methods; PascalCase for classes, properties
-- **RUBY**: snake_case for variables, methods; CamelCase for classes/modules
-- **GO**: camelCase for unexported, PascalCase for exported names
-- **AVOID_ABBREVIATIONS**: Use full words (userId not uid, calculate not calc)
-- **BE_DESCRIPTIVE**: Names should explain purpose, not just type
-- **CONSISTENT_PREFIXES**: Use consistent prefixes (is_, has_, get_, set_)
-- **BOOLEAN_CLARITY**: Boolean variables should read as yes/no questions
-- **COLLECTION_NAMES**: Use plural for arrays/lists, singular for single items
-
 ### CODE_FORMATTING_CONSISTENCY
+
+#### CODE_FORMATTING_RULES (non-negotiable, fail if not met)
+- **CHOOSE_STYLE**: Pick one style guide (Prettier, PEP 8, Google Style) and use consistently
+- **INDENTATION**: Use consistent indentation (2 or 4 spaces, or tabs)
+- **BRACE_STYLE**: Choose one brace style and stick to it (same line or new line)
+- **SPACING**: Consistent spacing around operators, after commas, before/after parentheses
+- **LINE_LENGTH**: Keep lines under 80-120 characters (configure your linter)
+- **BLANK_LINES**: Use blank lines to separate logical sections
+- **TRAILING_COMMAS**: Be consistent with trailing commas in objects/arrays
+
 ```javascript
 // ✅ PREFERRED: Consistent formatting
 function calculateTotal(items) {
@@ -456,16 +437,18 @@ def calculate_total(items):
      return total
 ```
 
-### CODE_FORMATTING_RULES
-- **CHOOSE_STYLE**: Pick one style guide (Prettier, PEP 8, Google Style) and use consistently
-- **INDENTATION**: Use consistent indentation (2 or 4 spaces, or tabs)
-- **BRACE_STYLE**: Choose one brace style and stick to it (same line or new line)
-- **SPACING**: Consistent spacing around operators, after commas, before/after parentheses
-- **LINE_LENGTH**: Keep lines under 80-120 characters (configure your linter)
-- **BLANK_LINES**: Use blank lines to separate logical sections
-- **TRAILING_COMMAS**: Be consistent with trailing commas in objects/arrays
-
 ### CODE_ORGANIZATION
+
+#### CODE_ORGANIZATION_RULES (non-negotiable, fail if not met)
+- **SINGLE_RESPONSIBILITY**: Each file/module should have one clear purpose
+- **LOGICAL_GROUPING**: Group related functionality together
+- **CLEAR_NAMING**: Use descriptive names for files and directories
+- **IMPORT_ORGANIZATION**: Group and sort imports logically (built-ins, third-party, local)
+- **AVOID_GOD_OBJECTS**: Don't create classes/objects that do everything
+- **SEPARATE_CONCERNS**: Keep business logic, data access, and presentation separate
+- **CONSISTENT_STRUCTURE**: Follow consistent patterns across the codebase
+- **MODULAR_DESIGN**: Break large systems into smaller, focused modules
+
 ```javascript
 // ✅ PREFERRED: Well-organized file structure
 // userService.js
@@ -513,17 +496,18 @@ function doEverything(data) {
 }
 ```
 
-### CODE_ORGANIZATION_RULES
-- **SINGLE_RESPONSIBILITY**: Each file/module should have one clear purpose
-- **LOGICAL_GROUPING**: Group related functionality together
-- **CLEAR_NAMING**: Use descriptive names for files and directories
-- **IMPORT_ORGANIZATION**: Group and sort imports logically (built-ins, third-party, local)
-- **AVOID_GOD_OBJECTS**: Don't create classes/objects that do everything
-- **SEPARATE_CONCERNS**: Keep business logic, data access, and presentation separate
-- **CONSISTENT_STRUCTURE**: Follow consistent patterns across the codebase
-- **MODULAR_DESIGN**: Break large systems into smaller, focused modules
-
 ### ALGORITHM_COMPLEXITY_CONSIDERATIONS
+
+#### ALGORITHM_COMPLEXITY_RULES (non-negotiable, fail if not met)
+- **CONSIDER_BIG_O**: Always think about time and space complexity
+- **APPROPRIATE_FOR_DATA_SIZE**: Choose algorithms based on expected data size
+- **AVOID_NESTED_LOOPS**: Minimize O(n²) operations, especially with large datasets
+- **USE_BUILT_IN_OPTIMIZATIONS**: Leverage language-specific optimized methods
+- **CONSIDER_MEMORY**: Balance time complexity with space usage
+- **PROFILE_WHEN_CRITICAL**: Measure performance for critical code paths
+- **DOCUMENT_COMPLEXITY**: Comment on Big O complexity for complex algorithms
+- **OPTIMIZE_BOTTLENECKS**: Focus optimization efforts on performance-critical paths
+
 ```javascript
 // ✅ PREFERRED: Consider Big O complexity in algorithm choice
 
@@ -561,17 +545,16 @@ function findUserByEmailBad(users, email) {
 }
 ```
 
-### ALGORITHM_COMPLEXITY_RULES
-- **CONSIDER_BIG_O**: Always think about time and space complexity
-- **APPROPRIATE_FOR_DATA_SIZE**: Choose algorithms based on expected data size
-- **AVOID_NESTED_LOOPS**: Minimize O(n²) operations, especially with large datasets
-- **USE_BUILT_IN_OPTIMIZATIONS**: Leverage language-specific optimized methods
-- **CONSIDER_MEMORY**: Balance time complexity with space usage
-- **PROFILE_WHEN_CRITICAL**: Measure performance for critical code paths
-- **DOCUMENT_COMPLEXITY**: Comment on Big O complexity for complex algorithms
-- **OPTIMIZE_BOTTLENECKS**: Focus optimization efforts on performance-critical paths
-
 ### MAGIC_NUMBERS_ELIMINATION
+
+#### MAGIC_NUMBER_RULES (non-negotiable, fail if not met)
+- **DEFINE_CONSTANTS**: Use named constants for any number used in multiple places
+- **MEANINGFUL_NAMES**: Constants should explain what the number represents
+- **GROUP_RELATED**: Group related constants together (e.g., all timeouts together)
+- **AVOID_INLINE**: Never use numbers directly in calculations without explanation
+- **CONSIDER_CONFIG**: For configurable values, use configuration files
+- **DOCUMENT_UNITS**: Include units in constant names (e.g., TIMEOUT_SECONDS, not TIMEOUT)
+
 ```javascript
 // ✅ PREFERRED: Named constants instead of magic numbers
 const MINIMUM_AGE = 18;
@@ -628,15 +611,18 @@ def handle_login_attempts(attempts):
     return 'continue'
 ```
 
-### MAGIC_NUMBER_RULES
-- **DEFINE_CONSTANTS**: Use named constants for any number used in multiple places
-- **MEANINGFUL_NAMES**: Constants should explain what the number represents
-- **GROUP_RELATED**: Group related constants together (e.g., all timeouts together)
-- **AVOID_INLINE**: Never use numbers directly in calculations without explanation
-- **CONSIDER_CONFIG**: For configurable values, use configuration files
-- **DOCUMENT_UNITS**: Include units in constant names (e.g., TIMEOUT_SECONDS, not TIMEOUT)
-
 ### COMMENT_QUALITY_GUIDELINES
+
+#### COMMENT_QUALITY_RULES (non-negotiable, fail if not met)
+- **LANGUAGE_ENGLISH**: Write all comments in English (international standard)
+- **EXPLAIN_WHY**: Comment the reasoning, not just what the code does
+- **UPDATE_COMMENTS**: Keep comments in sync with code changes
+- **AVOID_REDUNDANT**: Don't comment obvious code (e.g., i++ // increment i)
+- **USE_JSDOC**: Use proper documentation format for functions
+- **COMMENT_COMPLEXITY**: Explain complex algorithms or business logic
+- **AVOID_COMMENTING_OUT**: Remove commented code, don't leave it in
+- **SELF_DOCUMENTING**: Write code that's clear enough to need minimal comments
+
 ```javascript
 // ✅ PREFERRED: Meaningful, helpful comments
 /**
@@ -690,17 +676,17 @@ function calc(price, type, exempt, disc) {
 }
 ```
 
-### COMMENT_QUALITY_RULES
-- **LANGUAGE_ENGLISH**: Write all comments in English (international standard)
-- **EXPLAIN_WHY**: Comment the reasoning, not just what the code does
-- **UPDATE_COMMENTS**: Keep comments in sync with code changes
-- **AVOID_REDUNDANT**: Don't comment obvious code (e.g., i++ // increment i)
-- **USE_JSDOC**: Use proper documentation format for functions
-- **COMMENT_COMPLEXITY**: Explain complex algorithms or business logic
-- **AVOID_COMMENTING_OUT**: Remove commented code, don't leave it in
-- **SELF_DOCUMENTING**: Write code that's clear enough to need minimal comments
-
 ### DATA_STRUCTURE_CHOICE
+
+#### DATA_STRUCTURE_RULES (non-negotiable, fail if not met)
+- **MAP_FOR_KEYS**: Use Map for key-value pairs, especially with non-string keys
+- **SET_FOR_UNIQUE**: Use Set for collections requiring uniqueness
+- **ARRAY_FOR_ORDER**: Use Array for ordered collections with index access
+- **OBJECT_FOR_STRUCTURE**: Use Object for structured data with known properties
+- **CONSIDER_PERFORMANCE**: Choose structures based on access patterns (O(1) vs O(n))
+- **AVOID_OBJECTS_AS_MAPS**: Don't use plain objects as maps in performance-critical code
+- **CONSIDER_IMMUTABLE**: Use immutable structures when data shouldn't change
+
 ```javascript
 // ✅ PREFERRED: Appropriate data structures for use cases
 
@@ -733,16 +719,16 @@ const user = users.find(u => u.id === targetId);  // O(n) lookup
 const config = { a: 1, b: 2, c: 3 };  // Order not guaranteed in older JS
 ```
 
-### DATA_STRUCTURE_RULES
-- **MAP_FOR_KEYS**: Use Map for key-value pairs, especially with non-string keys
-- **SET_FOR_UNIQUE**: Use Set for collections requiring uniqueness
-- **ARRAY_FOR_ORDER**: Use Array for ordered collections with index access
-- **OBJECT_FOR_STRUCTURE**: Use Object for structured data with known properties
-- **CONSIDER_PERFORMANCE**: Choose structures based on access patterns (O(1) vs O(n))
-- **AVOID_OBJECTS_AS_MAPS**: Don't use plain objects as maps in performance-critical code
-- **CONSIDER_IMMUTABLE**: Use immutable structures when data shouldn't change
-
 ### FUNCTION_PARAMETER_LIMITS
+
+#### FUNCTION_PARAMETER_RULES (non-negotiable, fail if not met)
+- **MAX_PARAMETERS**: Limit to 5 parameters maximum per function
+- **USE_OPTIONS_OBJECT**: For 4+ parameters, use configuration objects
+- **AVOID_FLAG_PARAMETERS**: Don't use boolean flags (prefer separate functions)
+- **PARAMETER_ORDER**: Put required parameters first, optional last
+- **CONSISTENT_NAMING**: Use consistent parameter naming across similar functions
+- **DOCUMENT_PARAMETERS**: Use clear, descriptive parameter names
+
 ```javascript
 // ✅ PREFERRED: Few, well-defined parameters
 function createUser(email, password, firstName, lastName) {
@@ -783,15 +769,13 @@ def send_email(to, subj, msg, attch=None, pri=False, html=True,
     # Too many parameters, hard to remember order
 ```
 
-### FUNCTION_PARAMETER_RULES
-- **MAX_PARAMETERS**: Limit to 5 parameters maximum per function
-- **USE_OPTIONS_OBJECT**: For 4+ parameters, use configuration objects
-- **AVOID_FLAG_PARAMETERS**: Don't use boolean flags (prefer separate functions)
-- **PARAMETER_ORDER**: Put required parameters first, optional last
-- **CONSISTENT_NAMING**: Use consistent parameter naming across similar functions
-- **DOCUMENT_PARAMETERS**: Use clear, descriptive parameter names
-
 ### ERROR_HANDLING_PATTERNS
+
+#### ERROR_HANDLING_RULES (non-negotiable, fail if not met)
+- **SPECIFIC_ERRORS**: Use specific error types instead of generic exceptions
+- **INFORMATIVE_ERRORS**: Include relevant information in error messages
+- **RETHROW_UNEXPECTED**: Re-throw unexpected errors
+
 ```javascript
 // ✅ PREFERRED: Specific, informative errors
 class ValidationError extends Error {
@@ -822,6 +806,11 @@ try {
 ```
 
 ### LOGGING_PATTERNS
+
+#### LOGGING_RULES (non-negotiable, fail if not met)
+- **STRUCTURED_LOGGING**: Use structured logging with context
+- **AVOID_SIMPLE_LOGGING**: Avoid simple console logging
+
 ```javascript
 // ✅ PREFERRED: Structured logging with context
 const logger = createLogger({
@@ -842,36 +831,71 @@ console.log('Operation completed');
 console.error('Error:', err);
 ```
 
-## AI_CODE_GENERATION_CONSTRAINTS
+## LANGUAGE_PATTERNS
 
-### LOOP_PREVENTION
-```
-CRITICAL_CONSTRAINTS:
-├── MAX_ITERATIONS: 10 per reasoning cycle
-├── MAX_DEPTH: 5 levels of reasoning
-├── MAX_BRANCHES: 3 options per decision
-├── TERMINATION: Quality metrics achieved or timeout
-├── CYCLE_DETECTION: Hash-based state tracking
-└── ESCALATION: Fallback to simpler approaches
+### JAVASCRIPT_TYPESCRIPT
+```javascript
+// ✅ PREFERRED: Clear, typed, documented
+/**
+ * @param {string} userId - User identifier
+ * @param {Product[]} products - Product list
+ * @returns {Promise<Order>} Created order
+ * @throws {ValidationError} If validation fails
+ */
+export async function createOrder(userId: string, products: Product[]): Promise<Order> {
+  validateUser(userId);
+  validateProducts(products);
+  
+  const order = await orderRepository.create({
+    userId,
+    products: products.map(p => p.id),
+    total: calculateTotal(products),
+    status: 'pending'
+  });
+  
+  await sendOrderConfirmation(order);
+  return order;
+}
+
+// ❌ AVOID: Unclear, untyped, undocumented
+function x(u, p) {
+  return db.create({u, p, t: p.reduce((s, i) => s + i.price, 0)});
+}
 ```
 
-### EFFICIENT_RESOURCE_USAGE
-```
-OPTIMIZATION_GUIDELINES:
-├── CONTEXT_OPTIMIZATION: Use context window efficiently for reasoning
-├── TOKEN_EFFICIENCY: Maximize information density per token
-├── OUTPUT_QUALITY: Prioritize quality over length
-├── PROCESSING_INTELLIGENCE: Smart reasoning over brute force
-├── MEMORY_MANAGEMENT: Efficient data structures and algorithms
-└── COMPUTATIONAL_WISDOM: Choose optimal approaches for complexity
-```
+### PYTHON
+```python
+# ✅ PREFERRED: Type hinted, documented, error handling
+from typing import List, Optional
+import logging
 
-### QUALITY_METRICS
+def process_user_data(user_id: str, data: dict) -> Optional[User]:
+    """
+    Process and validate user data.
+    
+    Args:
+        user_id: Unique user identifier
+        data: User data dictionary
+        
+    Returns:
+        Updated User object or None if invalid
+        
+    Raises:
+        ValidationError: If data validation fails
+    """
+    try:
+        validated_data = validate_user_data(data)
+        user = update_user(user_id, validated_data)
+        logging.info(f"User {user_id} updated successfully")
+        return user
+    except ValidationError as e:
+        logging.error(f"Validation failed for user {user_id}: {e}")
+        return None
+    except Exception as e:
+        logging.error(f"Unexpected error for user {user_id}: {e}")
+        raise
+
+# ❌ AVOID: No types, no error handling, unclear
+def process_data(uid, d):
+    return update_user(uid, d)
 ```
-ACCEPTABLE_RANGES:
-- Cyclomatic complexity: < 10 per function
-- Function length: < 50 lines
-- Class length: < 300 lines
-- Test coverage: > 80%
-- Response time: < 500ms for web endpoints
-- Error rate: < 1%

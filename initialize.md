@@ -107,15 +107,13 @@ Initialize a new project for virtually any language or framework. This workflow 
   - Do not retry if a command fails or stalls, STOP and inform the developer.
   - For commands like unzip or curl, do not retry if a command fails or stalls, STOP and inform the developer.
   - DO NOT SKIP: Fail if no possible match is found, for example, if the local environment version is unsupported by the framework or the package manager is not installed. Inform the developer and stop.
-  - Parameters (only if the initializer requires them):
-     - Note: These defaults can be overridden if the developer provides explicit values at the start of the message.
+  - Parameters (These defaults can be overridden if the developer provides explicit values at the start of the message, use only if the initializer requires them):
      - NAME: App Initializer
      - DESCRIPTION: Patagonia App Initializer
      - GROUP_ID: com.patagonia
      - ARTIFACT_ID: app_initializer
      - PACKAGE_NAME: com.patagonia.app_initializer
      - BASE_DIR: {pwd}
-     - DATABASE: postgresql
      - CSS: tailwind
      - DOCKER: true
 
@@ -139,7 +137,6 @@ Initialize a new project for virtually any language or framework. This workflow 
      ```
 
 8. **SUMMARY WHAT WAS DONE**
-   - Directory validated as empty and `.gitignore` configured for the chosen stack.
    - Prerequisites checked (language, package manager, tooling).
    - Versions verified via official sources and GitHub Releases.
    - Project initialized using the official generator/CLI and latest stable defaults.
@@ -147,7 +144,7 @@ Initialize a new project for virtually any language or framework. This workflow 
 
 9. **NEXT STEPS (OPTIONAL — EXECUTE ONLY IF REQUESTED)**
   - The execution of this step is optional. Proceed only if the developer explicitly requests these actions; otherwise STOP here.
-  - DISPLAY PROMPT (do not execute): After completing Step 8, output to the developer a concise "Next steps" summary (the items below) and ask: "Would you like me to run any of these now?" Do not run any commands until explicit approval.
+  - DISPLAY PROMPT (do not execute): After completing Step 8, output to the developer a "Next steps" summary (mentioning all the items below) and ask: "Would you like me to run any of these now?" Do not run any commands until explicit approval.
 
   - Local environment setup
     - Package installation:
