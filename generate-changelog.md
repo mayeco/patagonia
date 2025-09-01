@@ -14,14 +14,12 @@ Generate a comprehensive changelog based on git commit history analysis, categor
 
 **DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete changelog generation within 8 steps maximum. If git analysis takes too long, use available data and proceed.
 
-**COMMAND VALIDATION**: Execute git commands directly without validation. If commands fail, stop with specific error message.
-
 **DATA PROCESSING**: Process commits in chronological order without over-analysis.
 
 **TERMINATION CONDITIONS**:
 - If git repository not found: Stop with clear error message
 - If no commits found: Stop with explanation
-- If command fails: Stop with specific error details
+- If git command fails: Stop with specific error details
 - Always provide changelog content or clear error
 
 ## STEPS
@@ -32,16 +30,20 @@ Generate a comprehensive changelog based on git commit history analysis, categor
    - If no clear English indicators are found, default to Spanish for all responses
    - Always provide responses in Spanish by default, unless the developer clearly specifies English.
 
-1. **ANALYZE GIT HISTORY**:
-   - Run `git log --pretty=format:"%h|%an|%ad|%s" --date=short --stat -20 --no-merges` to get comprehensive commit data
-   - Use deterministic sorting: commits processed in chronological order (oldest to newest)
-   - Extract commit messages, authors, dates, and categorize changes consistently
+1. **SHELL DETECTION AND TARGETING (DO NOT SKIP)**:
+   - RULE: TARGET_ACTIVE_SHELL_COMMANDS
+   - Detect the active shell using `echo $SHELL`
+   - Detect git installation using `git --version`
+   - If git is not installed: STOP - "Git is not installed - ensure git is installed and in a valid repository"
 
-2. **GIT REPOSITORY VALIDATION**:
-   - Execute: `git log --pretty=format:"%h|%an|%ad|%s" --date=short --stat -20 --no-merges`
-   - If command fails: STOP - "Git command failed - ensure git is installed and in a valid repository"
-   - If no commits found: STOP - "No git commits found in this repository"
-   - Parse output for commit data (hash, author, date, message, stats)
+2. **GIT REPOSITORY HISTORY ANALYSIS**:
+   - **Shell-agnostic description**: This Git command lists the last 20 non-merge commits with a one-line header per commit (hash, author, YYYY-MM-DD date, subject), followed by per-file change stats. The header fields are separated by a literal pipe character `|`. For clarity and portability, you may prefer `-n 20` instead of `-20` (both are equivalent).
+   - **Shell targeting guidance**: When executing programmatically, do not assume Bash. Detect the active shell and wrap the command accordingly.
+      - fish: `fish -c "git log --pretty=format:'%h|%an|%ad|%s' --date=short --stat -n 20 --no-merges"`
+      - Bash: `bash -lc "git log --pretty=format:'%h|%an|%ad|%s' --date=short --stat -n 20 --no-merges"`
+      - POSIX sh: `sh -lc "git log --pretty=format:'%h|%an|%ad|%s' --date=short --stat -n 20 --no-merges"`
+
+   - **Quoting guidance**: Quote the pretty-format as `--pretty=format:'%h|%an|%ad|%s'` so `|` is treated as a literal within the argument (not a pipe). When wrapping in a shell, use outer double quotes so the inner single quotes survive. Do not split arguments across lines; treat each flag as a single token.
 
 3. **COMMIT CATEGORIZATION**:
    - Classify each commit by type using commit message patterns
@@ -53,15 +55,12 @@ Generate a comprehensive changelog based on git commit history analysis, categor
       - **Security**: Keywords like "security", "vulnerability", "auth", "encrypt"
 
 4. **GENERATE CHANGELOG**:
-   - **DO NOT include standard Keep a Changelog header text**: "El formato se basa en [Keep a Changelog]..." 
-   - **DO NOT include Semantic Versioning reference text**: "este proyecto se adhiere a [Semantic Versioning]..."
-   - **CRITICAL**: Only include "## [Sin liberar]" or "## Unreleased" section IF THERE ARE ACTUAL UNRELEASED CHANGES
-   - **DO NOT add empty "## [Sin liberar]" sections** when no unreleased changes exist
-   - **Check for unreleased changes first** before adding any unreleased section
-   - **Skip unreleased section completely** if no pending changes are found
-   - Include "Unreleased" section only if unreleased changes exist
-   - **ALWAYS include release dates**: Use current date (YYYY-MM-DD format) for new releases
-   - **Add commit dates**: Include dates from git commit history for each change
+   - USE A DETERMINISTIC ALGORITHM TO GENERATE THE CHANGELOG
+   - DO NOT add empty sections
+   - Check for unreleased changes first before adding any unreleased section
+   - Skip unreleased section completely if no pending changes are found
+   - ALWAYS include release dates: Use current date (YYYY-MM-DD format) for new releases
+   - Add commit dates: Include dates from git commit history for each change
    - Use version numbers and release dates (YYYY-MM-DD format)
    - Group similar changes together in alphabetical order
    - List changes chronologically (newest first) but maintain consistent formatting
@@ -72,22 +71,22 @@ Generate a comprehensive changelog based on git commit history analysis, categor
    - Links to specific commits when possible
    - Date ranges covered by the changelog
 
-6. **SAVE THE GENERATED FILE**:
+6. **ENSURE DETERMINISTIC OUTPUT**:
+   - Running the same command multiple times with the same git history should produce identical CHANGELOG.md files.
+
+7. **SAVE THE GENERATED FILE**:
    - Save the generated CHANGELOG.md to the project root
 
-7. **DO NOT COMMIT THE CHANGELOG**:
+8. **DO NOT COMMIT THE CHANGELOG**:
    - Let the developer review and commit manually
 
-8. **ENSURE DETERMINISTIC OUTPUT**:
-   - Running the same command multiple times with the same git history should produce identical CHANGELOG.md files
-
 **Changelog Categories (Keep a Changelog Format):**
-- ✨ **Added**: Nuevas funcionalidades o características
-- 🔄 **Changed**: Cambios en funcionalidad existente
-- ⏰ **Deprecated**: Funcionalidades próximamente eliminadas
-- 🗑️ **Removed**: Funcionalidades eliminadas
-- 🐛 **Fixed**: Corrección de errores
-- 🔒 **Security**: Corrección de vulnerabilidades de seguridad
+- ✨ **Added**: New features or capabilities
+- 🔄 **Changed**: Changes to existing functionality
+- ⏰ **Deprecated**: Features to be removed in the future
+- 🗑️ **Removed**: Features removed
+- 🐛 **Fixed**: Error corrections
+- 🔒 **Security**: Security corrections
 
 **Analysis Features:**
 - Commit message analysis and categorization

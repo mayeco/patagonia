@@ -58,6 +58,12 @@ Create new releases based on Semantic Versioning (semver) with automated version
    - Execute: `git add VERSION && git commit -m "Bump version to X.Y.Z"`
    - If command fails: STOP - "Git commit failed - check repository status"
 
+5. **GENERATE CHANGELOG**:
+   - Execute: generate-changelog WORKFLOW
+   - If command fails: STOP - "Changelog generation failed"
+   - Execute: `git add CHANGELOG.md && git commit -m "Update changelog"`
+   - If command fails: STOP - "Git commit failed - check repository status"
+
 6. **GIT OPERATIONS**:
    - Execute: `git branch`
    - If command fails: STOP - "Git branch creation failed"
