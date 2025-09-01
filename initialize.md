@@ -113,7 +113,7 @@ Initialize a new project for virtually any language or framework. This workflow 
      - GROUP_ID: com.patagonia
      - ARTIFACT_ID: app_initializer
      - PACKAGE_NAME: com.patagonia.app_initializer
-     - BASE_DIR: app_initializer
+     - BASE_DIR: {pwd}
      - DATABASE: postgresql
      - CSS: tailwind
      - DOCKER: true
@@ -146,6 +146,7 @@ Initialize a new project for virtually any language or framework. This workflow 
 
 9. **NEXT STEPS (OPTIONAL — EXECUTE ONLY IF REQUESTED)**
   - The execution of this step is optional. Proceed only if the developer explicitly requests these actions; otherwise STOP here.
+  - DISPLAY PROMPT (do not execute): After completing Step 8, output to the developer a concise "Next steps" summary (the items below) and ask: "Would you like me to run any of these now?" Do not run any commands until explicit approval.
 
   - Local environment setup
     - Package installation:

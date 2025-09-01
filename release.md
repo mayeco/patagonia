@@ -52,16 +52,9 @@ Create new releases based on Semantic Versioning (semver) with automated version
    - Update any other version files (setup.py, constants)
    - Create or update `VERSION` file with the new version string (e.g., `vX.Y.Z` or `vX.Y.Z-<pre>`) and ensure a trailing newline
    - Example: `printf 'vX.Y.Z\\n' > VERSION`
-   - Execute: `git add . && git commit -m "Bump version to X.Y.Z"`
+   - Execute: `git add VERSION && git commit -m "Bump version to X.Y.Z"`
    - If command fails: STOP - "Git commit failed - check repository status"
 
-5. **CHANGELOG UPDATE**:
-   - Execute generate-changelog workflow to generate entries
-   - Move unreleased changes to new version section
-   - Add release date
-   - Execute: `git add CHANGELOG.md && git commit -m "Update changelog for vX.Y.Z"`
-   - If command fails: STOP - "Git commit failed for changelog"
-alpha.3
 6. **GIT OPERATIONS**:
    - Execute: `git branch`
    - If command fails: STOP - "Git branch creation failed"
@@ -93,13 +86,3 @@ alpha.3
 - Alpha: 1.0.0-alpha.1
 - Beta: 1.0.0-beta.1
 - Release Candidate: 1.0.0-rc.1
-
-### Commit Message Conventions
-- **feat:** New features (minor bump)
-- **fix:** Bug fixes (patch bump)
-- **BREAKING CHANGE:** Breaking changes (major bump)
-- **docs:** Documentation changes
-- **style:** Code style changes
-- **refactor:** Code refactoring
-- **test:** Testing changes
-- **chore:** Maintenance changes
