@@ -1,6 +1,6 @@
 # AI CODE GENERATION RULES
 
-## WHEN RUNNING COMMANDS: TARGET THE ACTIVE SHELL (AND ADAPT FOR NON-POSIX SHELLS)
+## TARGET_ACTIVE_SHELL_COMMANDS
 
 ### SHELL_DETECTION
   - Use `echo $SHELL` to identify the current login shell.
@@ -22,7 +22,7 @@
 ### OUTPUT_ONLY_VALIDATIONS
   - Avoid `echo`/`exit` for checks. Use commands whose empty output implies success (e.g., `find` to list disallowed entries).
 
-### COMMAND EXECUTION BEST PRACTICES
+### COMMAND_EXECUTION_BEST_PRACTICES
 
 #### NO_CD
   - Avoid `cd` in commands. Use absolute paths or rely on the runner-controlled CWD.
@@ -128,7 +128,7 @@
   - Auto-run only read-only or clearly non-destructive commands.
   - Require explicit approval for installations, file writes, or system changes.
 
-## CORE CODING DIRECTIVES
+## CORE_CODING_DIRECTIVES
 
 ### CODE_GENERATION
 - PRIORITY: Readability > Cleverness
@@ -158,7 +158,7 @@
 - CACHE_STRATEGY: Implement for expensive operations
 - ASYNC_OPERATIONS: Non-blocking for I/O
 
-## LANGUAGE PATTERNS
+## LANGUAGE_PATTERNS
 
 ### JAVASCRIPT_TYPESCRIPT
 ```javascript
@@ -227,7 +227,7 @@ def process_data(uid, d):
     return update_user(uid, d)
 ```
 
-## AI CODE SPECIFIC
+## AI_CODE_SPECIFIC
 
 ### GENERATION_RULES
 - PROMPT_CLARITY: Be specific about requirements
@@ -248,7 +248,7 @@ MANDATORY_CHECKS:
 - Documentation adequacy
 ```
 
-## PURE CODING STANDARDS
+## PURE_CODING_STANDARDS
 
 ### INLINE_CODE_READABILITY
 ```javascript
@@ -842,7 +842,7 @@ console.log('Operation completed');
 console.error('Error:', err);
 ```
 
-## AI CODE GENERATION CONSTRAINTS
+## AI_CODE_GENERATION_CONSTRAINTS
 
 ### LOOP_PREVENTION
 ```

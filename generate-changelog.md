@@ -7,6 +7,9 @@ auto_execution_mode: 3
 
 Generate a comprehensive changelog based on git commit history analysis, categorizing changes and providing detailed insights.
 
+## Important Rules: 
+- TARGET_ACTIVE_SHELL_COMMANDS
+
 ## ⚠️ CRITICAL AI EXECUTION RULES
 
 **DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete changelog generation within 8 steps maximum. If git analysis takes too long, use available data and proceed.

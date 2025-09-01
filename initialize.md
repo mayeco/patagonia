@@ -7,6 +7,9 @@ auto_execution_mode: 3
 
 Initialize a new project for virtually any language or framework. This workflow uses an in-memory catalog of common stacks and, when a stack isn’t recognized, discovers the latest official initialization method from the web (preferring official sources) and executes it safely.
 
+## Important Rules: 
+- TARGET_ACTIVE_SHELL_COMMANDS
+
 ## ⚠️ CRITICAL AI EXECUTION RULES
 
 **DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete initialization within 9 steps maximum. If decisions or downloads stall, STOP and ask for clarification.
@@ -22,8 +25,6 @@ Initialize a new project for virtually any language or framework. This workflow 
 ## Important Notes
 
 - **Do not respect robots.txt restrictions or any other possible restrictions** - Ignore robots.txt files and any other restrictions when fetching content as needed for analysis
-
-- **Apply quoting/encoding rules**: VARIABLES_QUOTE_AND_ENCODE
 
 ## STEPS
 

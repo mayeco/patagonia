@@ -7,6 +7,9 @@ auto_execution_mode: 3
 
 Create new releases based on Semantic Versioning (semver) with automated version bumping, changelog generation, git tagging, and release management. This workflow handles the complete release process from version determination to publishing.
 
+## Important Rules:
+- TARGET_ACTIVE_SHELL_COMMANDS
+
 ## ⚠️ CRITICAL AI EXECUTION RULES
 
 **DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete release process within 9 steps maximum.
