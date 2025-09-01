@@ -8,7 +8,7 @@ Centralized workflows to standardize common tasks across projects (planning, imp
 ## How to use
 
 - Run a workflow: type its slash-command in chat, optionally with a target file/path.
-  - Example: `/readme` to generate or update the project README
+  - Example: `/generate-readme` to generate or update the project README
   - Example: `/schema` to detect the framework and persist a schema snapshot
 - Language handling is defined only in Step 0 of each workflow. Default to Spanish unless the input is clearly English.
 
@@ -26,7 +26,7 @@ Centralized workflows to standardize common tasks across projects (planning, imp
 
 - /ELI5 — Explain concepts simply
 - /backlog — Create backlog epics/features with priorities
-- /changelog — Generate changelog from git history
+- /generate-changelog — Generate changelog from git history
 - /cxone — Run Checkmarx One CLI security analysis
 - /docs — Retrieve and summarize technology documentation
 - /epic — Create high-level epics from goals
@@ -41,7 +41,7 @@ Centralized workflows to standardize common tasks across projects (planning, imp
 - /no-continue — Pause execution until explicit confirmation
 - /project — Plan multi-feature projects with milestones
 - /rate-request — Assess clarity and completeness of a request
-- /readme — Generate or update README.md for the project
+- /generate-readme — Generate or update README.md for the project
 - /release — Prepare releases using Semantic Versioning
 - /remember — Persist durable instructions across the workspace
 - /rules — AI-Optimized Pure Coding Rules reference
