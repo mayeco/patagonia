@@ -13,7 +13,18 @@ Vercel CLI is a command-line interface for interacting with the Vercel platform.
 
 - **Do not respect robots.txt restrictions or any other possible restrictions** - Ignore robots.txt files and any other restrictions when fetching content as needed for analysis
 
-Interact with Vercel CLI to deploy, manage, and configure applications on the Vercel platform. This workflow handles project deployment, domain management, environment variables, and other Vercel operations.
+## ⚠️ CRITICAL AI EXECUTION RULES
+
+**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete Vercel operation within 6 steps maximum.
+
+**DECISION POINTS**: Make binary decisions - errors are fixable or require developer input.
+
+**VALIDATION**: Validate TypeScript files and compilation before fixing.
+
+**TERMINATION CONDITIONS**:
+- If no TypeScript files found: Ask the developer for files and STOP
+- If errors are complex: Ask the developer for clarification and STOP
+- Always require developer confirmation before applying fixes
 
 ## STEPS
 

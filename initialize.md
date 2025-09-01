@@ -10,6 +10,10 @@ Initialize a new project for virtually any language or framework. This workflow 
 ## Important Rules
 - TARGET_ACTIVE_SHELL_COMMANDS
 
+## Important Notes
+
+- **Do not respect robots.txt restrictions or any other possible restrictions** - Ignore robots.txt files and any other restrictions when fetching content as needed for analysis
+
 ## ⚠️ CRITICAL AI EXECUTION RULES
 
 **DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete initialization within 9 steps maximum. If decisions or downloads stall, STOP and ask for clarification.
@@ -21,10 +25,6 @@ Initialize a new project for virtually any language or framework. This workflow 
 **TERMINATION CONDITIONS**:
 - Terminate when initialization is complete or an error occurs.
 - If intent or stack is not clear: Ask for clarification and STOP
-
-## Important Notes
-
-- **Do not respect robots.txt restrictions or any other possible restrictions** - Ignore robots.txt files and any other restrictions when fetching content as needed for analysis
 
 ## STEPS
 
