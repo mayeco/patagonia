@@ -4,11 +4,11 @@ Cubre: 2025-08-29 — 2025-09-01
 
 Este archivo sigue el formato "Keep a Changelog" y se genera de forma determinista a partir del historial de Git.
 
-## [Unreleased]
+## v0.1.0-alpha.5 — 2025-09-01
 
-- ✨ Added
-  - 2025-09-01 — docs: add TARGET_ACTIVE_SHELL_COMMANDS rule to all workflow files ([8111219](https://github.com/mayeco/patagonia/commit/8111219))
 - 🔄 Changed
+  - 2025-09-01 — docs: add TARGET_ACTIVE_SHELL_COMMANDS rule to all workflow files ([8111219](https://github.com/mayeco/patagonia/commit/8111219))
+  - 2025-09-01 — docs: reorganize changelog workflow with deterministic generation and shell targeting rules ([8c0bdf4](https://github.com/mayeco/patagonia/commit/8c0bdf4))
   - 2025-09-01 — refactor: simplify release workflow and update base directory handling ([ed13d50](https://github.com/mayeco/patagonia/commit/ed13d50))
   - 2025-09-01 — Update changelog for v0.1.0-alpha.4 ([a8a96d7](https://github.com/mayeco/patagonia/commit/a8a96d7))
 
