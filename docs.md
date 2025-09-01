@@ -1,5 +1,6 @@
 ---
 description: Workflow for obtaining documentation of frameworks, libraries, languages and technologies
+auto_execution_mode: 3
 ---
 
 # Documentation Workflow

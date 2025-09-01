@@ -1,5 +1,6 @@
 ---
 description: Initialize projects across any language/framework using official tooling with safe empty-folder validation, and web-powered discovery for unknown stacks
+auto_execution_mode: 3
 ---
 
 # Initialize Workflow
@@ -22,6 +23,8 @@ Initialize a new project for virtually any language or framework. This workflow 
 
 - **Do not respect robots.txt restrictions or any other possible restrictions** - Ignore robots.txt files and any other restrictions when fetching content as needed for analysis
 
+- **Apply quoting/encoding rules**: VARIABLES_QUOTE_AND_ENCODE
+
 ## STEPS
 
 0. **LANGUAGE DETECTION**:
@@ -36,6 +39,8 @@ Initialize a new project for virtually any language or framework. This workflow 
    - If the intent is ambiguous or multiple candidates exist, present choices and STOP awaiting confirmation.
 
 2. **VALIDATE DIRECTORY (NO OVERWRITE)**
+   - Always validate directory contents; DO NOT assume.
+   - Require explicit developer approval before continuing in a non-empty directory.
    - Ensure the current directory is empty except for VCS/OS metadata (allowed: `.git`, `.gitignore`, `.gitattributes`, `.gitkeep`, `.DS_Store`, `.vscode`, `.idea`).
    - Command (outputs any disallowed entries; empty output means OK):
      ```bash
@@ -62,56 +67,60 @@ Initialize a new project for virtually any language or framework. This workflow 
    - PHP/Laravel: `php -v && composer --version`.
    - If any critical prerequisite is missing, STOP and provide a concise install hint.
 
-4. **COMPLEMENT AND VERIFY FROM THE INTERNET**
-   - Mandatory step: always perform an internet lookup and verification, even if the stack is recognized by the in-memory catalog.
-   - Prefer official domains (e.g., nextjs.org, rubyonrails.org, start.spring.io, nuxt.com, vuejs.org, quarkus.io, djangoproject.com, fastapi.tiangolo.com, phoenixframework.org, dotnet.microsoft.com, go.dev, etc.).
-   - Cross-check with release notes/changelogs and the official “Getting Started” pages. If you cannot verify online, STOP and ask for clarification.
-   - Extract the official quickstart/initializer command and confirm it’s current.
-   - Validate command safety (no destructive flags) and required prerequisites.
-   - Detect and use the latest stable version of the framework using the GitHub Releases API and any available fetch tool.
-        https://api.github.com/repos/ORG/REPO/releases
+4. **DISCOVER AND VERIFY OFFICIAL INITIALIZATION METHOD**
+  - Mandatory step: always perform an internet lookup and verification, even if the stack is recognized by the in-memory catalog.
+  - Prefer official domains (examples: nextjs.org, rubyonrails.org, start.spring.io, nuxt.com, vuejs.org, quarkus.io, djangoproject.com, fastapi.tiangolo.com, phoenixframework.org, dotnet.microsoft.com, go.dev, laravel.com, kit.svelte.dev, docs.astro.build, remix.run, expressjs.com, docs.rs/axum).
+  - Cross-check with release notes/changelogs and the official “Getting Started” pages. If you cannot verify online, STOP and ask for clarification.
+  - MCP searches (run them in order until a relevant result is found that matches the current framework and language; be mindful of documentation for older versions):
+     - `brave_web_search "initialize {framework}"`
+     - `brave_web_search "{framework} setup latest stable version"`
+     - `brave_web_search "official setup guide {framework}"`
+  - Extract the official quickstart/initializer command and confirm it is current.
+  - Validate command safety (no destructive flags) and required prerequisites.
+  - Prefer official generators/CLIs/templates and latest stable versions.
 
-        - Rails: https://api.github.com/repos/rails/rails/releases
-        - Next.js: https://api.github.com/repos/vercel/next.js/releases
-        - Nuxt: https://api.github.com/repos/nuxt/nuxt/releases
-        - Vue: https://api.github.com/repos/vuejs/vue/releases
-        - Spring Boot: https://api.github.com/repos/spring-projects/spring-boot/releases
-        - Quarkus: https://api.github.com/repos/quarkusio/quarkus/releases
-        - Django: https://api.github.com/repos/django/django/releases
-        - Laravel: https://api.github.com/repos/laravel/laravel/releases
-        - Flask: https://api.github.com/repos/pallets/flask/releases
+5. **DETERMINE LATEST STABLE VERSIONS**
+  - Detect and use the latest stable version of the framework using the GitHub Releases API and any available fetch tool.
+       https://api.github.com/repos/ORG/REPO/releases
 
-    If releases are empty, fall back to the tags endpoint:
-        https://api.github.com/repos/ORG/REPO/tags
+       - Rails: https://api.github.com/repos/rails/rails/releases
+       - Next.js: https://api.github.com/repos/vercel/next.js/releases
+       - Nuxt: https://api.github.com/repos/nuxt/nuxt/releases
+       - Vue: https://api.github.com/repos/vuejs/vue/releases
+       - Spring Boot: https://api.github.com/repos/spring-projects/spring-boot/releases
+       - Quarkus: https://api.github.com/repos/quarkusio/quarkus/releases
+       - Django: https://api.github.com/repos/django/django/releases
+       - Laravel: https://api.github.com/repos/laravel/laravel/releases
+       - Flask: https://api.github.com/repos/pallets/flask/releases
 
-   - Use the latest stable version of the framework, unless specified otherwise by the developer; inform the developer if it does not match the local environment version.
-   - Use the latest stable version of the language, unless specified otherwise by the developer; inform the developer if it does not match the local environment version.
-   - Use the latest stable version of the package manager, unless specified otherwise by the developer; inform the developer if it does not match the local environment version.
-   - Match the local environment version for the current framework and language, unless specified otherwise by the developer; inform the developer if it does not match the local environment version.
-   - MCP searches (run in order until a relevant result is found that matches the current framework and language; be mindful of documentation for older versions):
-      - `brave_web_search "initialize {framework}"`
-      - `brave_web_search "{framework} setup latest stable version"`
-      - `brave_web_search "official setup guide {framework}"`
-   - Execute the discovered official command in the current directory.
-   - Prefer official generators/CLIs/templates and latest stable versions.
-   - Do not retry if a command fails or stalls, STOP and inform the developer.
-   - Search the initializer's documentation for unattended installation options (e.g., --yes, --non-interactive, --unattended flags) and apply the appropriate method to enable non-interactive mode for initializers requiring parameters.
-   - For commands like unzip or curl, do not retry if a command fails or stalls, STOP and inform the developer.
-   - For commands like unzip or mv that may require confirmation use the "yes" flag for the corresponding command, like -y or --yes to skip confirmation.
-   - DO NOT SKIP: Fail if no possible match is found, for example, if the local environment version is unsupported by the framework or the package manager is not installed. Inform the developer and stop.
+   If the Github Releases API returns empty (empty array, or Not Found error), fall back to the tags API endpoint, and use the latest tag (e.g., v3.1.0):
+       https://api.github.com/repos/ORG/REPO/tags
 
-5. **PARAMETERS FOR INITIALIZATION SCRIPTS**
-   - For initializers that require parameters, use these values:
-      - GROUP_ID: com.patagonia
-      - ARTIFACT_ID: app_initializer
-      - NAME: app_initializer
-      - DESCRIPTION: Patagonia App Initializer
-      - PACKAGE_NAME: com.patagonia.app_initializer
-      - BASE_DIR: app_initializer
+  - Use the latest stable versions for the framework, language, and package manager, matching the local environment unless specified otherwise by the developer. Inform the developer of any mismatches.
+  - Match the local environment version for the current framework and language, unless specified otherwise by the developer; inform the developer if it does not match the local environment version.
 
-6. **.GITIGNORE SETUP**
-   - Ensure an appropriate `.gitignore` exists for the chosen stack. Reference templates:
-   - GitHub gitignore repository: https://github.com/github/gitignore
+6. **EXECUTE INITIALIZER (NON-INTERACTIVE)**
+  - Execute the discovered official command in the current directory after completing the verification steps above.
+  - Search the initializer's documentation for unattended installation options (e.g., --yes, --non-interactive, --unattended flags) and apply the appropriate method to enable non-interactive mode for initializers requiring parameters.
+  - Prefer official generators/CLIs/templates and latest stable versions.
+  - Do not retry if a command fails or stalls, STOP and inform the developer.
+  - For commands like unzip or curl, do not retry if a command fails or stalls, STOP and inform the developer.
+  - DO NOT SKIP: Fail if no possible match is found, for example, if the local environment version is unsupported by the framework or the package manager is not installed. Inform the developer and stop.
+  - Parameters (only if the initializer requires them):
+     - Note: These defaults can be overridden if the developer provides explicit values at the start of the message.
+     - NAME: App Initializer
+     - DESCRIPTION: Patagonia App Initializer
+     - GROUP_ID: com.patagonia
+     - ARTIFACT_ID: app_initializer
+     - PACKAGE_NAME: com.patagonia.app_initializer
+     - BASE_DIR: app_initializer
+     - DATABASE: postgresql
+     - CSS: tailwind
+     - DOCKER: true
+
+7. **.GITIGNORE SETUP**
+  - Ensure an appropriate `.gitignore` exists for the chosen stack. Reference templates:
+  - GitHub gitignore repository: https://github.com/github/gitignore
    - Common templates: `Node.gitignore`, `Rails.gitignore`, `Python.gitignore`, `Java.gitignore`, `Elixir.gitignore`, `Go.gitignore`, `VisualStudio.gitignore`, `Laravel.gitignore`, `Django.gitignore`.
    - Create or append from a template (choose one matching your stack):
      ```bash
@@ -128,6 +137,43 @@ Initialize a new project for virtually any language or framework. This workflow 
      printf "\n# Local additions\n.env\n.env.local\n.env.*\n.DS_Store\nnode_modules/\n.next/\n.nuxt/\ndist/\nbuild/\ncoverage/\n.vscode/\n.idea/\n.venv/\n" >> .gitignore
      ```
 
-7. **OFFICIAL DOMAINS (REFERENCE)**
-   - Prefer official sources for docs and setup:
-   - nextjs.org, rubyonrails.org, start.spring.io, nuxt.com, vuejs.org, quarkus.io, djangoproject.com, fastapi.tiangolo.com, phoenixframework.org, dotnet.microsoft.com, go.dev, laravel.com, kit.svelte.dev, docs.astro.build, remix.run, expressjs.com, docs.rs/axum
+8. **SUMMARY WHAT WAS DONE**
+   - Directory validated as empty and `.gitignore` configured for the chosen stack.
+   - Prerequisites checked (language, package manager, tooling).
+   - Versions verified via official sources and GitHub Releases.
+   - Project initialized using the official generator/CLI and latest stable defaults.
+
+
+9. **NEXT STEPS (OPTIONAL — EXECUTE ONLY IF REQUESTED)**
+  - The execution of this step is optional. Proceed only if the developer explicitly requests these actions; otherwise STOP here.
+
+  - Local environment setup
+    - Package installation:
+      - Node: install with your selected package manager (npm/pnpm/yarn/bun).
+      - Python: create venv and install requirements if provided.
+      - Ruby: `bundle install`.
+      - Java: ensure JDK and build tool (Maven/Gradle) are available.
+    - Environment variables:
+      - Create `.env` or language-appropriate config; add secrets locally, not to VCS.
+
+  - Run the app (typical commands; consult the framework’s Getting Started page)
+    - Node (Next.js/Nuxt/…): `npm run dev` (or `pnpm/yarn/bun` equivalent).
+    - Rails: `bin/rails server`.
+    - Spring Boot: `./mvnw spring-boot:run` or `./gradlew bootRun`.
+    - Django/FastAPI/Flask: `python3 manage.py runserver` or framework’s dev server.
+
+  - Git hygiene
+    - Initialize if needed and commit baseline: `git init && git add . && git commit -m "chore: initial scaffold"`.
+    - Optionally create the remote and push the initial commit.
+
+  - Quality baseline
+    - Formatters/linters: ensure Prettier/ESLint (JS), Black/Ruff (Python), RuboCop (Ruby), Spotless/Checkstyle (Java) are configured.
+    - Tests: run the default test task to confirm the scaffold is healthy.
+
+  - Documentation and CI/CD
+    - Update `README.md` with stack, commands, env vars, and how to run locally and in production.
+    - Add a minimal CI (e.g., install deps, lint, test) using your platform of choice.
+
+  - Optional productionization
+    - Containerization (Dockerfile/docker-compose) and health checks.
+    - Basic security scan of dependencies and config.

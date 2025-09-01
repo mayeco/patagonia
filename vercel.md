@@ -100,356 +100,89 @@ vercel teams rm developer@example.com
 
 ## Common Vercel CLI Operations
 
-### Project Management
 ```bash
-# Login to Vercel
+# Auth & Project
 vercel login
-
-# Check authentication
 vercel whoami
-
-# Initialize new project
-vercel
-
-# Link existing project
-vercel link
-
-# List projects
+vercel link                 # link existing repo/folder
 vercel project ls
+vercel switch <project>
 
-# Switch project
-vercel switch <project-name>
+# Deploy
+vercel                      # preview
+vercel --prod               # production
+vercel <dir>                # deploy specific folder
+vercel redeploy <deploy-url>
+vercel rollback <deploy-url>  # confirm before using
 
-# Create new project
-vercel project add <project-name>
-```
-
-### Deployment
-```bash
-# Deploy current directory (preview)
-vercel
-
-# Deploy to production
-vercel --prod
-
-# Deploy specific directory
-vercel <path-to-directory>
-
-# Deploy with custom name
-vercel --name <project-name>
-
-# Redeploy specific deployment
-vercel redeploy <deployment-url>
-
-# Remove deployment
-vercel remove <deployment-url>
-```
-
-### Environment Variables
-```bash
-# Add environment variable
-vercel env add VARIABLE_NAME
-
-# List environment variables
+# Env vars
+vercel env add NAME
 vercel env ls
-
-# Remove environment variable
-vercel env rm VARIABLE_NAME
-
-# Pull environment variables
 vercel env pull .env.local
-```
 
-### Domain Management
-```bash
-# Add custom domain
+# Domains
 vercel domains add example.com
-
-# List domains
 vercel domains ls
-
-# Remove domain
-vercel domains rm example.com
-
-# Verify domain
 vercel domains inspect example.com
-```
 
-### Build and Development
-```bash
-# Start development server
-vercel dev
-
-# Build project locally
-vercel build
-
-# View build logs
-vercel logs <deployment-url>
-
-# Clear build cache
-vercel build --clear-cache
-```
-
-### Team and Collaboration
-```bash
-# List teams
+# Teams
 vercel teams ls
-
-# Switch team
 vercel teams switch <team-slug>
-
-# Add team member
 vercel teams add <email>
 
-# List team members
-vercel teams ls <team-slug>
-```
+# Logs & Inspect
+vercel logs <deploy-url>
+vercel inspect <deploy-url>
+vercel build --clear-cache
 
-### Functions and APIs
-```bash
-# Deploy serverless function
+# Functions
 vercel --prod api/my-function.js
-
-# List deployments
 vercel ls
-
-# View deployment details
-vercel inspect <deployment-url>
-
-# Rollback deployment
-vercel rollback <deployment-url>
 ```
 
 ## Global Options
 
-Vercel CLI provides several global options that can be used with any command. These options are commonly available across all Vercel CLI commands.
+Common flags (mix and match before the command):
 
-### Current Working Directory
+- `--cwd <path>` Use different working directory
+- `--debug` or `-d` Verbose output
+- `--global-config <path>` or `-Q <path>` Custom global config dir
+- `--local-config <path>` or `-A <path>` Use specific vercel.json
+- `--scope <team-slug>` or `-S <team-slug>` Team scope
+- `--token <token>` or `-t <token>` Auth token (CI)
+- `--no-color` or env `NO_COLOR=1` Disable colors
+- `--help` or `-h` Help for any command
+
+Examples:
 ```bash
---cwd <path>
-```
-Specify a working directory different from the current directory.
-
-```bash
-# Example: Deploy from a different directory
-vercel --cwd ~/my-project --prod
-
-# Example: Use relative path
-vercel --cwd ./subfolder
-```
-
-### Debug Mode
-```bash
---debug
--d
-```
-Enable verbose debug output for troubleshooting.
-
-```bash
-# Example: Debug deployment issues
-vercel --debug
-
-# Example: Debug with production flag
-vercel --prod --debug
-```
-
-### Global Configuration
-```bash
---global-config <path>
--Q <path>
-```
-Set the path to the global configuration directory.
-
-```bash
-# Example: Use custom global config
-vercel --global-config /custom/config/path login
-```
-
-### Help
-```bash
---help
--h
-```
-Display help information for commands.
-
-```bash
-# Example: Get general help
-vercel --help
-
-# Example: Get help for specific command
-vercel deploy --help
-```
-
-### Local Configuration
-```bash
---local-config <path>
--A <path>
-```
-Specify path to a local vercel.json configuration file.
-
-```bash
-# Example: Use custom config file
-vercel --local-config ./custom-config.json
-
-# Example: Deploy with specific config
-vercel --local-config /path/to/vercel.json --prod
-```
-
-### Scope
-```bash
---scope <team-slug>
--S <team-slug>
-```
-Execute commands within a specific team scope.
-
-```bash
-# Example: Deploy to team scope
-vercel --scope my-team-slug --prod
-
-# Example: List projects for specific team
-vercel --scope my-team-slug project ls
-```
-
-### Authentication Token
-```bash
---token <token>
--t <token>
-```
-Use a specific authentication token (useful for CI/CD).
-
-```bash
-# Example: Deploy with token (CI/CD)
-vercel --token abc123def456 --prod
-
-# Example: Use environment variable
-vercel --token $VERCEL_TOKEN
-```
-
-### No Color Output
-```bash
---no-color
-NO_COLOR=1
-```
-Disable color and emoji output (respects NO_COLOR standard).
-
-```bash
-# Example: Plain text output
-vercel login --no-color
-
-# Example: Using environment variable
-NO_COLOR=1 vercel
-```
-
-### Common Usage Patterns
-
-```bash
-# CI/CD deployment with token and no color
 vercel --token $VERCEL_TOKEN --no-color --prod
-
-# Debug deployment in specific directory
-vercel --cwd ./my-app --debug
-
-# Deploy with custom config and team scope
+vercel --cwd ./app --debug
 vercel --scope my-team --local-config ./vercel.prod.json --prod
-
-# Get help for any command
-vercel deploy --help
 ```
-
-**NOTE:** Global options can be combined with any Vercel CLI command and should be placed before the specific command.
 
 ## Advanced Configuration
 
-### vercel.json Configuration
-```json
-{
-  "name": "my-app",
-  "version": 2,
-  "builds": [
-    { "src": "package.json", "use": "@vercel/next" },
-    { "src": "api/**/*.js", "use": "@vercel/node" }
-  ],
-  "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "src": "/(.*)", "dest": "/$1" }
-  ],
-  "env": {
-    "NODE_ENV": "production"
-  }
-}
-```
-
-### Environment-Specific Settings
+- Use `vercel.json` for custom builds, routes, and env.
+- Reference: https://vercel.com/docs/projects/project-configuration
+- Quick examples:
 ```bash
-# Development deployment
-vercel --dev
-
-# Production deployment
-vercel --prod
-
-# Staging environment
-vercel --target staging
+vercel --prod                  # prod deploy
+vercel --target staging        # staging target
+vercel --build-command "npm run build"  # custom build
 ```
 
 ## Framework-Specific Deployments
 
-### Next.js
-```bash
-# Deploy Next.js app
-vercel --prod
-
-# With custom build command
-vercel --build-command "npm run build"
-```
-
-### React
-```bash
-# Deploy Create React App
-vercel --prod
-
-# With SPA routing
-# Add _redirects file: /* /index.html 200
-```
-
-### Vue.js
-```bash
-# Deploy Vue app
-vercel --prod
-
-# With Vue Router history mode
-# Add vercel.json with SPA routing rules
-```
-
-### Angular
-```bash
-# Deploy Angular app
-vercel --prod
-
-# With Angular Universal
-vercel --build-command "npm run build:ssr"
-```
+- Most frameworks are auto-detected; run `vercel --prod`.
+- For custom builds or SPA routing, use `--build-command` or `vercel.json`.
 
 ## Monitoring and Analytics
 
-### Deployment Monitoring
 ```bash
-# View real-time logs
 vercel logs --follow
-
-# View logs for specific deployment
-vercel logs <deployment-url>
-
-# View analytics
+vercel logs <deploy-url>
+vercel inspect <deploy-url>
 vercel analytics <project-name>
-```
-
-### Performance Monitoring
-```bash
-# Check deployment status
-vercel inspect <deployment-url>
-
-# View build information
-vercel build --debug
 ```
 
 ## Security Best Practices
@@ -496,55 +229,25 @@ vercel build --clear-cache
 
 ## CI/CD Integration
 
-### GitHub Actions Example
+Minimal GitHub Actions:
 ```yaml
 name: Deploy to Vercel
-on:
-  push:
-    branches: [ main ]
+on: { push: { branches: [ main ] } }
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-      - name: Install Vercel CLI
-        run: npm i -g vercel
-      - name: Deploy to Vercel
-        run: vercel --prod --yes
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-```
-
-### GitLab CI Example
-```yaml
-deploy:
-  script:
-    - npm i -g vercel
-    - vercel --prod --yes
-  environment:
-    name: production
-    url: https://my-app.vercel.app
-  only:
-    - main
+      - uses: actions/checkout@v4
+      - run: npm i -g vercel
+      - run: vercel --prod --yes
+        env: { VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }} }
 ```
 
 ## Cost Optimization
 
-### Performance Tips
-- Use appropriate compute resources
-- Implement proper caching strategies
-- Optimize bundle sizes
-- Use CDN effectively
-
-### Cost Monitoring
-- Monitor usage in Vercel dashboard
-- Set up billing alerts
-- Review deployment frequency
-- Optimize function execution times
+- Use caching/CDN, optimize bundles
+- Monitor usage and set billing alerts
+- Avoid unnecessary redeploys and long-running builds
 
 **Prerequisites:**
 - Node.js installed (version 14+)

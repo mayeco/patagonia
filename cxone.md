@@ -1,5 +1,6 @@
 ---
 description: Execute security analysis with Checkmarx One CLI
+auto_execution_mode: 3
 ---
 
 # Checkmarx One CLI Scan Workflow

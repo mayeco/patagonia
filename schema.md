@@ -1,5 +1,6 @@
 ---
 description: Workflow to detect framework, discover database schema, and persist a compact schema snapshot
+auto_execution_mode: 3
 ---
 
 # Project Schema Workflow

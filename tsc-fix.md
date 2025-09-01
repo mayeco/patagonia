@@ -1,5 +1,6 @@
 ---
 description: Fix all TypeScript compiler errors and type issues
+auto_execution_mode: 3
 ---
 
 # TSC-FIX Workflow

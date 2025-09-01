@@ -1,5 +1,6 @@
 ---
 description: Check the current Git status and analyze any pending changes in the repository
+auto_execution_mode: 3
 ---
 
 # Git Status Workflow

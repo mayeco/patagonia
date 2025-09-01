@@ -47,6 +47,9 @@ NOTE: Previous conversation-level instructions, decisions, restrictions, or any 
 3. **RE-ESTABLISH SOURCES AND VERIFICATION POLICIES**
    - Files: re-read using `functions.Read` with absolute paths before citing.
    - Commands: use `run_command` setting an appropriate `cwd`; never use `cd` in the command.
+   - Find by name: use `functions.find_by_name` to find files and directories before citing.
+   - Directory: use `functions.list_dir` to list directory contents before citing.
+   - Search: use `functions.grep_search` to search for content before citing.
    - Web: use `read_url_content` to fetch documentation/resources again.
    - Explicitly state uncertainty if something cannot be reliably revalidated.
 

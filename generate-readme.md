@@ -1,5 +1,6 @@
 ---
 description: Generate or update README.md based on current application analysis
+auto_execution_mode: 3
 ---
 
 # README Generator Workflow

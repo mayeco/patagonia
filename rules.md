@@ -1,29 +1,132 @@
 # AI CODE GENERATION RULES
 
-## ENVIRONMENT
+## WHEN RUNNING COMMANDS: TARGET THE ACTIVE SHELL (AND ADAPT FOR NON-POSIX SHELLS)
 
-**WHEN RUNNING COMMANDS IDENTIFY SHELL AND ADAPT COMMANDS**
+### SHELL_DETECTION
+  - Use `echo $SHELL` to identify the current login shell.
 
-- **Shell Detection:**
-  - Primary: `echo $SHELL` (identifies current login shell)
+### SHELL_TARGETING
+  - Prefer shell-agnostic forms.
+  - If a snippet requires a specific shell, execute it explicitly:
+    - Bash: `bash -lc 'snippet'`
+    - Fish: `fish -c 'snippet'`
 
-- **Universal Patterns (compatible with Bash, Zsh, and Fish):**
-  - One-shot environment override: `env VAR=value command`
-  - Execute snippet in specific shell: `bash -lc 'snippet'` or `fish -c 'snippet'`
+### NON_POSIX_SHELLS (e.g., fish)
+  - Prefer native idioms over POSIX emulation.
+  - In workflows, when feasible, provide fish-first snippets.
 
-- **Common Conversions (Bash → Fish):**
-  - Export environment variable: `export FOO=bar` → `set -x FOO bar`
-  - Local variable for single command: `FOO=bar command` → `env FOO=bar command`
-  - Command substitution: `$(command)` → `(command)`
-  - Conditionals: `[ -f file ] && command` → `test -f file; and command`
-  - Source script: `. script.sh` → `source script.fish`
+### UNIVERSAL_PATTERNS
+  - One-shot env override: `env VAR=value command`
+  - Combine steps into a single line for efficiency (e.g., `curl ... && unzip ...`, or `curl ... | tar -xz`).
 
-- **Workflow Guidance:**
-  - Prioritize shell-agnostic patterns using `env VAR=value command` and simple pipelines.
-  - For Bash-specific snippets, wrap with `bash -lc '…'` or provide Fish equivalent.
-  - Ensure output-based validations (e.g., use `find` for listing disallowed entries where empty output indicates success).
-  - Prioritize combining multiple commands in a single execution line for efficiency (e.g., `curl ... && unzip ...` or pipelines like `curl ... | tar -xz`). This reduces the need for separate tool calls and improves automation reliability.
+### OUTPUT_ONLY_VALIDATIONS
+  - Avoid `echo`/`exit` for checks. Use commands whose empty output implies success (e.g., `find` to list disallowed entries).
 
+### COMMAND EXECUTION BEST PRACTICES
+
+#### NO_CD
+  - Avoid `cd` in commands. Use absolute paths or rely on the runner-controlled CWD.
+
+#### IDEMPOTENCY_AND_NON_INTERACTIVITY
+  - Prefer idempotent, safe flags (`mkdir -p`, `rm -f`, `touch`).
+  - Avoid prompts; use non-interactive flags (`-y`, `-f`, `--yes`) when available.
+
+#### PREFER_SILENT_FLAGS_AND_USEFUL_OUTPUT
+  - Prefer quiet/silent flags that preserve error visibility (stderr).
+  - Examples: `curl -fsSL`, `unzip -q`, avoid `tar -v` unless debugging, use `git --quiet` when appropriate, and prefer package manager flags like `--quiet/--silent`.
+  - Do not suppress errors with `2>/dev/null` unless intentionally handled; preserve stderr for diagnostics.
+  - For validations, design commands so empty output means success and non-empty output lists violations (aligns with `OUTPUT_ONLY_VALIDATIONS`).
+  - When minimal logging is needed, print a single concise summary line.
+
+#### FAIL_FAST_WITHOUT_SHELL_FLAGS
+  - Chain with `&&` to abort on first failure.
+  - If you need shell options (e.g., `set -euo pipefail`), wrap the snippet in an explicit shell:
+    - Bash: `bash -lc 'set -euo pipefail; …'`
+
+#### AVOID_NON_PORTABLE_FEATURES
+  - Avoid process substitution `<(...)>`, advanced brace expansion, and `[[ ... ]]` outside Bash.
+  - If required, wrap in the appropriate shell.
+
+#### MACOS_LINUX_COMPATIBILITY (BSD VS GNU)
+  - Prefer portable flags (sed: `-E` instead of `-r`).
+  - If using GNU-only flags, call it out or provide a BSD-compatible alternative.
+
+#### VARIABLES_QUOTE_AND_ENCODE
+
+- Principles
+  - Treat every CLI argument as a single token. Never split a parameter value across lines or inside quotes.
+  - Quote any path or value that can contain spaces or metacharacters.
+  - Use single quotes for literals; use double quotes when interpolation is required.
+  - Prefer argument arrays over string concatenation to avoid word-splitting.
+
+- One-shot environment
+  - Prefer `env VAR=value command` for single-command scope.
+
+- URL / querystring / form data
+  - Always URL-encode values before sending.
+  - curl: use `--data-urlencode` for each `key=value` when using `-G` (GET) or form posts.
+  - fish: `string escape --style=url "$value"` to encode a single value.
+  - Portable: `jq -rn --arg v "$VAL" '$v|@uri'` to produce a URL-encoded value.
+
+- JSON payloads (avoid inline quoted JSON)
+  - Build JSON with `jq -n` and pipe via stdin; this eliminates fragile quoting.
+  - Example (fish):
+    ```fish
+    jq -n --arg name "$NAME" --arg desc "$DESC" '{name:$name, description:$desc}' \
+    | curl -fsSL -H 'Content-Type: application/json' --data-binary @- https://api.example.com/endpoint
+    ```
+
+- Argument arrays (fish-first)
+  ```fish
+  set -l DESC 'Patagonia App Initializer'
+  set -l qparams
+  set -a qparams --data-urlencode 'javaVersion=24'
+  set -a qparams --data-urlencode 'bootVersion=4.0.0-SNAPSHOT'
+  set -a qparams --data-urlencode 'type=gradle-project'
+  set -a qparams --data-urlencode 'groupId=com.patagonia'
+  set -a qparams --data-urlencode 'artifactId=app_initializer'
+  set -a qparams --data-urlencode 'name=app_initializer'
+  set -a qparams --data-urlencode "description=$DESC"
+  set -a qparams --data-urlencode 'packageName=com.patagonia.app_initializer'
+
+  curl -fsSLG 'https://start.spring.io/starter.zip' $qparams -o project.zip \
+    && unzip -q project.zip && rm -f project.zip
+  ```
+
+- Bash equivalent (arrays)
+  ```bash
+  DESC='Patagonia App Initializer'
+  qparams=(
+    --data-urlencode 'javaVersion=24'
+    --data-urlencode 'bootVersion=4.0.0-SNAPSHOT'
+    --data-urlencode 'type=gradle-project'
+    --data-urlencode 'groupId=com.patagonia'
+    --data-urlencode 'artifactId=app_initializer'
+    --data-urlencode 'name=app_initializer'
+    --data-urlencode "description=$DESC"
+    --data-urlencode 'packageName=com.patagonia.app_initializer'
+  )
+  curl -fsSLG 'https://start.spring.io/starter.zip' "${qparams[@]}" -o project.zip \
+    && unzip -q project.zip && rm -f project.zip
+  ```
+
+- Auto-run guard
+  - Do not auto-run commands that:
+    - contain unquoted strings with spaces or metacharacters,
+    - use `-d/--data/-F` without proper encoding when applicable,
+    - split a parameter value across multiple lines.
+  - In such cases, rewrite to the safe patterns above or request explicit approval.
+
+- Output-only validations (empty output = OK)
+  - Check for values that require URL-encoding (fish):
+    ```fish
+    # Prints only values that are NOT URL-safe; no output => all good
+    printf "%s\n" $values | string match -rv '^[A-Za-z0-9._~-]+$'
+    ```
+
+#### AUTO_RUN_VS_APPROVAL
+  - Auto-run only read-only or clearly non-destructive commands.
+  - Require explicit approval for installations, file writes, or system changes.
 
 ## CORE CODING DIRECTIVES
 

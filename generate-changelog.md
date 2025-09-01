@@ -1,5 +1,6 @@
 ---
 description: Generate changelog from git commit history analysis
+auto_execution_mode: 3
 ---
 
 # Changelog Generator Workflow

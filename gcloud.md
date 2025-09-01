@@ -113,120 +113,59 @@ gcloud compute disks delete my-disk --zone=us-central1-a
 
 ## Common GCP Commands
 
-### Authentication
 ```bash
-# Interactive login
-gcloud auth login
-
-# Login with service account
-gcloud auth activate-service-account --key-file=service-account.json
-
-# List authenticated accounts
+# Auth & Config
+gcloud --version
+gcloud auth login                          # or: gcloud auth activate-service-account --key-file key.json
 gcloud auth list
+gcloud config set project <PROJECT_ID>
+gcloud config set compute/region <REGION>
+gcloud config set compute/zone <ZONE>
+gcloud config list
 
-# Set default account
-gcloud config set account user@example.com
-```
-
-### Project Management
-```bash
-# List projects
+# Projects
 gcloud projects list
+gcloud projects create <ID> --name="<NAME>"
+gcloud projects describe <PROJECT_ID>
 
-# Set default project
-gcloud config set project my-project-id
-
-# Create new project
-gcloud projects create my-new-project --name="My New Project"
-
-# Describe project
-gcloud projects describe my-project-id
-```
-
-### Compute Engine
-```bash
-# List instances
+# Compute Engine
 gcloud compute instances list
+gcloud compute instances create <NAME> --zone=<ZONE> --machine-type=e2-micro
+gcloud compute ssh <NAME> --zone=<ZONE>
+gcloud compute instances stop <NAME> --zone=<ZONE>
 
-# Create instance
-gcloud compute instances create my-instance --zone=us-central1-a --machine-type=n1-standard-1
-
-# SSH to instance
-gcloud compute ssh my-instance --zone=us-central1-a
-
-# Stop instance
-gcloud compute instances stop my-instance --zone=us-central1-a
-```
-
-### Cloud Storage
-```bash
-# List buckets
+# Cloud Storage
 gcloud storage buckets list
+gcloud storage buckets create gs://<BUCKET> --location=<REGION>
+gcloud storage cp <SRC> gs://<BUCKET>/
+gcloud storage cp gs://<BUCKET>/<OBJ> <DST>
 
-# Create bucket
-gcloud storage buckets create gs://my-bucket --location=us-central1
-
-# Upload file
-gcloud storage cp file.txt gs://my-bucket/
-
-# Download file
-gcloud storage cp gs://my-bucket/file.txt .
-```
-
-### Kubernetes Engine (GKE)
-```bash
-# List clusters
+# GKE
 gcloud container clusters list
-
-# Create cluster
-gcloud container clusters create my-cluster --zone=us-central1-a --num-nodes=3
-
-# Get credentials
-gcloud container clusters get-credentials my-cluster --zone=us-central1-a
-
-# List pods
+gcloud container clusters create <CLUSTER> --zone=<ZONE> --num-nodes=3
+gcloud container clusters get-credentials <CLUSTER> --zone=<ZONE>
 kubectl get pods
-```
 
-### Cloud Run
-```bash
-# Deploy service
-gcloud run deploy my-service --source . --platform managed --region us-central1
-
-# List services
+# Cloud Run
+gcloud run deploy <SERVICE> --source . --platform managed --region <REGION>
 gcloud run services list
+gcloud run services describe <SERVICE> --region <REGION> --format="value(status.url)"
 
-# Get service URL
-gcloud run services describe my-service --region us-central1 --format="value(status.url)"
+# IAM Service Accounts
+gcloud iam service-accounts create <SA> --display-name "<Name>"
+gcloud projects add-iam-policy-binding <PROJECT> --member="serviceAccount:<SA>@<PROJECT>.iam.gserviceaccount.com" --role="roles/editor"
+gcloud iam service-accounts keys create key.json --iam-account=<SA>@<PROJECT>.iam.gserviceaccount.com
 ```
 
 ## Common Configuration
 
-### Global Configuration
+Quick reference (covered above; minimal):
 ```bash
-# View current configuration
 gcloud config list
-
-# Set default zone
-gcloud config set compute/zone us-central1-a
-
-# Set default region
-gcloud config set compute/region us-central1
-
-# View available configurations
+gcloud config set project <PROJECT_ID>
+gcloud config set compute/region <REGION>
+gcloud config set compute/zone <ZONE>
 gcloud config configurations list
-```
-
-### Service Accounts
-```bash
-# Create service account
-gcloud iam service-accounts create my-service-account --display-name="My Service Account"
-
-# Assign roles
-gcloud projects add-iam-policy-binding my-project --member="serviceAccount:my-service-account@my-project.iam.gserviceaccount.com" --role="roles/editor"
-
-# Generate key
-gcloud iam service-accounts keys create key.json --iam-account=my-service-account@my-project.iam.gserviceaccount.com
 ```
 
 ## Best Practices
@@ -251,24 +190,16 @@ gcloud iam service-accounts keys create key.json --iam-account=my-service-accoun
 
 ## Troubleshooting
 
-### Common Problems
-- **Authentication error**: Run `gcloud auth login`
-- **Project not found**: Verify `gcloud config get-value project`
-- **Quota exceeded**: Review quotas in Cloud Console
-- **Insufficient permissions**: Verify assigned IAM roles
+- **Auth issues**: `gcloud auth login` then `gcloud auth list`
+- **Wrong project**: `gcloud config get-value project`
+- **Region/zone unset**: `gcloud config get-value compute/region|zone`
+- **Permissions**: verify IAM roles; **Quotas**: check Cloud Console
 
-### Diagnostic Commands
+Quick diagnostics:
 ```bash
-# Verify authentication
 gcloud auth list
-
-# Verify configuration
 gcloud config list
-
-# Verify project
 gcloud config get-value project
-
-# Verify zone/region
 gcloud config get-value compute/zone
 gcloud config get-value compute/region
 ```
@@ -277,4 +208,3 @@ gcloud config get-value compute/region
 - Google Cloud SDK installed (`gcloud` command available)
 - Authentication configured (login or service account)
 - GCP project configured
-- Appropriate permissions in the project
