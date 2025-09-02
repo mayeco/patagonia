@@ -1,72 +1,47 @@
-# AI CODE GENERATION RULES
+# RULES FOR CODE GENERATION AND SHELL COMMAND EXECUTION
 
-## TARGET_ACTIVE_SHELL_COMMANDS
+## COMMAND_EXECUTION
+
+Follow these rules and directives to ensure commands are executed correctly and securely:
 
 ### SHELL_DETECTION_AND_TARGETING
-  - Do not assume a shell is POSIX-compliant.
-  - Use `echo $SHELL` to identify the current login shell.
-  - Prefer shell-agnostic forms.
-  - If a snippet requires a specific shell, execute it explicitly:
+- Do not assume a shell is POSIX-compliant.
+- Use `echo $SHELL` to identify the current login shell.
+- Prefer shell-agnostic forms.
+- If a snippet requires a specific shell, execute it explicitly:
     - Bash: `bash -lc 'snippet'`
     - Fish: `fish -c 'snippet'`
-
-### NON_POSIX_SHELLS (e.g., fish)
-  - Prefer native idioms over POSIX emulation.
-  - In workflows, when feasible, provide fish-first snippets.
-
-### UNIVERSAL_PATTERNS
-  - One-shot env override: `env VAR=value command`
-  - Combine steps into a single line for efficiency (e.g., `curl ... && unzip ...`, or `curl ... | tar -xz`).
-
-### OUTPUT_ONLY_VALIDATIONS
-  - Avoid `echo`/`exit` for checks. Use commands whose empty output implies success (e.g., `find` to list disallowed entries).
+- Prefer native idioms over POSIX emulation.
 
 ### COMMAND_EXECUTION_BEST_PRACTICES
-
-#### NO_CD
-  - Avoid `cd` in commands. Use absolute paths or rely on the runner-controlled CWD.
-
-#### IDEMPOTENCY_AND_NON_INTERACTIVITY
-  - Prefer idempotent, safe flags (`mkdir -p`, `rm -f`, `touch`).
-  - Avoid prompts; use non-interactive flags (`-y`, `-f`, `--yes`) when available.
-
-#### PREFER_SILENT_FLAGS_AND_USEFUL_OUTPUT
-  - Prefer quiet/silent flags that preserve error visibility (stderr).
-  - Examples: `curl -fsSL`, `unzip -q`, avoid `tar -v` unless debugging, use `git --quiet` when appropriate, and prefer package manager flags like `--quiet/--silent`.
-  - Do not suppress errors with `2>/dev/null` unless intentionally handled; preserve stderr for diagnostics.
-  - For validations, design commands so empty output means success and non-empty output lists violations (aligns with `OUTPUT_ONLY_VALIDATIONS`).
-  - When minimal logging is needed, print a single concise summary line.
-
-#### FAIL_FAST_WITHOUT_SHELL_FLAGS
+- Avoid `cd` in commands. Use absolute paths or rely on the runner-controlled CWD.
+- Avoid `echo`/`exit` for checks. Use commands whose empty output implies success (e.g., `find` to list disallowed entries).
+  - For validations, design commands so empty output means success and non-empty output lists violations.
+- One-shot env override: `env VAR=value command`
+- Combine steps into a single line for efficiency (e.g., `curl ... && unzip ...`, or `curl ... | tar -xz`).
   - Chain with `&&` to abort on first failure.
-  - If you need shell options (e.g., `set -euo pipefail`), wrap the snippet in an explicit shell:
+- Prefer quiet/silent flags that preserve error visibility (stderr).
+  - Examples: `curl -fsSL`, `unzip -q`, avoid `tar -v` unless debugging, use `git --quiet` when appropriate, and prefer package manager flags like `--quiet/--silent`.
+- Do not suppress errors with `2>/dev/null` unless intentionally handled; preserve stderr for diagnostics.
+- When minimal logging is needed, print a single concise summary line.
+- If you need shell options (e.g., `set -euo pipefail`), wrap the snippet in an explicit shell:
     - Bash: `bash -lc 'set -euo pipefail; …'`
-
-#### AVOID_NON_PORTABLE_FEATURES
-  - Avoid process substitution `<(...)>`, advanced brace expansion, and `[[ ... ]]` outside Bash.
-  - If required, wrap in the appropriate shell.
-
-#### MACOS_LINUX_COMPATIBILITY (BSD VS GNU)
-  - Prefer portable flags (sed: `-E` instead of `-r`).
+- Avoid process substitution `<(...)>`, advanced brace expansion, and `[[ ... ]]` outside Bash.
+- If required, wrap in the appropriate shell.
+- Prefer portable flags (sed: `-E` instead of `-r`).
   - If using GNU-only flags, call it out or provide a BSD-compatible alternative.
 
-#### VARIABLES_QUOTE_AND_ENCODE
-
-- Principles
-  - Treat every CLI argument as a single token. Never split a parameter value across lines or inside quotes.
-  - Quote any path or value that can contain spaces or metacharacters.
-  - Use single quotes for literals; use double quotes when interpolation is required.
-  - Prefer argument arrays over string concatenation to avoid word-splitting.
-
-- One-shot environment
-  - Prefer `env VAR=value command` for single-command scope.
-
+### VARIABLES_QUOTE_AND_ENCODE
+- Treat every CLI argument as a single token. Never split a parameter value across lines or inside quotes.
+- Quote any path or value that can contain spaces or metacharacters.
+- Use single quotes for literals; use double quotes when interpolation is required.
+- Prefer argument arrays over string concatenation to avoid word-splitting.
+- One-shot environment: Prefer `env VAR=value command` for single-command scope.
 - URL / querystring / form data
   - Always URL-encode values before sending.
   - curl: use `--data-urlencode` for each `key=value` when using `-G` (GET) or form posts.
   - fish: `string escape --style=url "$value"` to encode a single value.
   - Portable: `jq -rn --arg v "$VAL" '$v|@uri'` to produce a URL-encoded value.
-
 - JSON payloads (avoid inline quoted JSON)
   - Build JSON with `jq -n` and pipe via stdin; this eliminates fragile quoting.
   - Example (fish):
@@ -123,52 +98,50 @@
     printf "%s\n" $values | string match -rv '^[A-Za-z0-9._~-]+$'
     ```
 
-#### AUTO_RUN_VS_APPROVAL
-  - Auto-run only read-only or clearly non-destructive commands.
-  - Require explicit approval for installations, file writes, or system changes.
+### AUTO_RUN_VS_APPROVAL
+- Auto-run only read-only or clearly non-destructive commands, installers, or scripts that are clearly non-destructive.
+  - Non-destructive commands, safe flags (`mkdir -p`, `touch`).
+  - Avoid prompts; use non-interactive flags (`-y`, `-f`, `--yes`) when available.
+- Require explicit approval for destructive commands, or system changes, or file writes (e.g., `rm -rf`, `mv`, `cp -r`).
 
-## AI_CODE_GENERATION_CONSTRAINTS
+## CODE_GENERATION_CONSTRAINTS
+
+**THESE CONSTRAINTS APPLY TO ALL CODE GENERATION REQUESTS AND ARE NON-NEGOTIABLE**
+
+Follow these code generation constraints to avoid code that exceeds these limits, in any of the following categories and at any point in the code generation process:
 
 ### LOOP_PREVENTION
-```
-CRITICAL_CONSTRAINTS:
-├── MAX_ITERATIONS: 10 per reasoning cycle
-├── MAX_DEPTH: 5 levels of reasoning
-├── MAX_BRANCHES: 3 options per decision
-├── TERMINATION: Quality metrics achieved or timeout
-├── CYCLE_DETECTION: Hash-based state tracking
-└── ESCALATION: Fallback to simpler approaches
-```
+- MAX_ITERATIONS: 10 per reasoning cycle
+- MAX_DEPTH: 5 levels of reasoning
+- MAX_BRANCHES: 3 options per decision
+- TERMINATION: Quality metrics achieved or timeout
+- CYCLE_DETECTION: Hash-based state tracking
+- ESCALATION: Fallback to simpler approaches
 
 ### EFFICIENT_RESOURCE_USAGE
-```
-OPTIMIZATION_GUIDELINES:
-├── CONTEXT_OPTIMIZATION: Use context window efficiently for reasoning
-├── TOKEN_EFFICIENCY: Maximize information density per token
-├── OUTPUT_QUALITY: Prioritize quality over length
-├── PROCESSING_INTELLIGENCE: Smart reasoning over brute force
-├── MEMORY_MANAGEMENT: Efficient data structures and algorithms
-└── COMPUTATIONAL_WISDOM: Choose optimal approaches for complexity
-```
+
+- CONTEXT_OPTIMIZATION: Use context window efficiently for reasoning
+- TOKEN_EFFICIENCY: Maximize information density per token
+- OUTPUT_QUALITY: Prioritize quality over length
+- PROCESSING_INTELLIGENCE: Smart reasoning over brute force
+- MEMORY_MANAGEMENT: Efficient data structures and algorithms
+- COMPUTATIONAL_WISDOM: Choose optimal approaches for complexity
 
 ### CODE_GENERATION_LIMITS
 
-**THESE LIMITS APPLY TO ALL CODE GENERATION REQUESTS AND ARE NON-NEGOTIABLE**
-```
-HARD_LIMITS (non-negotiable, fail if exceeded):
-- Cyclomatic complexity: <= 15 per function
-- Function length: < 150 lines
-- Class length: < 300 lines
-- Error rate: < 2%
+- HARD_LIMITS: (non-negotiable, fail if exceeded)
+  - Cyclomatic complexity: <= 15 per function
+  - Function length: < 150 lines
+  - Class length: < 300 lines
+  - Error rate: < 2%
 
-SOFT_LIMITS (strongly recommended, warn if exceeded):
-- Cyclomatic complexity: <= 10 per function
-- Function length: < 50 lines
-- Class length: < 100 lines
-- Error rate: < 1%
-```
+- SOFT_LIMITS: (strongly recommended, warn if exceeded)
+  - Cyclomatic complexity: <= 10 per function
+  - Function length: < 50 lines
+  - Class length: < 100 lines
+  - Error rate: < 1%
 
-#### NON_COMPLIANT_CODE_AUGMENTATION_BAN
+### NON_COMPLIANT_CODE_AUGMENTATION_BAN
 
 - NON-COMPLIANT UNIT: Any function or class that exceeds any HARD_LIMITS or SOFT_LIMITS defined in `CODE_GENERATION_LIMITS`.
 - AUGMENTATION FORBIDDEN: Within a NON-COMPLIANT UNIT, adding even a single line of code or introducing new behavior is strictly prohibited. This includes new branches/loops, side effects, parameters, public API, or additional statements.
@@ -187,17 +160,50 @@ Action required: Refactor to meet limits first (reduce complexity/size), then re
 Only refactor steps are permitted at this stage; augmentation is banned.
 ```
 
-## AI_CODE_SPECIFIC
+## CORE_CODING_DIRECTIVES
 
-### GENERATION_RULES
+Follow these code generation directives to ensure code quality and maintainability, in any of the following categories and at any point in the code generation process:
+
+### GENERAL_CODE_GENERATION
+
+- PRIORITY: Readability > Cleverness
+- NAMING: descriptive, intention-revealing names only
+- FUNCTIONS: single responsibility, < 50 lines
+- CLASSES: single responsibility, < 100 lines
+- DUPLICATION: Eliminate via abstraction or utilities
 - PROMPT_CLARITY: Be specific about requirements
 - CONTEXT_PROVIDE: Include existing code patterns
 - CONSTRAINTS_SPECIFY: Define performance, security needs
 - EXAMPLES_PROVIDE: Show expected input/output format
 
-### VALIDATION_REQUIRED
-```
-MANDATORY_CHECKS:
+### TESTING_MANDATE
+
+- UNIT_TESTS: 100% coverage for new code
+- TEST_FIRST: Write test before implementation
+- EDGE_CASES: Handle null, empty, boundary conditions
+- ERROR_SCENARIOS: Test all failure paths
+- MOCK_EXTERNAL: Database, API, file system calls
+
+### SECURITY_PROTOCOLS
+
+- INPUT_VALIDATION: Sanitize all user inputs
+- AUTHENTICATION: Verify before data access
+
+### SECURITY_PROTOCOLS
+
+- AUTHORIZATION: Check permissions for operations
+- ENCRYPTION: Sensitive data at rest/transit
+- DEPENDENCY_SCAN: Weekly security audits
+
+### PERFORMANCE_BASELINE
+
+- RESPONSE_TIME: < 500ms for web endpoints
+- MEMORY_USAGE: Monitor and optimize
+- DATABASE_QUERIES: Use indexes, avoid N+1
+- CACHE_STRATEGY: Implement for expensive operations
+- ASYNC_OPERATIONS: Non-blocking for I/O
+
+### CODE_GENERATION_VALIDATION_REQUIRED
 - Syntax validation
 - Type safety
 - Logic correctness
@@ -206,49 +212,19 @@ MANDATORY_CHECKS:
 - Integration compatibility
 - Error handling completeness
 - Documentation adequacy
-```
-
-## CORE_CODING_DIRECTIVES
-
-### CODE_GENERATION
-- PRIORITY: Readability > Cleverness
-- NAMING: descriptive, intention-revealing names only
-- FUNCTIONS: single responsibility, < 50 lines
-- CLASSES: single responsibility, < 100 lines
-- DUPLICATION: Eliminate via abstraction or utilities
-
-### TESTING_MANDATE
-- UNIT_TESTS: 100% coverage for new code
-- TEST_FIRST: Write test before implementation
-- EDGE_CASES: Handle null, empty, boundary conditions
-- ERROR_SCENARIOS: Test all failure paths
-- MOCK_EXTERNAL: Database, API, file system calls
-
-### SECURITY_PROTOCOLS
-- INPUT_VALIDATION: Sanitize all user inputs
-- AUTHENTICATION: Verify before data access
-- AUTHORIZATION: Check permissions for operations
-- ENCRYPTION: Sensitive data at rest/transit
-- DEPENDENCY_SCAN: Weekly security audits
-
-### PERFORMANCE_BASELINE
-- RESPONSE_TIME: < 500ms for web endpoints
-- MEMORY_USAGE: Monitor and optimize
-- DATABASE_QUERIES: Use indexes, avoid N+1
-- CACHE_STRATEGY: Implement for expensive operations
-- ASYNC_OPERATIONS: Non-blocking for I/O
 
 ## PURE_CODING_STANDARDS
 
+Follow these code generation standards to ensure code quality and maintainability, in any of the following categories and at any point in the code generation process:
+
 ### INLINE_CODE_READABILITY
 
-#### INLINE_READABILITY_RULES (non-negotiable, fail if not met)
-- **MAX_INLINE_COMPLEXITY**: Keep inline expressions to 3 operations maximum
-- **AVOID_NESTED_TERNARIES**: Use if/else or helper functions instead
-- **EXTRACT_COMPLEX_LOGIC**: Move complex calculations to named functions
-- **USE_DESCRIPTIVE_NAMES**: Variables in expressions should be self-explanatory
-- **CONSIDER_READABILITY**: Code is read more than written - prioritize understanding
-- **BREAK_DOWN_CHAINING**: Split long method chains into multiple lines
+- MAX_INLINE_COMPLEXITY: Keep inline expressions to 3 operations maximum
+- AVOID_NESTED_TERNARIES: Use if/else or helper functions instead
+- EXTRACT_COMPLEX_LOGIC: Move complex calculations to named functions
+- USE_DESCRIPTIVE_NAMES: Variables in expressions should be self-explanatory
+- CONSIDER_READABILITY: Code is read more than written - prioritize understanding
+- BREAK_DOWN_CHAINING: Split long method chains into multiple lines
 
 ```javascript
 // ✅ PREFERRED: Clear, readable expressions
@@ -298,19 +274,18 @@ def calc_disc(u, p):
 
 ### VARIABLE_NAMING_CONSISTENCY
 
-#### VARIABLE_NAMING_RULES (non-negotiable, fail if not met)
-- **LANGUAGE_SPECIFIC**: Use language conventions, don't choose your own style
-- **JAVASCRIPT_TYPESCRIPT**: camelCase for variables, functions, properties
-- **PYTHON**: snake_case for variables, functions, methods
-- **JAVA**: camelCase for variables, methods; PascalCase for classes
-- **CSHARP**: camelCase for variables, methods; PascalCase for classes, properties
-- **RUBY**: snake_case for variables, methods; CamelCase for classes/modules
-- **GO**: camelCase for unexported, PascalCase for exported names
-- **AVOID_ABBREVIATIONS**: Use full words (userId not uid, calculate not calc)
-- **BE_DESCRIPTIVE**: Names should explain purpose, not just type
-- **CONSISTENT_PREFIXES**: Use consistent prefixes (is_, has_, get_, set_)
-- **BOOLEAN_CLARITY**: Boolean variables should read as yes/no questions
-- **COLLECTION_NAMES**: Use plural for arrays/lists, singular for single items
+- LANGUAGE_SPECIFIC: Use language conventions, don't choose your own style
+- JAVASCRIPT_TYPESCRIPT: camelCase for variables, functions, properties
+- PYTHON: snake_case for variables, functions, methods
+- JAVA: camelCase for variables, methods; PascalCase for classes
+- CSHARP: camelCase for variables, methods; PascalCase for classes, properties
+- RUBY: snake_case for variables, methods; CamelCase for classes/modules
+- GO: camelCase for unexported, PascalCase for exported names
+- AVOID_ABBREVIATIONS: Use full words (userId not uid, calculate not calc)
+- BE_DESCRIPTIVE: Names should explain purpose, not just type
+- CONSISTENT_PREFIXES: Use consistent prefixes (is_, has_, get_, set_)
+- BOOLEAN_CLARITY: Boolean variables should read as yes/no questions
+COLLECTION_NAMES: Use plural for arrays/lists, singular for single items
 
 ```javascript
 // ✅ JAVASCRIPT/TYPESCRIPT: camelCase for variables and functions
@@ -392,14 +367,13 @@ is_profile_complete := profileData.IsComplete  # Wrong for Go
 
 ### CODE_FORMATTING_CONSISTENCY
 
-#### CODE_FORMATTING_RULES (non-negotiable, fail if not met)
-- **CHOOSE_STYLE**: Pick one style guide (Prettier, PEP 8, Google Style) and use consistently
-- **INDENTATION**: Use consistent indentation (2 or 4 spaces, or tabs)
-- **BRACE_STYLE**: Choose one brace style and stick to it (same line or new line)
-- **SPACING**: Consistent spacing around operators, after commas, before/after parentheses
-- **LINE_LENGTH**: Keep lines under 80-120 characters (configure your linter)
-- **BLANK_LINES**: Use blank lines to separate logical sections
-- **TRAILING_COMMAS**: Be consistent with trailing commas in objects/arrays
+- CHOOSE_STYLE: Pick one style guide (Prettier, PEP 8, Google Style) and use it consistently
+- INDENTATION: Use consistent indentation (2 or 4 spaces, or tabs)
+- BRACE_STYLE: Choose one brace style and stick to it (same line or new line)
+- SPACING: Consistent spacing around operators, after commas, before/after parentheses
+- LINE_LENGTH: Keep lines under 80-120 characters (configure your linter)
+- BLANK_LINES: Use blank lines to separate logical sections
+- TRAILING_COMMAS: Be consistent with trailing commas in objects/arrays
 
 ```javascript
 // ✅ PREFERRED: Consistent formatting
@@ -460,15 +434,14 @@ def calculate_total(items):
 
 ### CODE_ORGANIZATION
 
-#### CODE_ORGANIZATION_RULES (non-negotiable, fail if not met)
-- **SINGLE_RESPONSIBILITY**: Each file/module should have one clear purpose
-- **LOGICAL_GROUPING**: Group related functionality together
-- **CLEAR_NAMING**: Use descriptive names for files and directories
-- **IMPORT_ORGANIZATION**: Group and sort imports logically (built-ins, third-party, local)
-- **AVOID_GOD_OBJECTS**: Don't create classes/objects that do everything
-- **SEPARATE_CONCERNS**: Keep business logic, data access, and presentation separate
-- **CONSISTENT_STRUCTURE**: Follow consistent patterns across the codebase
-- **MODULAR_DESIGN**: Break large systems into smaller, focused modules
+- SINGLE_RESPONSIBILITY: Each file/module should have one clear purpose
+- LOGICAL_GROUPING: Group related functionality together
+- CLEAR_NAMING: Use descriptive names for files and directories
+- IMPORT_ORGANIZATION: Group and sort imports logically (built-ins, third-party, local)
+- AVOID_GOD_OBJECTS: Don't create classes/objects that do everything
+- SEPARATE_CONCERNS: Keep business logic, data access, and presentation separate
+- CONSISTENT_STRUCTURE: Follow consistent patterns across the codebase
+- MODULAR_DESIGN: Break large systems into smaller, focused modules
 
 ```javascript
 // ✅ PREFERRED: Well-organized file structure
@@ -519,15 +492,14 @@ function doEverything(data) {
 
 ### ALGORITHM_COMPLEXITY_CONSIDERATIONS
 
-#### ALGORITHM_COMPLEXITY_RULES (non-negotiable, fail if not met)
-- **CONSIDER_BIG_O**: Always think about time and space complexity
-- **APPROPRIATE_FOR_DATA_SIZE**: Choose algorithms based on expected data size
-- **AVOID_NESTED_LOOPS**: Minimize O(n²) operations, especially with large datasets
-- **USE_BUILT_IN_OPTIMIZATIONS**: Leverage language-specific optimized methods
-- **CONSIDER_MEMORY**: Balance time complexity with space usage
-- **PROFILE_WHEN_CRITICAL**: Measure performance for critical code paths
-- **DOCUMENT_COMPLEXITY**: Comment on Big O complexity for complex algorithms
-- **OPTIMIZE_BOTTLENECKS**: Focus optimization efforts on performance-critical paths
+- CONSIDER_BIG_O: Always think about time and space complexity
+- APPROPRIATE_FOR_DATA_SIZE: Choose algorithms based on expected data size
+- AVOID_NESTED_LOOPS: Minimize O(n²) operations, especially with large datasets
+- USE_BUILT_IN_OPTIMIZATIONS: Leverage language-specific optimized methods
+- CONSIDER_MEMORY: Balance time complexity with space usage
+- PROFILE_WHEN_CRITICAL: Measure performance for critical code paths
+- DOCUMENT_COMPLEXITY: Comment on Big O complexity for complex algorithms
+- OPTIMIZE_BOTTLENECKS: Focus optimization efforts on performance-critical paths
 
 ```javascript
 // ✅ PREFERRED: Consider Big O complexity in algorithm choice
@@ -568,13 +540,12 @@ function findUserByEmailBad(users, email) {
 
 ### MAGIC_NUMBERS_ELIMINATION
 
-#### MAGIC_NUMBER_RULES (non-negotiable, fail if not met)
-- **DEFINE_CONSTANTS**: Use named constants for any number used in multiple places
-- **MEANINGFUL_NAMES**: Constants should explain what the number represents
-- **GROUP_RELATED**: Group related constants together (e.g., all timeouts together)
-- **AVOID_INLINE**: Never use numbers directly in calculations without explanation
-- **CONSIDER_CONFIG**: For configurable values, use configuration files
-- **DOCUMENT_UNITS**: Include units in constant names (e.g., TIMEOUT_SECONDS, not TIMEOUT)
+- DEFINE_CONSTANTS: Use named constants for any number used in multiple places
+- MEANINGFUL_NAMES: Constants should explain what the number represents
+- GROUP_RELATED: Group related constants together (e.g., all timeouts together)
+- AVOID_INLINE: Never use numbers directly in calculations without explanation
+- CONSIDER_CONFIG: For configurable values, use configuration files
+- DOCUMENT_UNITS: Include units in constant names (e.g., TIMEOUT_SECONDS, not TIMEOUT)
 
 ```javascript
 // ✅ PREFERRED: Named constants instead of magic numbers
@@ -634,15 +605,14 @@ def handle_login_attempts(attempts):
 
 ### COMMENT_QUALITY_GUIDELINES
 
-#### COMMENT_QUALITY_RULES (non-negotiable, fail if not met)
-- **LANGUAGE_ENGLISH**: Write all comments in English (international standard)
-- **EXPLAIN_WHY**: Comment the reasoning, not just what the code does
-- **UPDATE_COMMENTS**: Keep comments in sync with code changes
-- **AVOID_REDUNDANT**: Don't comment obvious code (e.g., i++ // increment i)
-- **USE_JSDOC**: Use proper documentation format for functions
-- **COMMENT_COMPLEXITY**: Explain complex algorithms or business logic
-- **AVOID_COMMENTING_OUT**: Remove commented code, don't leave it in
-- **SELF_DOCUMENTING**: Write code that's clear enough to need minimal comments
+- LANGUAGE_ENGLISH: Write all comments in English (international standard)
+- EXPLAIN_WHY: Comment the reasoning, not just what the code does
+- UPDATE_COMMENTS: Keep comments in sync with code changes
+- AVOID_REDUNDANT: Don't comment obvious code (e.g., i++ // increment i)
+- USE_JSDOC: Use proper documentation format for functions
+- COMMENT_COMPLEXITY: Explain complex algorithms or business logic
+- AVOID_COMMENTING_OUT: Remove commented code, don't leave it in
+- SELF_DOCUMENTING: Write code that's clear enough to need minimal comments
 
 ```javascript
 // ✅ PREFERRED: Meaningful, helpful comments
@@ -699,14 +669,13 @@ function calc(price, type, exempt, disc) {
 
 ### DATA_STRUCTURE_CHOICE
 
-#### DATA_STRUCTURE_RULES (non-negotiable, fail if not met)
-- **MAP_FOR_KEYS**: Use Map for key-value pairs, especially with non-string keys
-- **SET_FOR_UNIQUE**: Use Set for collections requiring uniqueness
-- **ARRAY_FOR_ORDER**: Use Array for ordered collections with index access
-- **OBJECT_FOR_STRUCTURE**: Use Object for structured data with known properties
-- **CONSIDER_PERFORMANCE**: Choose structures based on access patterns (O(1) vs O(n))
-- **AVOID_OBJECTS_AS_MAPS**: Don't use plain objects as maps in performance-critical code
-- **CONSIDER_IMMUTABLE**: Use immutable structures when data shouldn't change
+- MAP_FOR_KEYS: Use Map for key-value pairs, especially with non-string keys
+- SET_FOR_UNIQUE: Use Set for collections requiring uniqueness
+- ARRAY_FOR_ORDER: Use Array for ordered collections with index access
+- OBJECT_FOR_STRUCTURE: Use Object for structured data with known properties
+- CONSIDER_PERFORMANCE: Choose structures based on access patterns (O(1) vs O(n))
+- AVOID_OBJECTS_AS_MAPS: Don't use plain objects as maps in performance-critical code
+- CONSIDER_IMMUTABLE: Use immutable structures when data shouldn't change
 
 ```javascript
 // ✅ PREFERRED: Appropriate data structures for use cases
@@ -742,13 +711,12 @@ const config = { a: 1, b: 2, c: 3 };  // Order not guaranteed in older JS
 
 ### FUNCTION_PARAMETER_LIMITS
 
-#### FUNCTION_PARAMETER_RULES (non-negotiable, fail if not met)
-- **MAX_PARAMETERS**: Limit to 5 parameters maximum per function
-- **USE_OPTIONS_OBJECT**: For 4+ parameters, use configuration objects
-- **AVOID_FLAG_PARAMETERS**: Don't use boolean flags (prefer separate functions)
-- **PARAMETER_ORDER**: Put required parameters first, optional last
-- **CONSISTENT_NAMING**: Use consistent parameter naming across similar functions
-- **DOCUMENT_PARAMETERS**: Use clear, descriptive parameter names
+- MAX_PARAMETERS: Limit to 5 parameters maximum per function
+- USE_OPTIONS_OBJECT: For 4+ parameters, use configuration objects
+- AVOID_FLAG_PARAMETERS: Don't use boolean flags (prefer separate functions)
+- PARAMETER_ORDER: Put required parameters first, optional last
+- CONSISTENT_NAMING: Use consistent parameter naming across similar functions
+- DOCUMENT_PARAMETERS: Use clear, descriptive parameter names
 
 ```javascript
 // ✅ PREFERRED: Few, well-defined parameters
@@ -792,10 +760,9 @@ def send_email(to, subj, msg, attch=None, pri=False, html=True,
 
 ### ERROR_HANDLING_PATTERNS
 
-#### ERROR_HANDLING_RULES (non-negotiable, fail if not met)
-- **SPECIFIC_ERRORS**: Use specific error types instead of generic exceptions
-- **INFORMATIVE_ERRORS**: Include relevant information in error messages
-- **RETHROW_UNEXPECTED**: Re-throw unexpected errors
+- SPECIFIC_ERRORS: Use specific error types instead of generic exceptions
+- INFORMATIVE_ERRORS: Include relevant information in error messages
+- RETHROW_UNEXPECTED: Re-throw unexpected errors
 
 ```javascript
 // ✅ PREFERRED: Specific, informative errors
@@ -828,9 +795,8 @@ try {
 
 ### LOGGING_PATTERNS
 
-#### LOGGING_RULES (non-negotiable, fail if not met)
-- **STRUCTURED_LOGGING**: Use structured logging with context
-- **AVOID_SIMPLE_LOGGING**: Avoid simple console logging
+- STRUCTURED_LOGGING: Use structured logging with context
+- AVOID_SIMPLE_LOGGING: Avoid simple console logging
 
 ```javascript
 // ✅ PREFERRED: Structured logging with context
@@ -850,73 +816,4 @@ logger.error('Operation failed', { operationId, error: err.message });
 // ❌ AVOID: Simple console logging
 console.log('Operation completed');
 console.error('Error:', err);
-```
-
-## LANGUAGE_PATTERNS
-
-### JAVASCRIPT_TYPESCRIPT
-```javascript
-// ✅ PREFERRED: Clear, typed, documented
-/**
- * @param {string} userId - User identifier
- * @param {Product[]} products - Product list
- * @returns {Promise<Order>} Created order
- * @throws {ValidationError} If validation fails
- */
-export async function createOrder(userId: string, products: Product[]): Promise<Order> {
-  validateUser(userId);
-  validateProducts(products);
-  
-  const order = await orderRepository.create({
-    userId,
-    products: products.map(p => p.id),
-    total: calculateTotal(products),
-    status: 'pending'
-  });
-  
-  await sendOrderConfirmation(order);
-  return order;
-}
-
-// ❌ AVOID: Unclear, untyped, undocumented
-function x(u, p) {
-  return db.create({u, p, t: p.reduce((s, i) => s + i.price, 0)});
-}
-```
-
-### PYTHON
-```python
-# ✅ PREFERRED: Type hinted, documented, error handling
-from typing import List, Optional
-import logging
-
-def process_user_data(user_id: str, data: dict) -> Optional[User]:
-    """
-    Process and validate user data.
-    
-    Args:
-        user_id: Unique user identifier
-        data: User data dictionary
-        
-    Returns:
-        Updated User object or None if invalid
-        
-    Raises:
-        ValidationError: If data validation fails
-    """
-    try:
-        validated_data = validate_user_data(data)
-        user = update_user(user_id, validated_data)
-        logging.info(f"User {user_id} updated successfully")
-        return user
-    except ValidationError as e:
-        logging.error(f"Validation failed for user {user_id}: {e}")
-        return None
-    except Exception as e:
-        logging.error(f"Unexpected error for user {user_id}: {e}")
-        raise
-
-# ❌ AVOID: No types, no error handling, unclear
-def process_data(uid, d):
-    return update_user(uid, d)
 ```
