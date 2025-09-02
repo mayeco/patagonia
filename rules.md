@@ -1,4 +1,6 @@
-# RULES FOR CODE GENERATION AND SHELL COMMAND EXECUTION
+# GLOBAL RULES
+
+Follow these rules and directives to ensure code quality, security, maintainability, environment safety, efficiency, compatibility, and safe file operations throughout the code generation process, across all categories, and at any point in the generation process:
 
 ## COMMAND_EXECUTION
 
@@ -175,6 +177,14 @@ Follow these code generation directives to ensure code quality and maintainabili
 - CONTEXT_PROVIDE: Include existing code patterns
 - CONSTRAINTS_SPECIFY: Define performance, security needs
 - EXAMPLES_PROVIDE: Show expected input/output format
+- SYNTAX_VALIDATION: All code must be valid
+- TYPE_SAFETY: Verify type safety (e.g., null checks, bounds checks)
+- LOGIC_CORRECTNESS: Logic must be correct
+- SECURITY_VULNERABILITIES: Validate security vulnerabilities (e.g., SQL injection, XSS)
+- PERFORMANCE_IMPLICATIONS: Validate performance implications
+- INTEGRATION_COMPATIBILITY: Validate integration compatibility
+- ERROR_HANDLING_COMPLETENESS: All errors must be handled
+- DOCUMENTATION_ADEQUACY: Provide documentation for all code
 
 ### TESTING_MANDATE
 
@@ -194,24 +204,6 @@ Follow these code generation directives to ensure code quality and maintainabili
 - AUTHORIZATION: Check permissions for operations
 - ENCRYPTION: Sensitive data at rest/transit
 - DEPENDENCY_SCAN: Weekly security audits
-
-### PERFORMANCE_BASELINE
-
-- RESPONSE_TIME: < 500ms for web endpoints
-- MEMORY_USAGE: Monitor and optimize
-- DATABASE_QUERIES: Use indexes, avoid N+1
-- CACHE_STRATEGY: Implement for expensive operations
-- ASYNC_OPERATIONS: Non-blocking for I/O
-
-### CODE_GENERATION_VALIDATION_REQUIRED
-- Syntax validation
-- Type safety
-- Logic correctness
-- Security vulnerabilities
-- Performance implications
-- Integration compatibility
-- Error handling completeness
-- Documentation adequacy
 
 ## PURE_CODING_STANDARDS
 
