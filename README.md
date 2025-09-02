@@ -14,7 +14,6 @@ Centralized workflows to standardize common tasks across projects (planning, imp
 
 ## Repository structure
 
-- `.windsurf/` — internal workspace folder
 - `CHANGELOG.md` — changelog
 - `LICENSE.md` — license
 - `README.md` — this file

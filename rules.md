@@ -127,57 +127,6 @@
   - Auto-run only read-only or clearly non-destructive commands.
   - Require explicit approval for installations, file writes, or system changes.
 
-## CORE_CODING_DIRECTIVES
-
-### CODE_GENERATION
-- PRIORITY: Readability > Cleverness
-- NAMING: descriptive, intention-revealing names only
-- FUNCTIONS: single responsibility, < 50 lines
-- CLASSES: single responsibility, < 300 lines
-- DUPLICATION: Eliminate via abstraction or utilities
-
-### TESTING_MANDATE
-- UNIT_TESTS: 100% coverage for new code
-- TEST_FIRST: Write test before implementation
-- EDGE_CASES: Handle null, empty, boundary conditions
-- ERROR_SCENARIOS: Test all failure paths
-- MOCK_EXTERNAL: Database, API, file system calls
-
-### SECURITY_PROTOCOLS
-- INPUT_VALIDATION: Sanitize all user inputs
-- AUTHENTICATION: Verify before data access
-- AUTHORIZATION: Check permissions for operations
-- ENCRYPTION: Sensitive data at rest/transit
-- DEPENDENCY_SCAN: Weekly security audits
-
-### PERFORMANCE_BASELINE
-- RESPONSE_TIME: < 500ms for web endpoints
-- MEMORY_USAGE: Monitor and optimize
-- DATABASE_QUERIES: Use indexes, avoid N+1
-- CACHE_STRATEGY: Implement for expensive operations
-- ASYNC_OPERATIONS: Non-blocking for I/O
-
-## AI_CODE_SPECIFIC
-
-### GENERATION_RULES
-- PROMPT_CLARITY: Be specific about requirements
-- CONTEXT_PROVIDE: Include existing code patterns
-- CONSTRAINTS_SPECIFY: Define performance, security needs
-- EXAMPLES_PROVIDE: Show expected input/output format
-
-### VALIDATION_REQUIRED
-```
-MANDATORY_CHECKS:
-- Syntax validation
-- Type safety
-- Logic correctness
-- Security vulnerabilities
-- Performance implications
-- Integration compatibility
-- Error handling completeness
-- Documentation adequacy
-```
-
 ## AI_CODE_GENERATION_CONSTRAINTS
 
 ### LOOP_PREVENTION
@@ -203,19 +152,91 @@ OPTIMIZATION_GUIDELINES:
 ```
 
 ### CODE_GENERATION_LIMITS
+
+**THESE LIMITS APPLY TO ALL CODE GENERATION REQUESTS AND ARE NON-NEGOTIABLE**
 ```
 HARD_LIMITS (non-negotiable, fail if exceeded):
-- Cyclomatic complexity: <= 10 per function
-- Function length: < 100 lines
-- Class length: < 500 lines
+- Cyclomatic complexity: <= 15 per function
+- Function length: < 150 lines
+- Class length: < 300 lines
 - Error rate: < 2%
 
 SOFT_LIMITS (strongly recommended, warn if exceeded):
 - Cyclomatic complexity: <= 10 per function
 - Function length: < 50 lines
-- Class length: < 200 lines
+- Class length: < 100 lines
 - Error rate: < 1%
 ```
+
+#### NON_COMPLIANT_CODE_AUGMENTATION_BAN
+
+- NON-COMPLIANT UNIT: Any function or class that exceeds any HARD_LIMITS or SOFT_LIMITS defined in `CODE_GENERATION_LIMITS`.
+- AUGMENTATION FORBIDDEN: Within a NON-COMPLIANT UNIT, adding even a single line of code or introducing new behavior is strictly prohibited. This includes new branches/loops, side effects, parameters, public API, or additional statements.
+- REFACTOR-ONLY UNTIL COMPLIANT: Only transformations that reduce complexity/size without changing behavior are allowed (e.g., extract/split methods, move code, rename symbols, deduplicate, remove dead code). Net new lines inside the NON-COMPLIANT UNIT must be <= 0, and cyclomatic complexity must not increase.
+- REQUEST HANDLING:
+  - If a request asks to add functionality inside a NON-COMPLIANT UNIT: Reject the request and require a refactor-first step to bring the unit within limits, then re-attempt the feature.
+  - If a feature can be implemented entirely outside the NON-COMPLIANT UNIT without touching it and without increasing its call surface (no new params, calls, or side effects on that unit): it is allowed. Otherwise, defer until after refactor.
+- ENFORCEMENT PROTOCOL:
+  1) Dry-run compliance scan to identify NON-COMPLIANT UNITs within the change scope (function/class granularity).
+  2) Diff gate: For each NON-COMPLIANT UNIT, assert net added lines <= 0 and equal-or-lower cyclomatic complexity. If violated, abort with rejection.
+  3) Commit annotation: "Refactor-only due to NON_COMPLIANT_CODE_AUGMENTATION_BAN".
+- REJECTION TEMPLATE:
+```text
+REJECTED: Target function/class is NON-COMPLIANT with CODE_GENERATION_LIMITS.
+Action required: Refactor to meet limits first (reduce complexity/size), then re-submit the feature request.
+Only refactor steps are permitted at this stage; augmentation is banned.
+```
+
+## AI_CODE_SPECIFIC
+
+### GENERATION_RULES
+- PROMPT_CLARITY: Be specific about requirements
+- CONTEXT_PROVIDE: Include existing code patterns
+- CONSTRAINTS_SPECIFY: Define performance, security needs
+- EXAMPLES_PROVIDE: Show expected input/output format
+
+### VALIDATION_REQUIRED
+```
+MANDATORY_CHECKS:
+- Syntax validation
+- Type safety
+- Logic correctness
+- Security vulnerabilities
+- Performance implications
+- Integration compatibility
+- Error handling completeness
+- Documentation adequacy
+```
+
+## CORE_CODING_DIRECTIVES
+
+### CODE_GENERATION
+- PRIORITY: Readability > Cleverness
+- NAMING: descriptive, intention-revealing names only
+- FUNCTIONS: single responsibility, < 50 lines
+- CLASSES: single responsibility, < 100 lines
+- DUPLICATION: Eliminate via abstraction or utilities
+
+### TESTING_MANDATE
+- UNIT_TESTS: 100% coverage for new code
+- TEST_FIRST: Write test before implementation
+- EDGE_CASES: Handle null, empty, boundary conditions
+- ERROR_SCENARIOS: Test all failure paths
+- MOCK_EXTERNAL: Database, API, file system calls
+
+### SECURITY_PROTOCOLS
+- INPUT_VALIDATION: Sanitize all user inputs
+- AUTHENTICATION: Verify before data access
+- AUTHORIZATION: Check permissions for operations
+- ENCRYPTION: Sensitive data at rest/transit
+- DEPENDENCY_SCAN: Weekly security audits
+
+### PERFORMANCE_BASELINE
+- RESPONSE_TIME: < 500ms for web endpoints
+- MEMORY_USAGE: Monitor and optimize
+- DATABASE_QUERIES: Use indexes, avoid N+1
+- CACHE_STRATEGY: Implement for expensive operations
+- ASYNC_OPERATIONS: Non-blocking for I/O
 
 ## PURE_CODING_STANDARDS
 
