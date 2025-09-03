@@ -1,61 +1,60 @@
 ---
-description: AI protocol for continuing reasoning, implementation, or conversation after an error in the IDE
+description: AI protocol to resume from the last failed step
 auto_execution_mode: 1
 ---
 
-# AI Workflow: Error Recovery Protocol
+# Continue From Failure Protocol
 
-When an error occurs (e.g., "Cascade error: Internal: stream error: stream ID 1893; INTERNAL_ERROR; received from peer"), follow these steps to recover and continue the task:
+When the previous step fails (e.g., a tool error such as "Cascade error: Internal: stream error: stream ID 1893; INTERNAL_ERROR; received from peer", a network interruption, or a partial execution), treat the prompt as a signal to resume from the failure point. Do not attempt to "solve the error message" generically; instead, follow these steps to continue the task from the last valid state:
 
 ## ⚠️ CRITICAL AI EXECUTION RULES
 
-**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete error recovery within 9 steps, maximum.
+**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete error recovery in at most 9 steps.
 
-**DECISION POINTS**: Make binary decisions - the error is recoverable or requires escalation.
+**DECISION POINTS**: Make binary decisions: either the error is recoverable or it requires escalation.
 
 **VALIDATION**: Validate the error type and recovery options.
 
 **TERMINATION CONDITIONS**:
 
-- If the error is unrecoverable: Ask the developer for manual intervention and STOP
-- If recovery fails: Provide fallback options and STOP
-- Always attempt recovery before escalating
+- If the error is unrecoverable: Ask the developer for manual intervention and STOP.
+- If recovery fails: Provide fallback options and STOP.
+- Always attempt recovery before escalating.
 
 ## STEPS
 
 0. **LANGUAGE DETECTION**:
-   - Detect the user's input language (default to Spanish if not clearly English)
+   - Detect the user's input language (default to Spanish if not clearly in English).
    - Additionally, infer from the language used in recent previous messages; if unclear, default to Spanish.
-   - If no clear English indicators are found, default to Spanish for all responses
+   - If no clear English indicators are found, default to Spanish for all responses.
    - Always provide responses in Spanish by default, unless the developer clearly specifies English.
 
-1. **REVIEW PREVIOUS REASONING**:
-   - Return to the last reasoning step before the error.
-   - Analyze the logic, assumptions, and actions that led to the failure.
-   - Identify possible causes such as incorrect assumptions, tool misuse, or unforeseen edge cases.
+1. **REVIEW FAILURE CONTEXT**:
+   - Treat the developer's prompt as a signal that the previous step failed, not a request to debug an error message.
+   - Reconstruct the last known good state and the exact point where execution stopped.
+   - Summarize what is done vs. pending and what was being attempted when it failed.
+   - Focus on what is needed to continue from that point; only analyze the error details if strictly required to proceed. Do not try to solve the error.
 
 2. **MAKE NEW DECISION**:
-   - Using the insights from the reasoning review.
+   - Use the insights from the reasoning review.
    - Decide on the best course of action: retry the operation, use a different approach, or escalate if necessary.
 
 3. **RETRY FAILED OPERATION**:
-   - If the new decision indicates retry is appropriate, attempt the last tool call, command execution or action again.
+   - If the new decision indicates that a retry is appropriate, attempt the last tool call, command execution, or action again.
+   - If the tool call failed, use alternative tools; retry with smaller changes or smaller steps; or use a batch or manual approach.
+   - If the conversation stream broke, summarize the previous context and restart from the last checkpoint.
 
-4. **FALLBACK STRATEGIES**:
-   - If tool call failed, use alternative tools or manual approaches.
-   - If conversation stream broke, summarize previous context and restart from last checkpoint.
-
-5. **NOTIFY DEVELOPER TRANSPARENTLY**:
+4. **NOTIFY DEVELOPER TRANSPARENTLY**:
    - Clearly inform the developer of the error and recovery steps taken, without alarming them.
 
-6. **RESUME TASK SEAMLESSLY**:
+5. **RESUME TASK SEAMLESSLY**:
    - Continue the implementation or reasoning from the last valid state, using available context or memories.
 
-7. **PREVENT FUTURE ERRORS**:
+6. **PREVENT FUTURE ERRORS**:
    - If applicable, adjust behavior (e.g., smaller tool calls, error handling in code).
 
-## Example Implementation
+## Possible errors to handle
 
-- Error during code edit: Retry edit with smaller changes, other tools or use MultiEdit.
+- Error during code edit: Retry the edit with smaller changes, use other tools, or use MultiEdit.
 - Error in data fetching: Switch to manual file reading or search tools.
 - Always prioritize the developer's task completion over error details.
