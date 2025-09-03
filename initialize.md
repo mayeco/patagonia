@@ -38,16 +38,14 @@ Initialize a new project for virtually any language or framework. This workflow 
    - If the intent is ambiguous or multiple candidates exist, present choices and STOP awaiting confirmation.
 
 2. **VALIDATE CURRENT DIRECTORY**
-   - Always validate directory contents; DO NOT assume.
-   - Require explicit developer approval before continuing in a non-empty directory.
-   - Ensure the current directory is empty except for VCS/OS metadata (allowed: `.git`, `.gitignore`, `.gitattributes`, `.gitkeep`, `.DS_Store`, `.vscode`, `.idea`).
-   - Command (outputs any disallowed entries; empty output means OK):
+    - Always validate directory contents; DO NOT ASSUME.
+    - Require explicit developer approval before continuing in a non-empty directory, and propose creating a new subdirectory named for the technology stack to start the initialization process there.
+    - Ensure that the current directory is empty except for VCS/OS metadata (allowed: `.git`, `.gitignore`, `.gitattributes`, `.gitkeep`, `.DS_Store`, `.vscode`, `.idea`).
+    - Command (outputs any disallowed entries; empty output means OK):
 
-     ```bash
+      ```bash
      find . -mindepth 1 -maxdepth 1 -not -name '.git' -not -name '.gitignore' -not -name '.gitattributes' -not -name '.gitkeep' -not -name '.DS_Store' -not -name '.vscode' -not -name '.idea' -print
      ```
-
-   - If the directory is not empty, create a new subdirectory with the name of the project stack and start the initialization process there.
 
 3. **CHECK PREREQUISITES (BY STACK)**
    - General: `git --version`.
