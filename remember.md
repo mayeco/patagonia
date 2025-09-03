@@ -8,7 +8,7 @@ Persist developer-provided instructions and preferences to memory (scoped to thi
 
 ## ⚠️ CRITICAL AI EXECUTION RULES
 
-**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete remember operation within 6 structured steps. If instructions are overly broad, request clarification and STOP.
+**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete the remember operation within 6 structured steps. If instructions are overly broad, request clarification and STOP.
 
 **DECISION POINTS**: Determine if the instruction is durable vs ephemeral, safe vs sensitive, and whether to create or update.
 
@@ -20,7 +20,7 @@ Persist developer-provided instructions and preferences to memory (scoped to thi
 
 - If instructions are unclear/ephemeral: Ask for clarification and STOP
 - If developer declines confirmation: STOP immediately
-- Always require developer confirmation before storing or updating
+- Always require the developer's confirmation before storing or updating
 
 ## STEPS
 

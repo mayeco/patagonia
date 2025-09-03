@@ -42,7 +42,7 @@ Follow these rules and directives to ensure commands are executed correctly and 
 - Use single quotes for literals; use double quotes when interpolation is required.
 - Prefer argument arrays over string concatenation to avoid word-splitting.
 - One-shot environment: Prefer `env VAR=value command` for single-command scope.
-- URL / querystring / form data
+- URL / query string / form data
   - Always URL-encode values before sending.
   - curl: use `--data-urlencode` for each `key=value` when using `-G` (GET) or form posts.
   - fish: `string escape --style=url "$value"` to encode a single value.
@@ -199,7 +199,7 @@ Follow these code generation directives to ensure code quality and maintainabili
 ### TESTING_MANDATE
 
 - UNIT_TESTS: 100% coverage for new code
-- TEST_FIRST: Write test before implementation
+- TEST_FIRST: Write tests before implementation
 - EDGE_CASES: Handle null, empty, boundary conditions
 - ERROR_SCENARIOS: Test all failure paths
 - MOCK_EXTERNAL: Database, API, file system calls
@@ -254,6 +254,7 @@ const discountRate = (() => {
 ```python
 # ✅ PREFERRED: Clear, step-by-step logic
 def calculate_discount(user, base_price):
+    """Calculate total price of items."""
     if user.age < 18 or user.is_blocked:
         return 0
 
@@ -283,9 +284,9 @@ def calc_disc(u, p):
 - GO: camelCase for unexported, PascalCase for exported names
 - AVOID_ABBREVIATIONS: Use full words (userId not uid, calculate not calc)
 - BE_DESCRIPTIVE: Names should explain purpose, not just type
-- CONSISTENT*PREFIXES: Use consistent prefixes (is*, has*, get*, set\_)
+- CONSISTENT_PREFIXES: Use consistent prefixes (is*, has*, get*, set\_)
 - BOOLEAN_CLARITY: Boolean variables should read as yes/no questions
-  COLLECTION_NAMES: Use plural for arrays/lists, singular for single items
+- COLLECTION_NAMES: Use plural for arrays/lists, singular for single items
 
 ```javascript
 // ✅ JAVASCRIPT/TYPESCRIPT: camelCase for variables and functions

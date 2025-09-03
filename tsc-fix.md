@@ -5,11 +5,11 @@ auto_execution_mode: 3
 
 # TSC-FIX Workflow
 
-Fix all TypeScript compiler (TSC) errors including type errors, syntax errors, module resolution errors, and compilation issues in TypeScript files.
+Fix all TypeScript compiler (TSC) errors, including type errors, syntax errors, module resolution errors, and compilation issues in TypeScript files.
 
 ## ⚠️ CRITICAL AI EXECUTION RULES
 
-**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete TSC error fixing within 7 steps maximum.
+**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete TSC error fixing within 7 steps, maximum.
 
 **DECISION POINTS**: Make binary decisions - errors are fixable or require developer input.
 
@@ -17,9 +17,9 @@ Fix all TypeScript compiler (TSC) errors including type errors, syntax errors, m
 
 **TERMINATION CONDITIONS**:
 
-- If no TypeScript files found: Ask the developer for files and STOP
-- If errors are complex: Ask the developer for clarification and STOP
-- Always require developer confirmation before applying fixes
+- If no TypeScript files are found: Ask the developer for the files and STOP.
+- If errors are complex: Ask the developer for clarification and STOP.
+- Always require the developer's confirmation before applying fixes.
 
 ## STEPS
 

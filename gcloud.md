@@ -8,18 +8,18 @@ Execute Google Cloud CLI (gcloud) commands based on developer requests. This wor
 
 ## ⚠️ CRITICAL AI EXECUTION RULES
 
-**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete GCP operation within 6 steps maximum.
+**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete the GCP operation within 6 steps, maximum.
 
-**DECISION POINTS**: Make binary decisions - command is safe or requires confirmation.
+**DECISION POINTS**: Make binary decisions - the command is safe or requires confirmation.
 
-**SAFETY VALIDATION**: Validate command safety and developer permissions before execution.
+**SAFETY VALIDATION**: Validate the command's safety and the developer's permissions before execution.
 
 **TERMINATION CONDITIONS**:
 
-- If gcloud not installed: Ask developer to install and STOP
-- If not authenticated: Ask developer to authenticate and STOP
-- If destructive command: Ask for confirmation and STOP if denied
-- Always require developer confirmation for destructive operations
+- If gcloud is not installed: Ask the developer to install it and STOP
+- If not authenticated: Ask the developer to authenticate and STOP
+- If the command is destructive: Ask for confirmation and STOP if denied
+- Always require the developer's confirmation for destructive operations
 
 ## STEPS
 
@@ -39,29 +39,29 @@ Execute Google Cloud CLI (gcloud) commands based on developer requests. This wor
 
 2. **ENVIRONMENT VALIDATION**:
    - Execute: `gcloud --version`
-   - If command fails: STOP - "gcloud CLI not installed - ensure Google Cloud SDK is available"
+   - If the command fails: STOP - "gcloud CLI not installed - ensure the Google Cloud SDK is available"
    - Execute: `gcloud auth list`
-   - If command fails: STOP - "Not authenticated with Google Cloud - run 'gcloud auth login' first"
+   - If the command fails: STOP - "Not authenticated with Google Cloud - run 'gcloud auth login' first"
    - Execute: `gcloud config get-value project`
-   - If no project: Ask developer to set project
+   - If no project is set: Ask the developer to set the project
 
 3. **COMMAND CONSTRUCTION**:
    - Map operation to specific gcloud command
    - Add required flags and options
    - Include project, zone, region as needed
-   - Validate command syntax mentally
+   - Validate the command syntax mentally
 
 4. **SAFETY CHECK**:
-   - Scan command for destructive keywords: delete, remove, destroy, rm
-   - If found: Ask developer for explicit confirmation
-   - If developer denies: STOP with safety message
-   - If developer confirms: Proceed to execution
+   - Scan the command for destructive keywords: delete, remove, destroy, rm
+   - If found: Ask the developer for explicit confirmation
+   - If the developer denies: STOP with a safety message
+   - If the developer confirms: Proceed to execution
 
 5. **COMMAND EXECUTION**:
-   - Execute prepared gcloud command
-   - Set reasonable timeout (30-60 seconds)
+   - Execute the prepared gcloud command
+   - Set a reasonable timeout (30-60 seconds)
    - Capture stdout, stderr, and exit code
-   - If command fails: Parse error output and STOP with specific error message
+   - If the command fails: Parse error output and STOP with a specific error message
    - Do NOT attempt alternative commands or installations
 
 6. **RESULT PROCESSING**: Process results:

@@ -9,16 +9,16 @@ Generate a comprehensive changelog based on git commit history analysis, categor
 
 ## ⚠️ CRITICAL AI EXECUTION RULES
 
-**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete changelog generation within 8 steps maximum. If git analysis takes too long, use available data and proceed.
+**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete changelog generation within 8 steps, maximum. If git analysis takes too long, use available data and proceed.
 
 **DATA PROCESSING**: Process commits in chronological order without over-analysis.
 
 **TERMINATION CONDITIONS**:
 
-- If git repository not found: Stop with clear error message
-- If no commits found: Stop with explanation
-- If git command fails: Stop with specific error details
-- Always provide changelog content or clear error
+- If a git repository is not found: Stop with a clear error message
+- If no commits are found: Stop with an explanation
+- If a git command fails: Stop with specific error details
+- Always provide changelog content or a clear error
 
 ## STEPS
 

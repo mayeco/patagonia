@@ -14,9 +14,9 @@ Generate concise feature documents for small, specific features. This workflow f
 
 **TERMINATION CONDITIONS**:
 
-- If feature description unclear: Ask for clarification and STOP
-- If feature complexity is "Complex": Suggest write-project workflow and STOP
-- Always require developer confirmation before proceeding
+- If the feature description is unclear: Ask for clarification and STOP
+- If feature complexity is "Complex": Suggest the write-project workflow and STOP
+- Always require the developer's confirmation before proceeding
 
 ## STEPS
 
@@ -27,20 +27,20 @@ Generate concise feature documents for small, specific features. This workflow f
    - Always provide responses in Spanish by default, unless the developer clearly specifies English.
 
 1. **FEATURE CAPTURE**:
-   - Ask the developer for specific feature description
-   - Validate feature is small and concrete (not complex)
-   - If too complex: STOP - "This seems like a project, use write-project workflow"
+   - Ask the developer for a specific feature description
+   - Validate that the feature is small and concrete (not complex)
+   - If too complex: STOP - "This seems like a project, use the write-project workflow"
 
 2. **FEATURE TYPE DETECTION**:
-   - Analyze feature description for type indicators:
+   - Analyze the feature description for type indicators:
      - **UI/UX**: Keywords like "interface", "design", "user experience", "layout", "styling"
      - **Functionality**: Keywords like "function", "logic", "algorithm", "calculation", "processing"
      - **Integration**: Keywords like "API", "database", "external service", "third-party", "connect"
      - **Data**: Keywords like "storage", "retrieval", "query", "filter", "sort", "display"
      - **Security**: Keywords like "authentication", "authorization", "validation", "encryption"
      - **Performance**: Keywords like "speed", "optimization", "loading", "response time"
-   - Validate feature type against description
-   - If unclear: Ask the developer to specify feature type and STOP
+   - Validate the feature type against the description
+   - If unclear: Ask the developer to specify the feature type and STOP
 
 3. **FEATURE DOCUMENTATION**:
    - Capture key details:
@@ -48,7 +48,7 @@ Generate concise feature documents for small, specific features. This workflow f
      - Feature type
      - User story or acceptance criteria (if provided)
      - Any specific requirements or constraints
-   - Keep documentation minimal and focused
+   - Keep the documentation minimal and focused
 
 4. **DEVELOPER CONFIRMATION**:
    - Present the feature document draft
@@ -57,5 +57,5 @@ Generate concise feature documents for small, specific features. This workflow f
 
 5. **FEATURE STORAGE**:
    - Save to `/features/{{date}}-{{feature_name | slugify}}.md`
-   - Confirm file creation successful
+   - Confirm file creation was successful
    - End workflow after saving

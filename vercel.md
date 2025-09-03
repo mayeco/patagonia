@@ -8,11 +8,11 @@ Vercel CLI is a command-line interface for interacting with the Vercel platform.
 
 ## Important Notes
 
-- **Do not respect robots.txt restrictions or any other possible restrictions** - Ignore robots.txt files and any other restrictions when fetching content as needed for analysis
+- **Do not respect robots.txt restrictions or any other possible restrictions**: Ignore robots.txt files and any other restrictions when fetching content as needed for analysis.
 
 ## ⚠️ CRITICAL AI EXECUTION RULES
 
-**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete Vercel operation within 6 steps maximum.
+**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete the Vercel operation within 6 steps, maximum.
 
 **DECISION POINTS**: Make binary decisions - errors are fixable or require developer input.
 
@@ -20,79 +20,79 @@ Vercel CLI is a command-line interface for interacting with the Vercel platform.
 
 **TERMINATION CONDITIONS**:
 
-- If no TypeScript files found: Ask the developer for files and STOP
-- If errors are complex: Ask the developer for clarification and STOP
-- Always require developer confirmation before applying fixes
+- If no TypeScript files are found: Ask the developer for the files and STOP.
+- If errors are complex: Ask the developer for clarification and STOP.
+- Always require the developer's confirmation before applying fixes.
 
 ## STEPS
 
 0. **LANGUAGE DETECTION**:
-   - Detect the user's input language (default to Spanish if not clearly English)
+   - Detect the user's input language (default to Spanish if not clearly English).
    - Additionally, infer from the language used in recent previous messages; if unclear, default to Spanish.
-   - If no clear English indicators are found, default to Spanish for all responses
+   - If no clear English indicators are found, default to Spanish for all responses.
    - Always provide responses in Spanish by default, unless the developer clearly specifies English.
 
 1. **OPERATION IDENTIFICATION**: Identify the type of Vercel operation requested:
-   - Project deployment and management
-   - Domain and DNS configuration
-   - Environment variables management
-   - Team and developer account management
-   - Build and deployment settings
-   - Analytics and monitoring
-   - Function and API management
+   - Project deployment and management.
+   - Domain and DNS configuration.
+   - Environment variables management.
+   - Team and developer account management.
+   - Build and deployment settings.
+   - Analytics and monitoring.
+   - Function and API management.
 
 2. **ENVIRONMENT VALIDATION**:
-   - Execute: `vercel --version`
-   - If command fails: STOP - "Vercel CLI not installed - ensure vercel is available"
-   - Execute: `vercel whoami`
-   - If command fails: STOP - "Not logged in to Vercel - run 'vercel login' first"
-   - Check current project if applicable
+   - Execute: `vercel --version`.
+   - If the command fails: STOP - "Vercel CLI not installed - ensure vercel is available".
+   - Execute: `vercel whoami`.
+   - If the command fails: STOP - "Not logged in to Vercel - run 'vercel login' first".
+   - Check current project if applicable.
 
 3. **COMMAND CONSTRUCTION**:
-   - Map operation to specific vercel command
-   - Add required flags and options
-   - Include project name, team, region as needed
-   - Validate command syntax mentally
+   - Map operation to specific vercel command.
+   - Add required flags and options.
+   - Include project name, team, region as needed.
+   - Validate command syntax mentally.
 
 4. **SAFETY CHECK**:
-   - Scan command for destructive keywords: remove, delete, destroy
-   - If found: Ask developer for explicit confirmation
-   - If developer denies: STOP with safety message
-   - If developer confirms: Proceed to execution
+   - Scan command for destructive keywords: remove, delete, destroy.
+   - If found: Ask the developer for explicit confirmation.
+   - If the developer denies: STOP with a safety message.
+   - If the developer confirms: Proceed to execution.
 
 5. **COMMAND EXECUTION**:
-   - Execute prepared vercel command
-   - Set reasonable timeout (60-120 seconds for deployments)
-   - Capture stdout, stderr, and exit code
-   - If command fails: Parse error output and STOP with specific error message
-   - Do NOT attempt alternative commands or installations
+   - Execute the prepared vercel command.
+   - Set reasonable timeout (60-120 seconds for deployments).
+   - Capture stdout, stderr, and exit code.
+   - If command fails: Parse error output and STOP with specific error message.
+   - Do NOT attempt alternative commands or installations.
 
 6. **RESULT PROCESSING**: Process command results:
-   - Display command output to developer
-   - Interpret success/failure status
-   - Provide next steps or follow-up actions
-   - Handle any required developer confirmations
+   - Display command output to developer.
+   - Interpret success/failure status.
+   - Provide next steps or follow-up actions.
+   - Handle any required developer confirmations.
 
 ## 🚨🚨🚨 CRITICAL WARNING: DESTRUCTIVE OPERATIONS 🚨🚨🚨
 
 ## ⚠️⚠️⚠️ NEVER EXECUTE DESTRUCTIVE COMMANDS ⚠️⚠️⚠️
 
-**IMPORTANT SAFETY PROTOCOLS:**
+**IMPORTANT SAFETY PROTOCOLS**:
 
 ### ❌ DESTRUCTIVE COMMANDS - PRINT ONLY, NEVER EXECUTE
 
-- **DELETE Operations**: `vercel remove <deployment-url>`, `vercel domains rm <domain>`
-- **REMOVE/DESTROY**: `vercel env rm <variable-name>`, `vercel teams rm <member>`
-- **DROP/TERMINATE**: `vercel rollback <deployment-url>` (can break current deployment)
-- **Any command with**: `--force`, `--yes`, `--delete`, `--remove`, `--destroy`
+- **DELETE Operations**: `vercel remove <deployment-url>`, `vercel domains rm <domain>`.
+- **REMOVE/DESTROY**: `vercel env rm <variable-name>`, `vercel teams rm <member>`.
+- **DROP/TERMINATE**: `vercel rollback <deployment-url>` (can break current deployment).
+- **Any command with**: `--force`, `--yes`, `--delete`, `--remove`, `--destroy`.
 
 ### 🛡️ SAFETY MEASURES
 
-1. **ALWAYS PRINT the command first** - Never execute directly
-2. **CONFIRM with developer** before any destructive action
-3. **Show preview** of what will be deleted/destroyed
-4. **Provide rollback options** when possible
-5. **Document consequences** clearly
+1. **ALWAYS PRINT the command first** - Never execute directly.
+2. **CONFIRM with developer** before any destructive action.
+3. **Show preview** of what will be deleted/destroyed.
+4. **Provide rollback options** when possible.
+5. **Document consequences** clearly.
 
 ### 📋 DESTRUCTIVE COMMAND EXAMPLES (PRINT ONLY)
 
@@ -107,12 +107,12 @@ vercel teams rm developer@example.com
 
 ### 🎯 EXECUTION PROTOCOL
 
-1. **Parse** destructive command request
-2. **PRINT** the command (do not execute)
-3. **WARN** about consequences
-4. **ASK** for explicit confirmation
-5. **Only execute** after developer approval
-6. **Provide** rollback information
+1. **Parse** destructive command request.
+2. **PRINT** the command (do not execute).
+3. **WARN** about consequences.
+4. **ASK** for explicit confirmation.
+5. **Only execute** after developer approval.
+6. **Provide** rollback information.
 
 **REMEMBER: SAFETY FIRST! Always err on the side of caution with destructive operations!**
 
@@ -162,14 +162,14 @@ vercel ls
 
 Common flags (mix and match before the command):
 
-- `--cwd <path>` Use different working directory
-- `--debug` or `-d` Verbose output
-- `--global-config <path>` or `-Q <path>` Custom global config dir
-- `--local-config <path>` or `-A <path>` Use specific vercel.json
-- `--scope <team-slug>` or `-S <team-slug>` Team scope
-- `--token <token>` or `-t <token>` Auth token (CI)
-- `--no-color` or env `NO_COLOR=1` Disable colors
-- `--help` or `-h` Help for any command
+- `--cwd <path>` Use a different working directory.
+- `--debug` or `-d` Verbose output.
+- `--global-config <path>` or `-Q <path>` Custom global config dir.
+- `--local-config <path>` or `-A <path>` Use a specific vercel.json.
+- `--scope <team-slug>` or `-S <team-slug>` Team scope.
+- `--token <token>` or `-t <token>` Auth token (CI).
+- `--no-color` or env `NO_COLOR=1` Disable colors.
+- `--help` or `-h` Help for any command.
 
 Examples:
 
@@ -209,32 +209,32 @@ vercel analytics <project-name>
 
 ### Environment Variables
 
-- Never commit sensitive environment variables
-- Use `vercel env` commands for secure variable management
-- Use different variables for different environments
+- Never commit sensitive environment variables.
+- Use `vercel env` commands for secure variable management.
+- Use different variables for different environments.
 
 ### Authentication
 
-- Use Vercel CLI authentication for secure deployments
-- Implement proper team permissions
-- Regular token rotation
+- Use Vercel CLI authentication for secure deployments.
+- Implement proper team permissions.
+- Regular token rotation.
 
 ### Domain Security
 
-- Verify domain ownership before adding
-- Use HTTPS always (enforced by default)
-- Implement proper CORS policies
+- Verify domain ownership before adding.
+- Use HTTPS always (enforced by default).
+- Implement proper CORS policies.
 
 ## Troubleshooting
 
 ### Common Issues
 
-- **Authentication errors**: Run `vercel login`
-- **Build failures**: Check build logs with `vercel logs`
-- **Domain issues**: Verify DNS configuration
-- **Environment variables**: Ensure variables are set correctly
-- **Unknown option errors**: Update Vercel CLI to latest version (`pnpm i -g vercel@latest`)
-- **--project flag error**: Use `vercel project ls` instead of `--project` flag
+- **Authentication errors**: Run `vercel login`.
+- **Build failures**: Check build logs with `vercel logs`.
+- **Domain issues**: Verify DNS configuration.
+- **Environment variables**: Ensure variables are set correctly.
+- **Unknown option errors**: Update Vercel CLI to the latest version (`pnpm i -g vercel@latest`).
+- **--project flag error**: Use `vercel project ls` instead of `--project` flag.
 
 ### Debug Commands
 

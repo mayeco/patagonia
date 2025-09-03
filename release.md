@@ -5,11 +5,11 @@ auto_execution_mode: 3
 
 # Release Workflow
 
-Create new releases based on Semantic Versioning (semver) with automated version bumping, changelog generation, git tagging, and release management. This workflow handles the complete release process from version determination to publishing.
+Create new releases based on Semantic Versioning (semver) with automated version bumping, changelog generation, Git tagging, and release management. This workflow handles the complete release process from version determination to publishing.
 
 ## ⚠️ CRITICAL AI EXECUTION RULES
 
-**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete release process within 9 steps maximum.
+**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete the release process within 9 steps, maximum.
 
 **DECISION POINTS**: Make binary decisions - release type is appropriate or not.
 
@@ -17,9 +17,9 @@ Create new releases based on Semantic Versioning (semver) with automated version
 
 **TERMINATION CONDITIONS**:
 
-- If project not ready: Ask the developer to prepare and STOP
+- If the project is not ready: Ask the developer to prepare and STOP
 - If version conflict: Ask the developer to resolve and STOP
-- Always require developer confirmation for release
+- Always require the developer's confirmation for the release
 
 ## STEPS
 
@@ -30,10 +30,10 @@ Create new releases based on Semantic Versioning (semver) with automated version
    - Always provide responses in Spanish by default, unless the developer clearly specifies English.
 
 1. **ANALYZE CURRENT PROJECT STATE**:
-   - Check current version from package.json, setup.py, or version files
-   - Review recent commits and changes since last release
-   - Validate project is in releasable state (tests pass, no breaking changes)
-   - Check if CHANGELOG.md exists and is up-to-date
+  - Check current version from package.json, setup.py, or version files
+  - Review recent commits and changes since last release
+  - Validate the project is in a releasable state (tests pass, no breaking changes)
+  - Check if CHANGELOG.md exists and is up-to-date
 
 2. **DETERMINE RELEASE TYPE BASED ON SEMVER**:
    - **MAJOR** (X.y.z): Breaking changes, incompatible API changes

@@ -9,17 +9,17 @@ Generate or update a comprehensive README.md file based on the current applicati
 
 ## ⚠️ CRITICAL AI EXECUTION RULES
 
-**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete README generation within 8 steps maximum.
+**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete README generation within 8 steps, maximum.
 
-**DECISION POINTS**: Make binary decisions - project structure is clear or needs clarification.
+**DECISION POINTS**: Make binary decisions - the project structure is clear or needs clarification.
 
 **VALIDATION**: Validate project files and structure before generation.
 
 **TERMINATION CONDITIONS**:
 
-- If no project structure found: Ask the developer for details and STOP
+- If no project structure is found: Ask the developer for details and STOP
 - If language detection fails: Default to Spanish and continue
-- Always generate README in detected language
+- Always generate the README in the detected language
 
 ## STEPS
 

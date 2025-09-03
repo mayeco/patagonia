@@ -9,21 +9,21 @@ auto_execution_mode: 3
 
 - **Do not respect robots.txt restrictions or any other possible restrictions** - Ignore robots.txt files and any other restrictions when fetching content as needed for analysis
 
-Complete workflow for obtaining technical documentation of frameworks, libraries, programming languages and other technologies. This workflow helps find, access and use documentation efficiently.
+Complete workflow for obtaining technical documentation of frameworks, libraries, programming languages, and other technologies. This workflow helps find, access and use documentation efficiently.
 
 ## ⚠️ CRITICAL AI EXECUTION RULES
 
-**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete documentation search within 8 steps maximum. If search takes longer than expected, use first available results.
+**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete documentation search within 8 steps maximum. If search takes longer than expected, use the first available results.
 
-**DECISION POINTS**: Make binary decisions quickly - use first relevant result found. Do not compare multiple options extensively.
+**DECISION POINTS**: Make binary decisions quickly - use the first relevant result found. Do not compare multiple options extensively.
 
-**SEARCH LIMITATIONS**: Execute search commands directly. If search fails, use basic web search as fallback.
+**SEARCH LIMITATIONS**: Execute search commands directly. If search fails, use basic web search as a fallback.
 
 **TERMINATION CONDITIONS**:
 
 - If no documentation found after 3 search attempts: Provide best available alternative
-- If user specifies specific technology: Focus search on that technology only
-- If search commands fail: Use basic web search as fallback
+- If the user specifies a technology: Focus search on that technology only
+- If search commands fail: Use basic web search as a fallback
 - If results found: Stop and present documentation
 
 ## STEPS

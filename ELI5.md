@@ -20,10 +20,10 @@ Explain any concept, web, plan, backlog, or input in simple terms as if explaini
 
 **TERMINATION CONDITIONS**:
 
-- If content type unclear: Ask the developer for clarification and STOP
-- If explanation becomes too complex: Simplify and provide basic explanation
+- If the content type is unclear: Ask the developer for clarification and STOP
+- If the explanation becomes too complex: Simplify and provide basic explanation
 - If the developer requests specific format: Adapt and complete
-- Always provide explanation within 5 minutes of processing
+- Always provide the explanation within 5 minutes of processing
 
 ## STEPS
 
@@ -50,7 +50,7 @@ Explain any concept, web, plan, backlog, or input in simple terms as if explaini
 
 4. **EXPLAIN SIMPLY**:
    - Use simple words, short sentences, and relatable examples (toys, games, everyday activities)
-   - Use MCP search brave_web_search for comprehensive web searches:
+   - Use MCP brave_web_search for comprehensive web searches:
      - `brave_web_search "explain like i'm five {concept}"`
      - `brave_web_search "{concept} explanation for children"`
      - `brave_web_search "easy explanation of {concept}"`

@@ -43,10 +43,14 @@ Generate comprehensive project plans that span multiple features and milestones.
      - **Research/Spike**: Keywords like "research", "investigate", "explore", "spike", "proof of concept"
    - If project type is unclear assume it is a **MVP**, give a message to the developer to let them know (Do not skip the message).
 
-3. **PROJECT PLANING AND STRUCTURING**:
+3. **PROJECT PLANNING AND STRUCTURING**:
    - **IDENTIFY SCOPE DEFINITION**
      - Identify project objectives and success criteria based on project type
      - Estimate project timeline based on project type complexity
+
+   - **SEARCH FOR IMPLEMENTATION DOCUMENTATION**
+     - Perform an MCP search for the current project's implementation and type (run a comprehensive search to find relevant documentation for implementation details and type; be mindful of outdated documentation):
+       - `brave_web_search "{relevant_content} {project_name} {project_type}"`
 
    - **FEATURE IDENTIFICATION**:
      - Break project into 5-12 major features

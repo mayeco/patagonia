@@ -90,14 +90,14 @@ Create high-level epics that contain multiple features and user stories. Epics a
    - Assign unique epic identifier
 
 9. **DEVELOPER CONFIRMATION**:
-   - Present complete epic structure
+   - Present the complete epic structure
    - Ask for explicit confirmation to create
    - If declined: STOP without creating
 
 10. **EPIC STORAGE**:
 
 - Save to `/epics/{{date}}-{{epic_name | slugify}}.md`
-- Confirm creation successful
+- Confirm creation was successful
 - Suggest next steps (break into projects or features)
 
 ## Epic Type Implementation Guidelines

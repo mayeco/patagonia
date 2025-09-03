@@ -47,7 +47,7 @@ Execute security analysis on the current project using Checkmarx One CLI with co
    - Do NOT validate environment variables
 
 4. **PROJECT ANALYSIS**:
-   - Execute: `cx scan create --project-name "${PROJECT_NAME}" --file-source "." --scan-info-format "json" --branch "${BRANCH_NAME}" --agent "Panagonia"`
+   - Execute: `cx scan create --project-name "${PROJECT_NAME}" --file-source "." --scan-info-format "json" --branch "${BRANCH_NAME}" --agent "Patagonia"`
    - If command fails: Parse error output for missing credentials or configuration
    - If credentials error: STOP - "Missing or invalid Checkmarx One credentials - check CX_TENANT, CX_BASE_URI, CX_CLIENT_ID, CX_CLIENT_SECRET"
    - If other error: STOP - "Checkmarx One scan failed - check project configuration"

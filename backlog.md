@@ -16,9 +16,9 @@ Report the current backlog from the existing context (memories and repository fi
 
 **TERMINATION CONDITIONS**:
 
-- If no backlog found in context and the developer provides no items: Ask for items and STOP
-- If developer declines confirmation: STOP immediately
-- Always require developer confirmation before storing or updating backlog entries
+- If no backlog is found in the context and the developer provides no items: Ask for items and STOP
+- If the developer declines confirmation: STOP immediately
+- Always require the developer's confirmation before storing or updating the backlog entries
 
 ## STEPS
 
@@ -42,7 +42,7 @@ Report the current backlog from the existing context (memories and repository fi
 
 3. **GAP CHECK AND QUESTIONS**:
    - Ask the developer to confirm accuracy and provide missing items or corrections.
-   - If the developer supplies updates, proceed to Step 4; otherwise STOP.
+   - If the developer supplies updates, proceed to Step 4; otherwise, STOP.
 
 4. **CAPTURE NEW/UPDATED ITEMS**:
    - Create/update backlog entries in memory (use the Memory Workflow conventions).

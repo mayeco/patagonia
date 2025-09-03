@@ -8,18 +8,18 @@ Evaluate how well requests, plans, backlog items, or current pending tasks are u
 
 ## ⚠️ CRITICAL AI EXECUTION RULES
 
-**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete evaluation within 6 steps maximum. Provide rating and either ask questions or proceed.
+**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete evaluation within 6 steps, maximum. Provide a rating and either ask questions or proceed.
 
-**DECISION POINTS**: Make binary decisions - content is clear enough to proceed or needs clarification.
+**DECISION POINTS**: Make binary decisions - the content is clear enough to proceed or needs clarification.
 
 **CONTENT ANALYSIS**: Evaluate clarity, completeness, and feasibility quickly.
 
 **TERMINATION CONDITIONS**:
 
-- If rating is 6-10: Provide explanation and recommend proceeding
+- If rating is 6-10: Provide an explanation and recommend proceeding
 - If rating is 1-5: Ask specific questions and STOP
-- If the developer provides clarification: Re-evaluate and provide new rating
-- Never proceed with implementation without developer confirmation
+- If the developer provides clarification: Re-evaluate and provide a new rating
+- Never proceed with implementation without the developer's confirmation
 
 ## STEPS
 

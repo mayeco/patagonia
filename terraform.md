@@ -16,9 +16,9 @@ Scan the current project and automatically detect infrastructure requirements th
 
 1. **SCAN PROJECT STRUCTURE AND FILES**:
    - Analyze package.json, requirements.txt, pom.xml, go.mod for dependencies
-   - Check for environment variables in .env files, docker-compose.yml
+   - Check for environment variables in .env files and docker-compose.yml
    - Identify framework and runtime (Node.js, Python, Java, Go, etc.)
-   - Detect database usage from ORM configurations, connection strings
+   - Detect database usage from ORM configurations and connection strings
    - Check for cloud service integrations (AWS SDK, Google Cloud client libraries)
    - Analyze Docker files for containerization requirements
    - Review CI/CD files for deployment patterns
@@ -52,19 +52,19 @@ Scan the current project and automatically detect infrastructure requirements th
 
 6. **CONFIGURATION VALIDATION**:
    - Execute: `terraform validate`
-   - If command fails: STOP - "Terraform validation failed - check configuration syntax and fix errors"
+   - If the command fails: STOP - "Terraform validation failed - check configuration syntax and fix errors"
    - Check for syntax errors and missing resources
    - If validation fails: Fix errors and re-validate
 
 7. **FILE OUTPUT**:
-   - Create /terraform directory structure
+   - Create the /terraform directory structure
    - Save all generated files
-   - Provide summary of generated infrastructure
+   - Provide a summary of the generated infrastructure
 
 8. **COMPLETION REPORT**:
    - Confirm successful generation
    - Provide file locations and next steps
-   - Suggest manual review before deployment guide
+   - Suggest a manual review before deployment
    - Document required permissions and prerequisites
    - Include cost estimation commands
    - Provide rollback procedures
@@ -426,12 +426,11 @@ terraform show -json > plan.json
 ### Common Issues
 
 - **Provider authentication**: Check credentials and permissions
-- **Resource dependencies**: Ensure resources are created in correct order
+- **Resource dependencies**: Ensure resources are created in the correct order
 - **Variable validation**: Check variable types and defaults
-- **State management**: Handle terraform state carefully
+- **State management**: Handle Terraform state carefully
 
 ### Validation Commands
-
 ```bash
 # Validate configuration
 terraform validate
@@ -444,6 +443,7 @@ terraform plan -refresh-only
 
 # Debug issues
 TF_LOG=DEBUG terraform apply
+```
 
 ## Prerequisites:
 - Terraform CLI installed (version 1.0+)
@@ -451,4 +451,3 @@ TF_LOG=DEBUG terraform apply
 - Project files accessible for scanning
 - Basic understanding of infrastructure concepts
 - Cost management approval for cloud resources
-```

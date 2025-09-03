@@ -9,7 +9,7 @@ Operational workflow for discovering the project's database schema and making it
 
 ## ⚠️ CRITICAL AI EXECUTION RULES
 
-**DO NOT GET STUCK**: Complete schema discovery within 5 search attempts/paths max; then ask the developer for a path and STOP.
+**DO NOT GET STUCK**: Complete schema discovery within 5 search attempts/paths, maximum; then ask the developer for a path and STOP.
 
 **NON-DESTRUCTIVE**: Never modify project files or execute migrations/DB commands.
 
@@ -19,9 +19,9 @@ Operational workflow for discovering the project's database schema and making it
 
 **TERMINATION CONDITIONS**:
 
-- If no schema/migrations found and no user-provided path: Ask and STOP
+- If no schema/migrations are found and no user-provided path: Ask and STOP
 - If multiple frameworks detected with conflicting hints: Ask the developer to choose and STOP
-- If files are unreadable or permissions restricted: Report the issue and STOP
+- If files are unreadable or permissions are restricted: Report the issue and STOP
 
 ## STEPS
 
@@ -50,7 +50,7 @@ Operational workflow for discovering the project's database schema and making it
      - Liquibase/Flyway changelogs under `db/changelog*` or `db/migration*`
      - Migrations directories: `db/migrate/`, `database/migrations/`, `migrations/`, `alembic/versions/`, `prisma/migrations/*/migration.sql`, `src/migrations/`
    - Search patterns: files `schema.prisma`, `schema.sql`, `structure.sql`, `db/schema.rb`; dirs `prisma/`, `db/migrate/`, `database/migrations/`, `migrations/`, `alembic/`, `prisma/migrations/`.
-   - If none found, ask the developer for the schema path or ORM used and STOP.
+   - If none are found, ask the developer for the schema path or ORM used and STOP.
 
 3. **READ AND EXTRACT SCHEMA**:
    - Parse and normalize key entities: tables, columns (name, type, nullable), PKs, FKs, uniques/indexes, enums, and relations.
@@ -62,7 +62,7 @@ Operational workflow for discovering the project's database schema and making it
    - Title: `Schema Snapshot (<framework>)`
    - Content: concise summary (counts, key relations/enums/indexes) + source file paths.
    - Tags: `schema_snapshot`, `framework_<name>`, `database_schema`
-   - Prefer update if a prior snapshot exists; otherwise create.
+   - Prefer an update if a prior snapshot exists; otherwise create.
 
 5. **CACHE FOR SESSION USE**:
    - Keep the parsed structure in working context for answering future queries and validations.
