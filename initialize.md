@@ -138,27 +138,27 @@ Initialize a new project for virtually any language or framework. This workflow 
      - Spring Boot: `./mvnw spring-boot:run` or `./gradlew bootRun`.
      - Django/FastAPI/Flask: `python3 manage.py runserver` or framework’s dev server.
 
-   - Git hygiene and Gitignore Setup
-     - Ensure an appropriate `.gitignore` exists for the chosen stack. Reference templates:
-     - GitHub gitignore repository: <https://github.com/github/gitignore>
-     - Common templates: `Node.gitignore`, `Rails.gitignore`, `Python.gitignore`, `Java.gitignore`, `Elixir.gitignore`, `Go.gitignore`, `VisualStudio.gitignore`, `Laravel.gitignore`, `Django.gitignore`.
-     - Create or append from a template (choose one matching your stack):
+   - Git initialization and Gitignore Setup
+     - Ensure an appropriate `.gitignore` exists for the chosen stack.
+       - Use Github gitignore repository reference templates according to the stack: <https://github.com/github/gitignore>
+       - Common templates: `Node.gitignore`, `Rails.gitignore`, `Python.gitignore`, `Java.gitignore`, `Elixir.gitignore`, `Go.gitignore`, `VisualStudio.gitignore`, `Laravel.gitignore`, `Django.gitignore`.
+       - Create or append from a template (choose one matching your stack):
 
-       ```bash
-       # Create from a template (overwrites existing .gitignore)
-       # Example for Node:
-       curl -fsSL https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore > .gitignore
+         ```bash
+         # Create from a template (overwrites existing .gitignore)
+         # Example for Node:
+         curl -fsSL https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore > .gitignore
 
-       # Or append to an existing .gitignore
-       # Example for Rails:
-       curl -fsSL https://raw.githubusercontent.com/github/gitignore/main/Rails.gitignore >> .gitignore
-       ```
+         # Or append to an existing .gitignore
+         # Example for Rails:
+         curl -fsSL https://raw.githubusercontent.com/github/gitignore/main/Rails.gitignore >> .gitignore
+         ```
 
-     - Add local, project-specific exclusions (safe to append; duplicates are okay):
+       - Add local, project-specific exclusions (safe to append; duplicates are okay):
 
-       ```bash
-       printf "\n# Local additions\n.env\n.env.local\n.env.*\n.DS_Store\nnode_modules/\n.next/\n.nuxt/\ndist/\nbuild/\ncoverage/\n.vscode/\n.idea/\n.venv/\n" >> .gitignore
-       ```
+         ```bash
+         printf "\n# Local additions\n.env\n.env.local\n.env.*\n.DS_Store\nnode_modules/\n.next/\n.nuxt/\ndist/\nbuild/\ncoverage/\n.vscode/\n.idea/\n.venv/\n" >> .gitignore
+         ```
 
      - Initialize if needed and commit baseline: `git init && git add . && git commit -m "chore: initial scaffold"`.
      - Optionally create the remote and push the initial commit.
