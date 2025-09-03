@@ -4,6 +4,28 @@ Cubre: 2025-08-29 — 2025-09-01
 
 Este archivo sigue el formato "Keep a Changelog" y se genera de forma determinista a partir del historial de Git.
 
+## v0.1.0-beta.1 — 2025-09-03
+
+- ✨ Added
+  - 2025-09-03 — chore: add repository configuration files and linting setup ([6111d5f](https://github.com/mayeco/patagonia/commit/6111d5f))
+  - 2025-09-03 — docs: add copilot validation instructions and enhance error-continue workflow ([d86be61](https://github.com/mayeco/patagonia/commit/d86be61))
+  - 2025-09-02 — docs: add code quality and validation requirements to global rules ([c357c28](https://github.com/mayeco/patagonia/commit/c357c28))
+
+- 🔄 Changed
+  - 2025-09-03 — chore: migrate from npm to pnpm and update dependencies ([72c9b31](https://github.com/mayeco/patagonia/commit/72c9b31))
+  - 2025-09-03 — style: standardize line endings and indentation across config files ([fe03a27](https://github.com/mayeco/patagonia/commit/fe03a27))
+  - 2025-09-03 — style: standardize quote style in markdownlint workflow from double to single quotes ([97498d1](https://github.com/mayeco/patagonia/commit/97498d1))
+  - 2025-09-02 — docs: reorganize and streamline code generation rules and standards ([06b43e6](https://github.com/mayeco/patagonia/commit/06b43e6))
+  - 2025-09-02 — docs: streamline project initialization parameters and workflow steps ([e7bcdde](https://github.com/mayeco/patagonia/commit/e7bcdde))
+  - 2025-09-01 — docs: update version badge to v0.1.0-alpha.5 and add release link ([ad74255](https://github.com/mayeco/patagonia/commit/ad74255))
+  - 2025-09-01 — docs: add critical AI execution rules and move notes section for clarity ([46dcfac](https://github.com/mayeco/patagonia/commit/46dcfac))
+  - 2025-09-01 — docs: rename slash commands to be more descriptive and consistent ([d241c21](https://github.com/mayeco/patagonia/commit/d241c21))
+  - 2025-09-01 — chore: rename changelog.md to CHANGELOG.md for standard file naming convention ([87daaa0](https://github.com/mayeco/patagonia/commit/87daaa0))
+  - 2025-09-01 — style: remove trailing colon and space from Important Rules heading ([192163c](https://github.com/mayeco/patagonia/commit/192163c))
+
+- 🗑️ Removed
+  - 2025-09-02 — docs: remove .windsurf internal folder reference and reorganize coding guidelines ([e3c57ea](https://github.com/mayeco/patagonia/commit/e3c57ea))
+
 ## v0.1.0-alpha.5 — 2025-09-01
 
 - 🔄 Changed
