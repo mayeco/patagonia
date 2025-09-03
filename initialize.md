@@ -100,12 +100,12 @@ Initialize a new project for virtually any language or framework. This workflow 
 
 6. **EXECUTE INITIALIZER (NON-INTERACTIVE)**
    - Parameters (These defaults can be overridden if the developer provides explicit values at the start of the message, use only if the initializer requires them):
-     - NAME: App Initializer
-     - DESCRIPTION: Patagonia App Initializer
+     - NAME: {CURRENT_DIRECTORY_NAME}
+     - DESCRIPTION: {CURRENT_DIRECTORY_NAME}
      - GROUP_ID: com.patagonia
-     - ARTIFACT_ID: app_initializer
-     - PACKAGE_NAME: com.patagonia.app_initializer
-     - BASE_DIR: {pwd}
+     - ARTIFACT_ID: {CURRENT_DIRECTORY_NAME}
+     - PACKAGE_NAME: com.patagonia.{CURRENT_DIRECTORY_NAME}
+     - BASE_DIR: {CURRENT_DIRECTORY_NAME}
      - CSS: tailwind
      - DOCKER: true
    - Execute the discovered official command in the current directory after completing the verification steps above.
