@@ -88,14 +88,22 @@ Generate comprehensive project plans that span multiple features and milestones.
    - Assign unique project identifier
 
 5. **DEVELOPER CONFIRMATION**:
-   - Present complete project structure
-   - Request changes, clarifications, or additional information, and re-run the workflow
-   - Ask for explicit confirmation to create
+   - Present the complete project structure
+   - Request changes, clarifications, or additional information, and re-run the project planning steps
+   - Ask for explicit confirmation to proceed with the storage process
    - If declined: STOP without creating
 
 6. **PROJECT STORAGE**:
-   - Save to `/projects/{{date}}-{{project_name | slugify}}.md`
-   - Confirm creation successful
+   - Save content to file `/projects/{{date}}-{{project_name | slugify}}.md` or the location defined by input if provided
+   - Execute memory operation:
+      - Create if no related memory exists, or update it if it exists (use its Id).
+      - Fields when creating/updating:
+        - Title: `Project: {{project_name}} ({{project_type}})`
+        - Content: Structured block including project title, project_id, date, description, objectives, features, milestones, and requirements.
+        - Tags: `project`, `{{project_name | slugify}}`, `{{project_type | slugify}}`, `{{project_id}}`
+        - CorpusNames: `patagonia_workflows` (only when creating)
+        - UserTriggered: `true`
+   - Confirm creation was successful
    - Suggest next steps (create epics or features)
 
 ## Project Template Format
