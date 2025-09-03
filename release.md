@@ -30,10 +30,10 @@ Create new releases based on Semantic Versioning (semver) with automated version
    - Always provide responses in Spanish by default, unless the developer clearly specifies English.
 
 1. **ANALYZE CURRENT PROJECT STATE**:
-  - Check current version from package.json, setup.py, or version files
-  - Review recent commits and changes since last release
-  - Validate the project is in a releasable state (tests pass, no breaking changes)
-  - Check if CHANGELOG.md exists and is up-to-date
+   - Check current version from package.json, setup.py, or version files
+   - Review recent commits and changes since last release
+   - Validate the project is in a releasable state (tests pass, no breaking changes)
+   - Check if CHANGELOG.md exists and is up-to-date
 
 2. **DETERMINE RELEASE TYPE BASED ON SEMVER**:
    - **MAJOR** (X.y.z): Breaking changes, incompatible API changes

@@ -284,7 +284,7 @@ def calc_disc(u, p):
 - GO: camelCase for unexported, PascalCase for exported names
 - AVOID_ABBREVIATIONS: Use full words (userId not uid, calculate not calc)
 - BE_DESCRIPTIVE: Names should explain purpose, not just type
-- CONSISTENT_PREFIXES: Use consistent prefixes (is*, has*, get*, set\_)
+- CONSISTENT_PREFIXES: Use consistent prefixes (is*, has*, get\*, set\_)
 - BOOLEAN_CLARITY: Boolean variables should read as yes/no questions
 - COLLECTION_NAMES: Use plural for arrays/lists, singular for single items
 

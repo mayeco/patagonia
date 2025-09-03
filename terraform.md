@@ -431,6 +431,7 @@ terraform show -json > plan.json
 - **State management**: Handle Terraform state carefully
 
 ### Validation Commands
+
 ```bash
 # Validate configuration
 terraform validate
@@ -446,6 +447,7 @@ TF_LOG=DEBUG terraform apply
 ```
 
 ## Prerequisites:
+
 - Terraform CLI installed (version 1.0+)
 - Cloud provider credentials configured
 - Project files accessible for scanning

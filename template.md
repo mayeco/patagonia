@@ -10,14 +10,14 @@ Template
 
 **DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete within N steps, maximum. If it exceeds N steps, STOP. Ask for clarification.
 
-**DECISION POINTS**: Make binary decisions. If ___ exceeds N steps, STOP. Ask for clarification.
+**DECISION POINTS**: Make binary decisions. If \_\_\_ exceeds N steps, STOP. Ask for clarification.
 
-**CONTENT VALIDATION**: Evaluate before proceeding. If ___ is not clear, ask for clarification.
+**CONTENT VALIDATION**: Evaluate before proceeding. If \_\_\_ is not clear, ask for clarification.
 
 **TERMINATION CONDITIONS**:
 
-- Terminate when ___
-- If ___ is not clear: Ask for clarification and STOP
+- Terminate when \_\_\_
+- If \_\_\_ is not clear: Ask for clarification and STOP
 
 ## STEPS
 
