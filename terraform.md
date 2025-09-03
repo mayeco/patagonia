@@ -446,7 +446,7 @@ terraform plan -refresh-only
 TF_LOG=DEBUG terraform apply
 ```
 
-## Prerequisites:
+## Prerequisites
 
 - Terraform CLI installed (version 1.0+)
 - Cloud provider credentials configured

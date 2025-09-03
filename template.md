@@ -1,10 +1,10 @@
 ---
-description: Template
+description: Description
 ---
 
-# Template
+# Title workflow
 
-Template
+Description
 
 ## ⚠️ CRITICAL AI EXECUTION RULES
 

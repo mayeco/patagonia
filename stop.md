@@ -2,9 +2,11 @@
 description: Dev Server Stop & Clean Workflow
 ---
 
+# Dev Server Stop & Clean Workflow
+
 Stop any development server and clean build artifacts across any programming language, framework, or development environment. This workflow discovers and handles any technology stack automatically.
 
-**⚠️ CRITICAL AI EXECUTION RULES**
+## ⚠️ CRITICAL AI EXECUTION RULES
 
 **DO NOT GET STUCK IN DETECTION LOOPS**: Complete cleanup process within 8 steps maximum.
 
@@ -16,7 +18,7 @@ Stop any development server and clean build artifacts across any programming lan
 - If user denies destructive operations: Honor choice and STOP
 - Always require user confirmation for cache/dependency reset operations
 
-**STEPS**
+## STEPS
 
 1. **RUNTIME ENVIRONMENT DETECTION**:
    - Detect operating system and available shells
