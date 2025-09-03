@@ -1,4 +1,4 @@
-# PatagonAI Workflows
+# Patagonia Workflows
 
 [![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](https://unlicense.org/)
 [![Version](https://img.shields.io/badge/version-v0.1.0--alpha.5-blue.svg)](https://github.com/mayeco/patagonia/releases/tag/v0.1.0-alpha.5)
