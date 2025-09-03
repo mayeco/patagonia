@@ -96,13 +96,13 @@ Generate comprehensive project plans that span multiple features and milestones.
 6. **PROJECT STORAGE**:
    - Save content to file `/projects/{{date}}-{{project_name | slugify}}.md` or the location defined by input if provided
    - Execute memory operation:
-      - Create if no related memory exists, or update it if it exists (use its Id).
-      - Fields when creating/updating:
-        - Title: `Project: {{project_name}} ({{project_type}})`
-        - Content: Structured block including project title, project_id, date, description, objectives, features, milestones, and requirements.
-        - Tags: `project`, `{{project_name | slugify}}`, `{{project_type | slugify}}`, `{{project_id}}`
-        - CorpusNames: `patagonia_workflows` (only when creating)
-        - UserTriggered: `true`
+     - Create if no related memory exists, or update it if it exists (use its Id).
+     - Fields when creating/updating:
+       - Title: `Project: {{project_name}} ({{project_type}})`
+       - Content: Structured block including project title, project_id, date, description, objectives, features, milestones, and requirements.
+       - Tags: `project`, `{{project_name | slugify}}`, `{{project_type | slugify}}`, `{{project_id}}`
+       - CorpusNames: `patagonia_workflows` (only when creating)
+       - UserTriggered: `true`
    - Confirm creation was successful
    - Suggest next steps (create epics or features)
 
