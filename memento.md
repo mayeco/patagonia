@@ -22,15 +22,15 @@ This workflow enforces a reset of the current conversation context: from activat
    - Send a clear message to activate the reset for this conversation.
    - Suggested template:
 
-```text 
-Memento reset: from this message onward I will not assume prior file contents, execution results, or information. Everything will be re-verified from the current state.
-```
+      ```text
+      Memento reset: from this message onward I will not assume prior file contents, execution results, or information. Everything will be re-verified from the current state.
+      ```
 
    - Reminder: All prior conversation-level instructions and persistent preferences are cleared and will not be applied. Only rules stated after this reset will be considered.
 
-```text
-NOTE: Previous conversation-level instructions, decisions, restrictions, or any other information have been cleared. Only rules stated after this message will be applied.
-```
+      ```text
+      NOTE: Previous conversation-level instructions, decisions, restrictions, or any other information have been cleared. Only rules stated after this message will be applied.
+      ```
 
 2. **INVALIDATE PRIOR ASSUMPTIONS (internal)**
    - Treat as unreliable until revalidated:
@@ -53,21 +53,17 @@ NOTE: Previous conversation-level instructions, decisions, restrictions, or any 
    - Web: use `read_url_content` to fetch documentation/resources again.
    - Explicitly state uncertainty if something cannot be reliably revalidated.
 
-5. **LOGGING (optional, persistent)**
+4. **LOGGING (optional, persistent)**
    - Create an audit Memory noting that the reset was applied (do not delete any existing Memory). Example content:
      - Title: "Memento Reset"
      - Content: "Memento reset applied at <local timestamp>"
      - Tags: `memento`, `audit`
 
-6. **CONFIRMATION AND CONTINUATION**
+5. **CONFIRMATION AND CONTINUATION**
    - Confirm to the user and proceed only with re-verified information.
    - Reminder: All previous conversation-level instructions and persistent preferences have been cleared. Only rules restated after the reset will be applied.
+   - Suggested template:
 
-```text
-Memento reset applied. From now on I will not assume prior knowledge or results; everything will be checked again from the current state.
-```
-
-## TERMINATION CONDITIONS
-
-- Finish when the reset confirmation is sent and no unverified assumptions remain.
-- If the reset scope is unclear: ask for clarification and STOP.
+      ```text
+      Memento reset applied. From now on I will not assume prior knowledge or results; everything will be checked again from the current state.
+      ```

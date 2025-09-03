@@ -15,6 +15,7 @@ Report the current backlog from the existing context (memories and repository fi
 **CONTENT VALIDATION**: Validate item titles, descriptions, and statuses before storing updates.
 
 **TERMINATION CONDITIONS**:
+
 - If no backlog found in context and the developer provides no items: Ask for items and STOP
 - If developer declines confirmation: STOP immediately
 - Always require developer confirmation before storing or updating backlog entries
@@ -60,6 +61,7 @@ Report the current backlog from the existing context (memories and repository fi
    - Ask the developer to confirm the backlog or specify next actions (e.g., implementation).
 
 **Memory Structure:**
+
 - Backlog entries (epics, features, tasks) stored as separate memory entries
 - Each entry contains: title, description, status (pending/in_progress/completed), created/updated dates
 - Relationships preserved via references (e.g., feature → parent epic)

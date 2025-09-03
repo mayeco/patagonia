@@ -7,8 +7,8 @@ auto_execution_mode: 3
 
 Execute security analysis on the current project using Checkmarx One CLI with configured environment variables.
 
-
 ## Important Rules
+
 - TARGET_ACTIVE_SHELL_COMMANDS
 
 ## ⚠️ CRITICAL AI EXECUTION RULES
@@ -20,6 +20,7 @@ Execute security analysis on the current project using Checkmarx One CLI with co
 **COMMAND EXECUTION**: Execute cx commands directly without validation. If commands fail, parse error output for specific issues.
 
 **TERMINATION CONDITIONS**:
+
 - If cx command fails: Parse error and stop with specific guidance
 - If credentials invalid: Stop with credential configuration message
 - If project not found: Stop with project setup guidance
@@ -67,6 +68,7 @@ Execute security analysis on the current project using Checkmarx One CLI with co
    - Display total number of findings
 
 **Prerequisites:**
+
 - Checkmarx One CLI installed (`cx` command available)
 - Environment variables configured:
   - `CX_TENANT` - Tenant name
@@ -76,10 +78,12 @@ Execute security analysis on the current project using Checkmarx One CLI with co
 - Project with source code to scan
 
 **Scan Types Supported:**
+
 - 🔍 **SAST**: Static Application Security Testing
 - 📦 **SCA**: Software Composition Analysis
 
 **Common Scan Commands:**
+
 ```bash
 # Basic scan
 cx scan create --project-name "my-project" --file-source "."

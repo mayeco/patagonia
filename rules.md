@@ -7,15 +7,17 @@ Follow these rules and directives to ensure code quality, security, maintainabil
 Follow these rules and directives to ensure commands are executed correctly and securely:
 
 ### SHELL_DETECTION_AND_TARGETING
+
 - Do not assume a shell is POSIX-compliant.
 - Use `echo $SHELL` to identify the current login shell.
 - Prefer shell-agnostic forms.
 - If a snippet requires a specific shell, execute it explicitly:
-    - Bash: `bash -lc 'snippet'`
-    - Fish: `fish -c 'snippet'`
+  - Bash: `bash -lc 'snippet'`
+  - Fish: `fish -c 'snippet'`
 - Prefer native idioms over POSIX emulation.
 
 ### COMMAND_EXECUTION_BEST_PRACTICES
+
 - Avoid `cd` in commands. Use absolute paths or rely on the runner-controlled CWD.
 - Avoid `echo`/`exit` for checks. Use commands whose empty output implies success (e.g., `find` to list disallowed entries).
   - For validations, design commands so empty output means success and non-empty output lists violations.
@@ -27,13 +29,14 @@ Follow these rules and directives to ensure commands are executed correctly and 
 - Do not suppress errors with `2>/dev/null` unless intentionally handled; preserve stderr for diagnostics.
 - When minimal logging is needed, print a single concise summary line.
 - If you need shell options (e.g., `set -euo pipefail`), wrap the snippet in an explicit shell:
-    - Bash: `bash -lc 'set -euo pipefail; …'`
+  - Bash: `bash -lc 'set -euo pipefail; …'`
 - Avoid process substitution `<(...)>`, advanced brace expansion, and `[[ ... ]]` outside Bash.
 - If required, wrap in the appropriate shell.
 - Prefer portable flags (sed: `-E` instead of `-r`).
   - If using GNU-only flags, call it out or provide a BSD-compatible alternative.
 
 ### VARIABLES_QUOTE_AND_ENCODE
+
 - Treat every CLI argument as a single token. Never split a parameter value across lines or inside quotes.
 - Quote any path or value that can contain spaces or metacharacters.
 - Use single quotes for literals; use double quotes when interpolation is required.
@@ -47,12 +50,14 @@ Follow these rules and directives to ensure commands are executed correctly and 
 - JSON payloads (avoid inline quoted JSON)
   - Build JSON with `jq -n` and pipe via stdin; this eliminates fragile quoting.
   - Example (fish):
+
     ```fish
     jq -n --arg name "$NAME" --arg desc "$DESC" '{name:$name, description:$desc}' \
     | curl -fsSL -H 'Content-Type: application/json' --data-binary @- https://api.example.com/endpoint
     ```
 
 - Argument arrays (fish-first)
+
   ```fish
   set -l DESC 'Patagonia App Initializer'
   set -l qparams
@@ -70,6 +75,7 @@ Follow these rules and directives to ensure commands are executed correctly and 
   ```
 
 - Bash equivalent (arrays)
+
   ```bash
   DESC='Patagonia App Initializer'
   qparams=(
@@ -95,12 +101,14 @@ Follow these rules and directives to ensure commands are executed correctly and 
 
 - Output-only validations (empty output = OK)
   - Check for values that require URL-encoding (fish):
+
     ```fish
     # Prints only values that are NOT URL-safe; no output => all good
     printf "%s\n" $values | string match -rv '^[A-Za-z0-9._~-]+$'
     ```
 
 ### AUTO_RUN_VS_APPROVAL
+
 - Auto-run only read-only or clearly non-destructive commands, installers, or scripts that are clearly non-destructive.
   - Non-destructive commands, safe flags (`mkdir -p`, `touch`).
   - Avoid prompts; use non-interactive flags (`-y`, `-f`, `--yes`) when available.
@@ -108,11 +116,12 @@ Follow these rules and directives to ensure commands are executed correctly and 
 
 ## CODE_GENERATION_CONSTRAINTS
 
-**THESE CONSTRAINTS APPLY TO ALL CODE GENERATION REQUESTS AND ARE NON-NEGOTIABLE**
+THESE CONSTRAINTS APPLY TO ALL CODE GENERATION REQUESTS AND ARE NON-NEGOTIABLE
 
 Follow these code generation constraints to avoid code that exceeds these limits, in any of the following categories and at any point in the code generation process:
 
 ### LOOP_PREVENTION
+
 - MAX_ITERATIONS: 10 per reasoning cycle
 - MAX_DEPTH: 5 levels of reasoning
 - MAX_BRANCHES: 3 options per decision
@@ -156,6 +165,7 @@ Follow these code generation constraints to avoid code that exceeds these limits
   2) Diff gate: For each NON-COMPLIANT UNIT, assert net added lines <= 0 and equal-or-lower cyclomatic complexity. If violated, abort with rejection.
   3) Commit annotation: "Refactor-only due to NON_COMPLIANT_CODE_AUGMENTATION_BAN".
 - REJECTION TEMPLATE:
+
 ```text
 REJECTED: Target function/class is NON-COMPLIANT with CODE_GENERATION_LIMITS.
 Action required: Refactor to meet limits first (reduce complexity/size), then re-submit the feature request.

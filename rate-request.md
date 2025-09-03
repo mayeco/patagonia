@@ -15,6 +15,7 @@ Evaluate how well requests, plans, backlog items, or current pending tasks are u
 **CONTENT ANALYSIS**: Evaluate clarity, completeness, and feasibility quickly.
 
 **TERMINATION CONDITIONS**:
+
 - If rating is 6-10: Provide explanation and recommend proceeding
 - If rating is 1-5: Ask specific questions and STOP
 - If the developer provides clarification: Re-evaluate and provide new rating
@@ -61,4 +62,5 @@ Evaluate how well requests, plans, backlog items, or current pending tasks are u
    - Do not proceed with coding, deployment, or execution until the developer confirms understanding
 
 10. **WAIT FOR CONFIRMATION**:
-   - Wait for explicit developer confirmation before taking any implementation actions
+
+- Wait for explicit developer confirmation before taking any implementation actions

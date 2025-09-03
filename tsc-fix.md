@@ -8,6 +8,7 @@ auto_execution_mode: 3
 Fix all TypeScript compiler (TSC) errors including type errors, syntax errors, module resolution errors, and compilation issues in TypeScript files.
 
 ## Important Rules
+
 - TARGET_ACTIVE_SHELL_COMMANDS
 
 ## ⚠️ CRITICAL AI EXECUTION RULES
@@ -19,6 +20,7 @@ Fix all TypeScript compiler (TSC) errors including type errors, syntax errors, m
 **VALIDATION**: Validate TypeScript files and compilation before fixing.
 
 **TERMINATION CONDITIONS**:
+
 - If no TypeScript files found: Ask the developer for files and STOP
 - If errors are complex: Ask the developer for clarification and STOP
 - Always require developer confirmation before applying fixes
@@ -56,6 +58,7 @@ Fix all TypeScript compiler (TSC) errors including type errors, syntax errors, m
 ## Comprehensive TSC Error Categories
 
 ### TYPE_ERRORS
+
 - **TS2339**: Property does not exist on type
 - **TS2322**: Type assignment mismatch
 - **TS2345**: Argument type mismatch
@@ -64,6 +67,7 @@ Fix all TypeScript compiler (TSC) errors including type errors, syntax errors, m
 - **TS2335**: Super cannot be referenced
 
 ### MODULE_ERRORS
+
 - **TS2307**: Cannot find module
 - **TS2306**: File not found
 - **TS2303**: Circular dependency detected
@@ -72,6 +76,7 @@ Fix all TypeScript compiler (TSC) errors including type errors, syntax errors, m
 - **TS2305**: Module has no default export
 
 ### DECLARATION_ERRORS
+
 - **TS2304**: Cannot find name
 - **TS2308**: Member is private
 - **TS2309**: Property is missing in type
@@ -80,6 +85,7 @@ Fix all TypeScript compiler (TSC) errors including type errors, syntax errors, m
 - **TS2312**: Type is not assignable to other type
 
 ### SYNTAX_ERRORS
+
 - **TS1003**: Identifier expected
 - **TS1005**: Semicolon expected
 - **TS1011**: Element implicitly has any type
@@ -88,6 +94,7 @@ Fix all TypeScript compiler (TSC) errors including type errors, syntax errors, m
 - **TS1109**: Expression expected
 
 ### STRICT_MODE_ERRORS
+
 - **TS2454**: Variable is used before being assigned
 - **TS18046**: Property is optional but must be provided
 - **TS18047**: Strict mode requires explicit types
@@ -96,6 +103,7 @@ Fix all TypeScript compiler (TSC) errors including type errors, syntax errors, m
 - **TS18050**: Type assertion requires strict mode
 
 ### CONFIGURATION_ERRORS
+
 - **TS5012**: Cannot find tsconfig.json
 - **TS6047**: File extension not allowed
 - **TS6054**: File not included in compilation
@@ -106,6 +114,7 @@ Fix all TypeScript compiler (TSC) errors including type errors, syntax errors, m
 ## Comprehensive TSC Correction Strategies
 
 ### TYPE_CORRECTIONS
+
 - Add explicit type annotations for variables and functions
 - Use union types (`string | number`) for multiple possible types
 - Implement interface extensions and type intersections
@@ -113,6 +122,7 @@ Fix all TypeScript compiler (TSC) errors including type errors, syntax errors, m
 - Use type guards and discriminated unions for type safety
 
 ### MODULE_CORRECTIONS
+
 - Fix import paths to correct relative/absolute locations
 - Add missing type definition files (`@types/package`)
 - Create proper module declarations for untyped modules
@@ -120,6 +130,7 @@ Fix all TypeScript compiler (TSC) errors including type errors, syntax errors, m
 - Resolve circular dependency issues
 
 ### DECLARATION_CORRECTIONS
+
 - Add missing variable and function declarations
 - Fix scope issues and variable shadowing
 - Implement proper class member visibility (public/private)
@@ -127,6 +138,7 @@ Fix all TypeScript compiler (TSC) errors including type errors, syntax errors, m
 - Fix method overriding and overloading signatures
 
 ### SYNTAX_CORRECTIONS
+
 - Add missing brackets, parentheses, and semicolons
 - Fix malformed function and class declarations
 - Correct import/export statement syntax
@@ -134,6 +146,7 @@ Fix all TypeScript compiler (TSC) errors including type errors, syntax errors, m
 - Resolve statement termination issues
 
 ### STRICT_MODE_CORRECTIONS
+
 - Add definite assignment assertions (`!`) for initialization checks
 - Implement null/undefined checks with optional chaining
 - Add explicit type annotations for strict type checking
@@ -141,6 +154,7 @@ Fix all TypeScript compiler (TSC) errors including type errors, syntax errors, m
 - Implement proper type narrowing techniques
 
 ### CONFIGURATION_CORRECTIONS
+
 - Update tsconfig.json compiler options for compatibility
 - Add missing type library references (`"lib": ["es2020"]`)
 - Configure module resolution settings
@@ -148,6 +162,7 @@ Fix all TypeScript compiler (TSC) errors including type errors, syntax errors, m
 - Set proper target and module compilation settings
 
 **TSC-FIX Style Guidelines:**
+
 - Focus on all TypeScript compiler errors and compilation issues
 - Provide specific TSC error codes and their detailed meanings
 - Show before/after examples with complete type annotations

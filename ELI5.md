@@ -19,6 +19,7 @@ Explain any concept, web, plan, backlog, or input in simple terms as if explaini
 **CONTENT LIMITATIONS**: Keep explanations simple and short. Use analogies appropriate for a 5-year-old.
 
 **TERMINATION CONDITIONS**:
+
 - If content type unclear: Ask the developer for clarification and STOP
 - If explanation becomes too complex: Simplify and provide basic explanation
 - If the developer requests specific format: Adapt and complete
@@ -64,6 +65,7 @@ Explain any concept, web, plan, backlog, or input in simple terms as if explaini
    - Ask if the explanation needs to be even simpler or if they have questions
 
 **ELI5 Style Guidelines:**
+
 - Use words a 5-year-old knows (no technical terms)
 - Compare to toys, games, or everyday activities
 - Use short sentences and simple structure

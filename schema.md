@@ -18,6 +18,7 @@ Operational workflow for discovering the project's database schema and making it
 **CONFIRMATION POINTS**: Confirm before overwriting an existing schema snapshot.
 
 **TERMINATION CONDITIONS**:
+
 - If no schema/migrations found and no user-provided path: Ask and STOP
 - If multiple frameworks detected with conflicting hints: Ask the developer to choose and STOP
 - If files are unreadable or permissions restricted: Report the issue and STOP

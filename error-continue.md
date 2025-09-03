@@ -15,6 +15,7 @@ When an error occurs (e.g., "Cascade error: Internal: stream error: stream ID 18
 **VALIDATION**: Validate error type and recovery options.
 
 **TERMINATION CONDITIONS**:
+
 - If error is unrecoverable: Ask the developer for manual intervention and STOP
 - If recovery fails: Provide fallback options and STOP
 - Always attempt recovery before escalating
@@ -31,9 +32,9 @@ When an error occurs (e.g., "Cascade error: Internal: stream error: stream ID 18
    - Send a clear message to activate the error-continue protocol for this conversation.
    - Suggested template:
 
-```text 
-Error and Continue: There was an error in the the last or last few steps of the code generation process, tool call or command execution, I acknowledge the error will attempt to do a different approach.
-```
+      ```text
+      Error and Continue: There was an error in the the last or last few steps of the code generation process, tool call or command execution, I acknowledge the error will attempt to do a different approach.
+      ```
 
 2. **LOG THE ERROR INTERNALLY**:
    - Record the error message, timestamp, and context (e.g., last tool called, user request).
@@ -65,10 +66,11 @@ Error and Continue: There was an error in the the last or last few steps of the 
    - Continue the implementation or reasoning from the last valid state, using available context or memories.
 
 10. **PREVENT FUTURE ERRORS**:
-   - If applicable, adjust behavior (e.g., smaller tool calls, error handling in code).
 
+- If applicable, adjust behavior (e.g., smaller tool calls, error handling in code).
 
-## Example Implementation:
+## Example Implementation
+
 - Error during code edit: Retry edit with smaller changes, other tools or use MultiEdit.
 - Error in data fetching: Switch to manual file reading or search tools.
 - Always prioritize the developer's task completion over error details.

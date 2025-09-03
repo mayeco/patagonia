@@ -7,6 +7,7 @@ description: Scan projects and generate Terraform infrastructure as code automat
 Scan the current project and automatically detect infrastructure requirements through dependencies, environment variables, configuration files, and other indicators. Generate a complete /terraform folder with appropriate Terraform files for deploying the project.
 
 ## Important Rules
+
 - TARGET_ACTIVE_SHELL_COMMANDS
 
 ## STEPS
@@ -83,6 +84,7 @@ Scan the current project and automatically detect infrastructure requirements th
 ### Dependency Analysis
 
 #### Node.js Projects
+
 ```bash
 # Check package.json for cloud dependencies
 cat package.json | jq '.dependencies | keys[] | select(contains("aws") or contains("gcp") or contains("azure"))'
@@ -94,6 +96,7 @@ cat package.json | jq '.dependencies | keys[] | select(contains("aws") or contai
 ```
 
 #### Python Projects
+
 ```bash
 # Check requirements.txt for cloud SDKs
 grep -E "(boto3|google-cloud|azure)" requirements.txt
@@ -104,6 +107,7 @@ grep -E "(boto3|google-cloud|azure)" requirements.txt
 ```
 
 #### Java Projects
+
 ```bash
 # Check pom.xml or build.gradle for AWS SDK
 grep -E "(aws-sdk|spring-cloud)" pom.xml
@@ -116,6 +120,7 @@ grep -E "(aws-sdk|spring-cloud)" pom.xml
 ### Environment Detection
 
 #### Database Detection
+
 ```bash
 # Check for database connection strings
 grep -r "DATABASE_URL\|DB_CONNECTION\|MONGO_URI" .
@@ -127,6 +132,7 @@ grep -r "DATABASE_URL\|DB_CONNECTION\|MONGO_URI" .
 ```
 
 #### Storage Detection
+
 ```bash
 # Check for file upload or storage usage
 grep -r "multer\|boto3.*s3\|cloud-storage" .
@@ -137,6 +143,7 @@ grep -r "multer\|boto3.*s3\|cloud-storage" .
 ```
 
 #### External Services
+
 ```bash
 # Check for external API integrations
 grep -r "STRIPE\|SENDGRID\|TWILIO\|SLACK" .
@@ -149,7 +156,8 @@ grep -r "STRIPE\|SENDGRID\|TWILIO\|SLACK" .
 ## Generated Terraform Structure
 
 ### Basic Project Structure
-```
+
+```bash
 terraform/
 ├── main.tf           # Main infrastructure resources
 ├── variables.tf      # Input variables
@@ -165,7 +173,8 @@ terraform/
 ```
 
 ### Advanced Structure with Modules
-```
+
+```bash
 terraform/
 ├── main.tf
 ├── variables.tf
@@ -189,6 +198,7 @@ terraform/
 ## Cloud Provider Templates
 
 ### AWS Template
+
 ```hcl
 # provider.tf
 terraform {
@@ -229,6 +239,7 @@ variable "instance_type" {
 ```
 
 ### GCP Template
+
 ```hcl
 # provider.tf
 terraform {
@@ -265,6 +276,7 @@ resource "google_compute_instance" "web" {
 ```
 
 ### Azure Template
+
 ```hcl
 # provider.tf
 terraform {
@@ -314,18 +326,21 @@ resource "azurerm_linux_virtual_machine" "web" {
 ## Common Infrastructure Patterns
 
 ### Web Application
+
 - **Frontend**: S3 + CloudFront or Cloud Storage + CDN
 - **Backend**: Lambda/API Gateway or ECS/App Runner
 - **Database**: RDS or Cloud SQL
 - **Cache**: ElastiCache or Memorystore
 
 ### Microservices
+
 - **Service Discovery**: ECS Service Discovery or Cloud Map
 - **API Gateway**: API Gateway or Cloud Endpoints
 - **Load Balancing**: ALB or Load Balancer
 - **Monitoring**: CloudWatch or Cloud Monitoring
 
 ### Data Processing
+
 - **Compute**: EMR or Dataproc for big data
 - **Storage**: S3 or Cloud Storage for data lake
 - **Databases**: Redshift or BigQuery for analytics
@@ -334,6 +349,7 @@ resource "azurerm_linux_virtual_machine" "web" {
 ## Deployment Scripts
 
 ### Plan and Apply
+
 ```bash
 #!/bin/bash
 # scripts/plan.sh
@@ -349,6 +365,7 @@ echo "Review the plan above and run 'terraform apply tfplan' to apply changes."
 ```
 
 ### Destroy Infrastructure
+
 ```bash
 #!/bin/bash
 # scripts/destroy.sh
@@ -367,6 +384,7 @@ fi
 ## Cost Estimation
 
 ### AWS Cost Commands
+
 ```bash
 # Estimate monthly costs
 terraform plan -var-file="terraform.tfvars" > plan.txt
@@ -377,6 +395,7 @@ infracost diff --path=plan.txt
 ```
 
 ### GCP Cost Commands
+
 ```bash
 # Estimate costs using gcp-price-calculator
 terraform show -json > plan.json
@@ -386,18 +405,21 @@ terraform show -json > plan.json
 ## Security Best Practices
 
 ### IAM and Permissions
+
 - Use least privilege principle
 - Rotate access keys regularly
 - Use IAM roles instead of access keys when possible
 - Enable multi-factor authentication
 
 ### Network Security
+
 - Use VPCs and security groups
 - Implement network segmentation
 - Use HTTPS everywhere
 - Configure firewalls properly
 
 ### Data Protection
+
 - Encrypt data at rest and in transit
 - Use managed database services
 - Implement backup strategies
@@ -406,12 +428,14 @@ terraform show -json > plan.json
 ## Troubleshooting
 
 ### Common Issues
+
 - **Provider authentication**: Check credentials and permissions
 - **Resource dependencies**: Ensure resources are created in correct order
 - **Variable validation**: Check variable types and defaults
 - **State management**: Handle terraform state carefully
 
 ### Validation Commands
+
 ```bash
 # Validate configuration
 terraform validate

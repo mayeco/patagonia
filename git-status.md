@@ -8,6 +8,7 @@ auto_execution_mode: 3
 Check the current Git status and analyze any pending changes in the repository.
 
 ## Important Rules
+
 - TARGET_ACTIVE_SHELL_COMMANDS
 
 ## ⚠️ CRITICAL AI EXECUTION RULES
@@ -19,6 +20,7 @@ Check the current Git status and analyze any pending changes in the repository.
 **VALIDATION**: Check git installation and repository state.
 
 **TERMINATION CONDITIONS**:
+
 - If not a git repository: Ask developer to navigate to repo and STOP
 - If git not installed: Ask developer to install and STOP
 - Always provide summary even with errors

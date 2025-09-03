@@ -7,7 +7,8 @@ auto_execution_mode: 3
 
 Create new releases based on Semantic Versioning (semver) with automated version bumping, changelog generation, git tagging, and release management. This workflow handles the complete release process from version determination to publishing.
 
-## Important Rules:
+## Important Rules
+
 - TARGET_ACTIVE_SHELL_COMMANDS
 
 ## ⚠️ CRITICAL AI EXECUTION RULES
@@ -19,6 +20,7 @@ Create new releases based on Semantic Versioning (semver) with automated version
 **VALIDATION**: Validate project state and version before release.
 
 **TERMINATION CONDITIONS**:
+
 - If project not ready: Ask the developer to prepare and STOP
 - If version conflict: Ask the developer to resolve and STOP
 - Always require developer confirmation for release
@@ -87,11 +89,13 @@ Create new releases based on Semantic Versioning (semver) with automated version
 ## Semver Guidelines
 
 ### Version Format: MAJOR.MINOR.PATCH
+
 - **MAJOR**: Breaking changes (1.0.0 → 2.0.0)
 - **MINOR**: New features (1.0.0 → 1.1.0)
 - **PATCH**: Bug fixes (1.0.0 → 1.0.1)
 
 ### Pre-release Versions
+
 - Alpha: 1.0.0-alpha.1
 - Beta: 1.0.0-beta.1
 - Release Candidate: 1.0.0-rc.1

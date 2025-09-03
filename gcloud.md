@@ -7,7 +7,8 @@ description: Execute Google Cloud CLI commands based on developer requests
 Execute Google Cloud CLI (gcloud) commands based on developer requests. This workflow handles common GCP operations like authentication, project management, deployments, and resource configuration.
 
 ## Important Rules
-- TARGET_ACTIVE_SHELL_COMMANDS
+
+- COMMAND_EXECUTION
 
 ## ⚠️ CRITICAL AI EXECUTION RULES
 
@@ -18,6 +19,7 @@ Execute Google Cloud CLI (gcloud) commands based on developer requests. This wor
 **SAFETY VALIDATION**: Validate command safety and developer permissions before execution.
 
 **TERMINATION CONDITIONS**:
+
 - If gcloud not installed: Ask developer to install and STOP
 - If not authenticated: Ask developer to authenticate and STOP
 - If destructive command: Ask for confirmation and STOP if denied
@@ -72,27 +74,30 @@ Execute Google Cloud CLI (gcloud) commands based on developer requests. This wor
    - Provide feedback to developer
    - Suggest next steps if applicable
 
-# 🚨🚨🚨 CRITICAL WARNING: DESTRUCTIVE OPERATIONS 🚨🚨🚨
+## 🚨🚨🚨 CRITICAL WARNING: DESTRUCTIVE OPERATIONS 🚨🚨🚨
 
 ## ⚠️⚠️⚠️ NEVER EXECUTE DESTRUCTIVE COMMANDS ⚠️⚠️⚠️
 
 **IMPORTANT SAFETY PROTOCOLS:**
 
-### ❌ DESTRUCTIVE COMMANDS - PRINT ONLY, NEVER EXECUTE:
+### ❌ DESTRUCTIVE COMMANDS - PRINT ONLY, NEVER EXECUTE
+
 - **DELETE Operations**: `gcloud projects delete`, `gcloud compute instances delete`, `gcloud storage buckets delete`
 - **STOP/TERMINATE**: `gcloud compute instances delete`, `gcloud container clusters delete`
 - **REMOVE/DESTROY**: `gcloud iam service-accounts delete`, `gcloud sql instances delete`
 - **DROP/REMOVE**: `gcloud storage rm`, `gcloud compute disks delete`
 - **Any command with**: `--delete`, `--remove`, `--destroy`, `--terminate`, `--drop`
 
-### 🛡️ SAFETY MEASURES:
+### 🛡️ SAFETY MEASURES
+
 1. **ALWAYS PRINT the command first** - Never execute directly
 2. **CONFIRM with developer** before any destructive action
 3. **Show preview** of what will be deleted/destroyed
 4. **Provide rollback options** when possible
 5. **Document consequences** clearly
 
-### 📋 DESTRUCTIVE COMMAND EXAMPLES (PRINT ONLY):
+### 📋 DESTRUCTIVE COMMAND EXAMPLES (PRINT ONLY)
+
 ```bash
 # ❌ NEVER EXECUTE - Only print for developer review
 gcloud projects delete my-project-id
@@ -104,7 +109,8 @@ gcloud sql instances delete my-sql-instance
 gcloud compute disks delete my-disk --zone=us-central1-a
 ```
 
-### 🎯 EXECUTION PROTOCOL:
+### 🎯 EXECUTION PROTOCOL
+
 1. **Parse** destructive command request
 2. **PRINT** the command (do not execute)
 3. **WARN** about consequences
@@ -163,6 +169,7 @@ gcloud iam service-accounts keys create key.json --iam-account=<SA>@<PROJECT>.ia
 ## Common Configuration
 
 Quick reference (covered above; minimal):
+
 ```bash
 gcloud config list
 gcloud config set project <PROJECT_ID>
@@ -174,18 +181,21 @@ gcloud config configurations list
 ## Best Practices
 
 ### Security
+
 - Never expose keys or credentials in logs
 - Use service accounts instead of user accounts for CI/CD
 - Apply least privilege principle
 - Rotate keys regularly
 
 ### Efficiency
+
 - Configure default zone/region to avoid prompts
 - Use `--format` to filter output
 - Use `--filter` for specific queries
 - Cache credentials when possible
 
 ### Monitoring
+
 - Use `gcloud logging` to review logs
 - Configure alerts in Cloud Monitoring
 - Review quotas and usage limits
@@ -199,6 +209,7 @@ gcloud config configurations list
 - **Permissions**: verify IAM roles; **Quotas**: check Cloud Console
 
 Quick diagnostics:
+
 ```bash
 gcloud auth list
 gcloud config list
@@ -208,6 +219,7 @@ gcloud config get-value compute/region
 ```
 
 **Prerequisites:**
+
 - Google Cloud SDK installed (`gcloud` command available)
 - Authentication configured (login or service account)
 - GCP project configured

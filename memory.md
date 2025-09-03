@@ -15,6 +15,7 @@ Guidelines for using the memory tool to persist important context across session
 **CONTENT VALIDATION**: Validate epic title, description, and functionalities before storing.
 
 **TERMINATION CONDITIONS**:
+
 - If developer doesn't provide epic title: Ask and STOP
 - If no functionalities listed: Ask developer to specify and STOP
 - If developer declines confirmation: STOP immediately

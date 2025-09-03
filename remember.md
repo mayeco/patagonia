@@ -17,6 +17,7 @@ Persist developer-provided instructions and preferences to memory (scoped to thi
 **PRIVACY**: Do not store secrets, tokens, or sensitive personal data. If present, mask and ask the developer how to proceed.
 
 **TERMINATION CONDITIONS**:
+
 - If instructions are unclear/ephemeral: Ask for clarification and STOP
 - If developer declines confirmation: STOP immediately
 - Always require developer confirmation before storing or updating

@@ -17,6 +17,7 @@ Start implementing a feature, epic, project based on existing plans, or process 
 **ITERATION HANDLING**: If clarifications needed, edit existing plan or create structured plan from open text unless the developer explicitly requests "new one".
 
 **TERMINATION CONDITIONS**:
+
 - If no input specified: Ask the developer for description or plan reference and STOP
 - If plan file doesn't exist: Create plan from open text description and save to `/plans/`
 - If implementation hits blocker: Ask the developer for clarification and STOP
@@ -39,75 +40,72 @@ Start implementing a feature, epic, project based on existing plans, or process 
      - **Open Text**: General descriptions, requirements, or implementation requests
    - Check input for specific plan references (file paths, names, structured content)
 
-2. **PLAN DISCOVERY** (For Structured Plans):
-   - Scan all plan directories: `/plans/`, `/epics/`, `/features/`, `/projects/`
-   - If specific plan mentioned: Look for exact match
-   - If no specific plan: List available plans by type and ask the developer to select
-   - Validate plan file exists and is readable
+2. **IMPLEMENTATION DISCOVERY**:
 
-3. **OPEN TEXT PROCESSING** (For Unstructured Input):
-   - Extract implementation requirements from open text description
-   - Identify key components: what, why, how, success criteria
-   - Determine appropriate implementation scope (feature, project, or epic level)
-   - Create structured implementation plan from unstructured input
-   - Ask for clarification on unclear requirements
+   - **STRUCTURED PLANS**:
+      - Scan plan directories: `/plans/`, `/epics/`, `/features/`, `/projects/`
+      - If specific plan mentioned: Look for exact match
+      - If no specific file: List available plans by type and ask the developer to select
+      - Validate plan file exists and is readable
 
-4. **CONTENT ANALYSIS** (Type-Specific):
-   - **Epic Plans**: Extract strategic objectives, stakeholder requirements, success metrics
-   - **Project Plans**: Extract milestones, technical stack, resource requirements
-   - **Feature Plans**: Extract implementation steps, dependencies, testing requirements
-   - **Open Text**: Identify main goals, requirements, constraints, and success indicators
-   - Identify any clarification points or missing information
+   - **OPEN TEXT PROCESSING**:
+      - Extract implementation requirements from open text description
+      - Identify key components: what, why, how, success criteria
+      - Determine appropriate implementation scope (feature, project, or epic level)
+      - Create structured implementation plan from unstructured input
+      - Ask for clarification on unclear requirements
 
-2. **PLAN DISCOVERY**:
-   - Scan all plan directories: `/plans/`, `/epics/`, `/features/`, `/projects/`
-   - If specific plan mentioned: Look for exact match
-   - If no specific plan: List available plans by type and ask user to select
-   - Validate plan file exists and is readable
+   - **IMPLEMENTATION ANALYSIS**:
+      - **Epic Plans**: Extract strategic objectives, stakeholder requirements, success metrics
+      - **Project Plans**: Extract milestones, technical stack, resource requirements
+      - **Feature Plans**: Extract implementation steps, dependencies, testing requirements
+      - **Open Text**: Identify main goals, requirements, constraints, and success indicators
+      - Identify any clarification points or missing information
 
-3. **PLAN ANALYSIS** (Type-Specific):
-   - **Epic Plans**: Extract strategic objectives, stakeholder requirements, success metrics
-   - **Project Plans**: Extract milestones, technical stack, resource requirements
-   - **Feature Plans**: Extract implementation steps, dependencies, testing requirements
-   - Identify any clarification points or missing information
-
-4. **CLARIFICATION HANDLING**:
+3. **CLARIFICATION HANDLING**:
    - If plan has unclear sections: Identify specific areas needing clarification
    - For open text: Ask the developer for missing technical details, constraints, or success criteria
    - Edit existing plan with clarifications unless the developer requests "new one"
    - Ask the developer for missing information and update plan accordingly
 
-5. **IMPLEMENTATION PREPARATION** (Type-Adapted):
+4. **IMPLEMENTATION PREPARATION**:
    - **Epic**: Create project breakdown and prioritize features
    - **Project**: Set up development environment and team coordination
    - **Feature**: Prepare code environment and identify implementation order
    - **Open Text**: Create structured implementation plan and identify required resources
    - Create implementation roadmap based on input type
 
-6. **STEP-BY-STEP EXECUTION**:
+5. **STEP-BY-STEP EXECUTION**:
+   - Before starting the implementation, send a clear message to inform the developer that the implementation will begin (Do not skip this step).
+      - Suggested template:
+
+         ```text
+         The implementation of the plan or open text description will begin now... please relax and enjoy the process.
+         ```
+
    - Follow plan-specific or text-derived implementation steps
    - Track progress against identified milestones or goals
    - Document completed work and update plan status
    - Test each component before proceeding
 
-7. **PROGRESS TRACKING**:
+6. **PROGRESS TRACKING**:
    - Update plan with implementation progress
    - Mark completed items and identify next steps
-   - Report status to relevant stakeholders based on input type
+   - Report status to developer based on input type
 
-8. **QUALITY ASSURANCE** (Type-Specific):
+7. **QUALITY ASSURANCE**:
    - **Epic**: Validate strategic alignment and business value delivery
    - **Project**: Ensure milestone deliverables and quality gates
    - **Feature**: Verify functionality and integration testing
    - **Open Text**: Validate against original requirements and success criteria
    - Document any deviations from original plan or requirements
 
-9. **COMPLETION VALIDATION**:
+8. **COMPLETION VALIDATION**:
    - Verify all requirements are met (from plan or open text)
    - Confirm success criteria are achieved
    - Update plan with final status and lessons learned
 
-10. **FOLLOW-UP ACTIONS**:
-    - Suggest next implementation phases
-    - Identify potential improvements for future plans
-    - Archive completed plan with implementation results
+9. **FOLLOW-UP ACTIONS**:
+   - Suggest next implementation phases
+   - Identify potential improvements for future plans
+   - Archive completed plan with implementation results

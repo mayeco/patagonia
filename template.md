@@ -8,13 +8,14 @@ Template
 
 ## ⚠️ CRITICAL AI EXECUTION RULES
 
-**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete ___ within N steps maximum. If ___ exceeds N steps, STOP. Ask for clarification.
+**DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete _**within N steps maximum. If**_ exceeds N steps, STOP. Ask for clarification.
 
-**DECISION POINTS**: Make binary decisions ___ or ___. If ___ exceeds N steps, STOP. Ask for clarification.
+**DECISION POINTS**: Make binary decisions _**or**_. If ___ exceeds N steps, STOP. Ask for clarification.
 
-**CONTENT VALIDATION**: Evaluate ___ before proceeding. If ___ is not clear, ask for clarification.
+**CONTENT VALIDATION**: Evaluate _**before proceeding. If**_ is not clear, ask for clarification.
 
 **TERMINATION CONDITIONS**:
+
 - Terminate when ___
 - If ___ is not clear: Ask for clarification and STOP
 
@@ -26,5 +27,5 @@ Template
    - If no clear English indicators are found, default to Spanish for all responses
    - Always provide responses in Spanish by default, unless the developer clearly specifies English.
 
-1. ___START HERE__
+1. _**START HERE**
    - Provide the initial input and objective.

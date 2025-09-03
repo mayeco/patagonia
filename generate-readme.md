@@ -8,6 +8,7 @@ auto_execution_mode: 3
 Generate or update a comprehensive README.md file based on the current application/project structure and code analysis.
 
 ## Important Rules
+
 - TARGET_ACTIVE_SHELL_COMMANDS
 
 ## ⚠️ CRITICAL AI EXECUTION RULES
@@ -19,6 +20,7 @@ Generate or update a comprehensive README.md file based on the current applicati
 **VALIDATION**: Validate project files and structure before generation.
 
 **TERMINATION CONDITIONS**:
+
 - If no project structure found: Ask the developer for details and STOP
 - If language detection fails: Default to Spanish and continue
 - Always generate README in detected language

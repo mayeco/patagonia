@@ -20,6 +20,7 @@ Complete workflow for obtaining technical documentation of frameworks, libraries
 **SEARCH LIMITATIONS**: Execute search commands directly. If search fails, use basic web search as fallback.
 
 **TERMINATION CONDITIONS**:
+
 - If no documentation found after 3 search attempts: Provide best available alternative
 - If user specifies specific technology: Focus search on that technology only
 - If search commands fail: Use basic web search as fallback

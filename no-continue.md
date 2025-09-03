@@ -15,6 +15,7 @@ Do not proceed with coding, deployment, or execution. Wait for explicit develope
 **STATUS REPORTING**: Provide current status and pending items clearly.
 
 **TERMINATION CONDITIONS**:
+
 - Always stop after providing status information
 - Never execute any commands or make changes
 - If developer requests specific action: Redirect to appropriate workflow

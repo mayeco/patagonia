@@ -8,6 +8,7 @@ auto_execution_mode: 3
 Generate a comprehensive changelog based on git commit history analysis, categorizing changes and providing detailed insights.
 
 ## Important Rules
+
 - TARGET_ACTIVE_SHELL_COMMANDS
 
 ## ⚠️ CRITICAL AI EXECUTION RULES
@@ -17,6 +18,7 @@ Generate a comprehensive changelog based on git commit history analysis, categor
 **DATA PROCESSING**: Process commits in chronological order without over-analysis.
 
 **TERMINATION CONDITIONS**:
+
 - If git repository not found: Stop with clear error message
 - If no commits found: Stop with explanation
 - If git command fails: Stop with specific error details
@@ -81,6 +83,7 @@ Generate a comprehensive changelog based on git commit history analysis, categor
    - Let the developer review and commit manually
 
 **Changelog Categories (Keep a Changelog Format):**
+
 - ✨ **Added**: New features or capabilities
 - 🔄 **Changed**: Changes to existing functionality
 - ⏰ **Deprecated**: Features to be removed in the future
@@ -89,6 +92,7 @@ Generate a comprehensive changelog based on git commit history analysis, categor
 - 🔒 **Security**: Security corrections
 
 **Analysis Features:**
+
 - Commit message analysis and categorization
 - File change impact assessment
 - Author contribution tracking

@@ -13,6 +13,7 @@ Generate concise feature documents for small, specific features. This workflow f
 **DECISION POINTS**: Make binary decisions - feature is simple enough or needs project planning.
 
 **TERMINATION CONDITIONS**:
+
 - If feature description unclear: Ask for clarification and STOP
 - If feature complexity is "Complex": Suggest write-project workflow and STOP
 - Always require developer confirmation before proceeding

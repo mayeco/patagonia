@@ -13,6 +13,7 @@ Create high-level epics that contain multiple features and user stories. Epics a
 **DECISION POINTS**: Make binary decisions - epic scope is appropriate or too broad.
 
 **TERMINATION CONDITIONS**:
+
 - If no epic description provided: Ask and STOP
 - If epic is too vague: Ask for more details and STOP
 - Always require developer confirmation before creating
@@ -94,37 +95,43 @@ Create high-level epics that contain multiple features and user stories. Epics a
    - If declined: STOP without creating
 
 10. **EPIC STORAGE**:
-   - Save to `/epics/{{date}}-{{epic_name | slugify}}.md`
-   - Confirm creation successful
-   - Suggest next steps (break into projects or features)
+
+- Save to `/epics/{{date}}-{{epic_name | slugify}}.md`
+- Confirm creation successful
+- Suggest next steps (break into projects or features)
 
 ## Epic Type Implementation Guidelines
 
 ### **Strategic Epic**
+
 - **Focus**: Business growth, market expansion, competitive advantage
 - **Timeline**: 3-12 months
 - **Success Criteria**: Revenue impact, market share growth, strategic objectives
 - **Stakeholders**: Executives, board members, key customers
 
 ### **Operational Epic**
+
 - **Focus**: Process optimization, efficiency improvement, cost reduction
 - **Timeline**: 2-6 months
 - **Success Criteria**: Efficiency metrics, cost savings, process improvements
 - **Stakeholders**: Department heads, process owners, end users
 
 ### **Technical Epic**
+
 - **Focus**: Architecture modernization, technical debt reduction, scalability
 - **Timeline**: 3-9 months
 - **Success Criteria**: Performance improvements, technical debt reduction, scalability gains
 - **Stakeholders**: Development teams, architects, DevOps engineers
 
 ### **Product Epic**
+
 - **Focus**: User experience enhancement, feature development, product growth
 - **Timeline**: 2-8 months
 - **Success Criteria**: User satisfaction, feature adoption, product metrics
 - **Stakeholders**: Product managers, UX designers, customer success teams
 
 ### **Compliance Epic**
+
 - **Focus**: Regulatory compliance, security enhancement, audit readiness
 - **Timeline**: 1-6 months
 - **Success Criteria**: Compliance coverage, security posture, audit results
@@ -139,6 +146,7 @@ Create high-level epics that contain multiple features and user stories. Epics a
 **Business Value**: [Clear statement of business impact]
 
 **Success Criteria**:
+
 - [Measurable KPI 1]: [Target value]
 - [Measurable KPI 2]: [Target value]
 - [Measurable KPI 3]: [Target value]
@@ -146,67 +154,80 @@ Create high-level epics that contain multiple features and user stories. Epics a
 **Timeline**: [Start date] to [End date] ([X months])
 
 **Stakeholders**:
+
 - **Primary**: [Key decision makers]
 - **Secondary**: [Affected teams/users]
 - **Communication Plan**: [How stakeholders will be updated]
 
 **Major Features**:
+
 1. **Feature 1**: [Description] - Priority: [High/Medium/Low]
 2. **Feature 2**: [Description] - Priority: [High/Medium/Low]
 3. **Feature 3**: [Description] - Priority: [High/Medium/Low]
 
 **Risks & Mitigation**:
+
 - **Risk 1**: [Description] - **Mitigation**: [Strategy]
 - **Risk 2**: [Description] - **Mitigation**: [Strategy]
 
 ## Epic Type Detection Keywords
 
-### Strategic Detection:
+### Strategic Detection
+
 - "strategic", "business goal", "company objective", "market expansion", "revenue", "growth", "competitive"
 
-### Operational Detection:
+### Operational Detection
+
 - "operational", "process", "efficiency", "workflow", "automation", "productivity", "streamline"
 
-### Technical Detection:
+### Technical Detection
+
 - "technical", "architecture", "infrastructure", "platform", "scalability", "technical debt", "modernization"
 
-### Product Detection:
+### Product Detection
+
 - "product", "user experience", "customer", "feature", "UX", "user journey", "product roadmap"
 
-### Compliance Detection:
+### Compliance Detection
+
 - "compliance", "regulatory", "security", "audit", "GDPR", "SOX", "standards", "certification"
 
 ## Epic Success Metrics by Type
 
-### Strategic Epic Metrics:
+### Strategic Epic Metrics
+
 - Revenue impact percentage
 - Market share growth
 - Customer acquisition rate
 - ROI (Return on Investment)
 - Strategic objective completion rate
 
-### Operational Epic Metrics:
+### Operational Epic Metrics
+
 - Process efficiency improvement (%)
 - Cost reduction achieved ($)
 - Time savings per process (hours)
 - Error rate reduction (%)
 - Process completion rate (%)
 
-### Technical Epic Metrics:
+### Technical Epic Metrics
+
 - Performance improvement (%)
 - Technical debt reduction (%)
 - Scalability capacity increase
 - Error rate reduction (%)
 - System uptime improvement (%)
 
-### Product Epic Metrics:
+### Product Epic Metrics
+
 - User satisfaction score (NPS/CSAT)
 - Feature adoption rate (%)
 - User engagement increase (%)
 - Conversion rate improvement (%)
 - Customer retention improvement (%)
 
-### Compliance Epic Metrics:
+### Compliance Epic Metrics
+
 - Compliance coverage percentage (%)
 - Audit finding reduction (%)
 - Security incident reduction (%)
@@ -215,8 +236,10 @@ Create high-level epics that contain multiple features and user stories. Epics a
 
 ## Epic Communication Templates
 
-### Stakeholder Updates:
+### Stakeholder Updates
+
 **Weekly Status Update Template:**
+
 - Epic Progress: [X% complete]
 - Current Milestone: [Milestone name]
 - Key Achievements: [3-5 bullet points]
@@ -224,8 +247,10 @@ Create high-level epics that contain multiple features and user stories. Epics a
 - Next Week Focus: [2-3 priorities]
 - Risk Status: [Green/Yellow/Red with details]
 
-### Risk Escalation:
+### Risk Escalation
+
 **Risk Alert Template:**
+
 - Risk Level: [High/Medium/Low]
 - Risk Description: [Clear description]
 - Impact Assessment: [Business/technical impact]
@@ -233,8 +258,10 @@ Create high-level epics that contain multiple features and user stories. Epics a
 - Timeline: [When action needed]
 - Escalation Path: [Who needs to be involved]
 
-### Success Celebration:
+### Success Celebration
+
 **Milestone Achievement Template:**
+
 - Milestone Completed: [Milestone name]
 - Business Value Delivered: [Specific benefits]
 - Team Recognition: [Key contributors]
