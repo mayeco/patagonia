@@ -41,8 +41,7 @@ Generate comprehensive project plans that span multiple features and milestones.
      - **Migration**: Keywords like "migrate", "upgrade", "move to", "switch to", "transition"
      - **Integration**: Keywords like "integrate", "connect", "third-party", "external service"
      - **Research/Spike**: Keywords like "research", "investigate", "explore", "spike", "proof of concept"
-   - Validate project type against description
-   - If unclear: Ask the developer to specify project type and STOP
+   - If project type is unclear assume it is a **MVP**, give a message to the developer to let them know (Do not skip the message).
 
 3. **PROJECT PLANING AND STRUCTURING**:
    - **IDENTIFY SCOPE DEFINITION**
