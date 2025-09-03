@@ -1,3 +1,3 @@
 module.exports = {
-    plugins: ['remark-lint-fenced-code-flag'],
+  plugins: ['remark-lint-fenced-code-flag'],
 };

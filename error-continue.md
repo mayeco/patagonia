@@ -32,9 +32,9 @@ When an error occurs (e.g., "Cascade error: Internal: stream error: stream ID 18
    - Send a clear message to activate the error-continue protocol for this conversation.
    - Suggested template:
 
-      ```text
-      Error and Continue: There was an error in the the last or last few steps of the code generation process, tool call or command execution, I acknowledge the error will attempt to do a different approach.
-      ```
+     ```text
+     Error and Continue: There was an error in the the last or last few steps of the code generation process, tool call or command execution, I acknowledge the error will attempt to do a different approach.
+     ```
 
 2. **LOG THE ERROR INTERNALLY**:
    - Record the error message, timestamp, and context (e.g., last tool called, user request).

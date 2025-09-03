@@ -41,26 +41,25 @@ Start implementing a feature, epic, project based on existing plans, or process 
    - Check input for specific plan references (file paths, names, structured content)
 
 2. **IMPLEMENTATION DISCOVERY**:
-
    - **STRUCTURED PLANS**:
-      - Scan plan directories: `/plans/`, `/epics/`, `/features/`, `/projects/`
-      - If specific plan mentioned: Look for exact match
-      - If no specific file: List available plans by type and ask the developer to select
-      - Validate plan file exists and is readable
+     - Scan plan directories: `/plans/`, `/epics/`, `/features/`, `/projects/`
+     - If specific plan mentioned: Look for exact match
+     - If no specific file: List available plans by type and ask the developer to select
+     - Validate plan file exists and is readable
 
    - **OPEN TEXT PROCESSING**:
-      - Extract implementation requirements from open text description
-      - Identify key components: what, why, how, success criteria
-      - Determine appropriate implementation scope (feature, project, or epic level)
-      - Create structured implementation plan from unstructured input
-      - Ask for clarification on unclear requirements
+     - Extract implementation requirements from open text description
+     - Identify key components: what, why, how, success criteria
+     - Determine appropriate implementation scope (feature, project, or epic level)
+     - Create structured implementation plan from unstructured input
+     - Ask for clarification on unclear requirements
 
    - **IMPLEMENTATION ANALYSIS**:
-      - **Epic Plans**: Extract strategic objectives, stakeholder requirements, success metrics
-      - **Project Plans**: Extract milestones, technical stack, resource requirements
-      - **Feature Plans**: Extract implementation steps, dependencies, testing requirements
-      - **Open Text**: Identify main goals, requirements, constraints, and success indicators
-      - Identify any clarification points or missing information
+     - **Epic Plans**: Extract strategic objectives, stakeholder requirements, success metrics
+     - **Project Plans**: Extract milestones, technical stack, resource requirements
+     - **Feature Plans**: Extract implementation steps, dependencies, testing requirements
+     - **Open Text**: Identify main goals, requirements, constraints, and success indicators
+     - Identify any clarification points or missing information
 
 3. **CLARIFICATION HANDLING**:
    - If plan has unclear sections: Identify specific areas needing clarification
@@ -77,11 +76,11 @@ Start implementing a feature, epic, project based on existing plans, or process 
 
 5. **STEP-BY-STEP EXECUTION**:
    - Before starting the implementation, send a clear message to inform the developer that the implementation will begin (Do not skip this step).
-      - Suggested template:
+     - Suggested template:
 
-         ```text
-         The implementation of the plan or open text description will begin now... please relax and enjoy the process.
-         ```
+       ```text
+       The implementation of the plan or open text description will begin now... please relax and enjoy the process.
+       ```
 
    - Follow plan-specific or text-derived implementation steps
    - Track progress against identified milestones or goals

@@ -10,14 +10,14 @@ Template
 
 **DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete _**within N steps maximum. If**_ exceeds N steps, STOP. Ask for clarification.
 
-**DECISION POINTS**: Make binary decisions _**or**_. If ___ exceeds N steps, STOP. Ask for clarification.
+**DECISION POINTS**: Make binary decisions _**or**_. If \_\_\_ exceeds N steps, STOP. Ask for clarification.
 
 **CONTENT VALIDATION**: Evaluate _**before proceeding. If**_ is not clear, ask for clarification.
 
 **TERMINATION CONDITIONS**:
 
-- Terminate when ___
-- If ___ is not clear: Ask for clarification and STOP
+- Terminate when \_\_\_
+- If \_\_\_ is not clear: Ask for clarification and STOP
 
 ## STEPS
 
@@ -27,5 +27,5 @@ Template
    - If no clear English indicators are found, default to Spanish for all responses
    - Always provide responses in Spanish by default, unless the developer clearly specifies English.
 
-1. _**START HERE**
+1. \_**START HERE**
    - Provide the initial input and objective.

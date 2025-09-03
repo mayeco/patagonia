@@ -33,12 +33,12 @@ Generate concise feature documents for small, specific features. This workflow f
 
 2. **FEATURE TYPE DETECTION**:
    - Analyze feature description for type indicators:
-      - **UI/UX**: Keywords like "interface", "design", "user experience", "layout", "styling"
-      - **Functionality**: Keywords like "function", "logic", "algorithm", "calculation", "processing"
-      - **Integration**: Keywords like "API", "database", "external service", "third-party", "connect"
-      - **Data**: Keywords like "storage", "retrieval", "query", "filter", "sort", "display"
-      - **Security**: Keywords like "authentication", "authorization", "validation", "encryption"
-      - **Performance**: Keywords like "speed", "optimization", "loading", "response time"
+     - **UI/UX**: Keywords like "interface", "design", "user experience", "layout", "styling"
+     - **Functionality**: Keywords like "function", "logic", "algorithm", "calculation", "processing"
+     - **Integration**: Keywords like "API", "database", "external service", "third-party", "connect"
+     - **Data**: Keywords like "storage", "retrieval", "query", "filter", "sort", "display"
+     - **Security**: Keywords like "authentication", "authorization", "validation", "encryption"
+     - **Performance**: Keywords like "speed", "optimization", "loading", "response time"
    - Validate feature type against description
    - If unclear: Ask the developer to specify feature type and STOP
 

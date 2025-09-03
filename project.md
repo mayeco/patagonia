@@ -45,43 +45,42 @@ Generate comprehensive project plans that span multiple features and milestones.
    - If unclear: Ask the developer to specify project type and STOP
 
 3. **PROJECT PLANING AND STRUCTURING**:
-
    - **IDENTIFY SCOPE DEFINITION**
-      - Identify project objectives and success criteria based on project type
-      - Estimate project timeline based on project type complexity
+     - Identify project objectives and success criteria based on project type
+     - Estimate project timeline based on project type complexity
 
    - **FEATURE IDENTIFICATION**:
-      - Break project into 5-12 major features
-      - Group features into logical milestones
+     - Break project into 5-12 major features
+     - Group features into logical milestones
 
    - **TECHNICAL ARCHITECTURE** (Type-Aware):
-      - Define technology stack based on project type requirements
-      - Identify integration points and dependencies
-      - Plan infrastructure and deployment requirements
+     - Define technology stack based on project type requirements
+     - Identify integration points and dependencies
+     - Plan infrastructure and deployment requirements
 
    - **RISK ASSESSMENT** (Adapted to Project Type):
-      - Identify potential risks specific to project type:
-         - **MVP**: Market validation, technical feasibility
-         - **Refactor**: Regression risks, performance impacts
-         - **New Feature**: Integration complexity, user adoption
-         - **Maintenance**: Security vulnerabilities, system stability
-      - Define mitigation strategies and plan contingencies
+     - Identify potential risks specific to project type:
+       - **MVP**: Market validation, technical feasibility
+       - **Refactor**: Regression risks, performance impacts
+       - **New Feature**: Integration complexity, user adoption
+       - **Maintenance**: Security vulnerabilities, system stability
+     - Define mitigation strategies and plan contingencies
 
    - **MILESTONE PLANNING** (Adapted to Project Type):
-      - Create milestones appropriate for project type:
-         - **MVP**: Focus on core functionality milestones
-         - **Refactor**: Code quality improvement milestones
-         - **New Feature**: Feature development and integration milestones
-         - **Maintenance**: Risk mitigation and rollback milestones
-      - Assign features to milestones based on project type priorities
+     - Create milestones appropriate for project type:
+       - **MVP**: Focus on core functionality milestones
+       - **Refactor**: Code quality improvement milestones
+       - **New Feature**: Feature development and integration milestones
+       - **Maintenance**: Risk mitigation and rollback milestones
+     - Assign features to milestones based on project type priorities
 
    - **RESOURCE PLANNING** (Adapted to Project Type):
-      - Identify required team roles and skills based on project type:
-         - **MVP**: Minimal team, focus on core development
-         - **Refactor**: Code quality experts, testing specialists
-         - **New Feature**: Full-stack developers, UX designers
-         - **Maintenance**: Security experts, QA specialists
-      - Estimate effort and timeline for each milestone
+     - Identify required team roles and skills based on project type:
+       - **MVP**: Minimal team, focus on core development
+       - **Refactor**: Code quality experts, testing specialists
+       - **New Feature**: Full-stack developers, UX designers
+       - **Maintenance**: Security experts, QA specialists
+     - Estimate effort and timeline for each milestone
 
 4. **PROJECT STRUCTURE CREATION**:
    - Create project with title, description, objectives

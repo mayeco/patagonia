@@ -7,10 +7,6 @@ auto_execution_mode: 3
 
 Generate or update a comprehensive README.md file based on the current application/project structure and code analysis.
 
-## Important Rules
-
-- TARGET_ACTIVE_SHELL_COMMANDS
-
 ## ⚠️ CRITICAL AI EXECUTION RULES
 
 **DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete README generation within 8 steps maximum.

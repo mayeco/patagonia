@@ -7,10 +7,6 @@ auto_execution_mode: 3
 
 Fix all TypeScript compiler (TSC) errors including type errors, syntax errors, module resolution errors, and compilation issues in TypeScript files.
 
-## Important Rules
-
-- TARGET_ACTIVE_SHELL_COMMANDS
-
 ## ⚠️ CRITICAL AI EXECUTION RULES
 
 **DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete TSC error fixing within 7 steps maximum.

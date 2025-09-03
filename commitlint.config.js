@@ -21,8 +21,8 @@
  * - release: bump version to v2024.12.4
  */
 module.exports = {
-    extends: ['@commitlint/config-conventional'],
-    rules: {
-        'type-enum': [2, 'always', ['add', 'update', 'remove', 'fix', 'meta', 'release']],
-    },
+  extends: ['@commitlint/config-conventional'],
+  rules: {
+    'type-enum': [2, 'always', ['add', 'update', 'remove', 'fix', 'meta', 'release']],
+  },
 };

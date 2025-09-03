@@ -33,11 +33,11 @@ Create high-level epics that contain multiple features and user stories. Epics a
 
 2. **EPIC TYPE DETECTION**:
    - Analyze epic description for type indicators:
-      - **Strategic**: Keywords like "strategic", "business goal", "company objective", "market expansion"
-      - **Operational**: Keywords like "operational", "process improvement", "efficiency", "workflow"
-      - **Technical**: Keywords like "technical", "architecture", "infrastructure", "platform"
-      - **Product**: Keywords like "product", "user experience", "feature set", "customer value"
-      - **Compliance**: Keywords like "compliance", "regulatory", "security", "standards"
+     - **Strategic**: Keywords like "strategic", "business goal", "company objective", "market expansion"
+     - **Operational**: Keywords like "operational", "process improvement", "efficiency", "workflow"
+     - **Technical**: Keywords like "technical", "architecture", "infrastructure", "platform"
+     - **Product**: Keywords like "product", "user experience", "feature set", "customer value"
+     - **Compliance**: Keywords like "compliance", "regulatory", "security", "standards"
    - Validate epic type against description
    - If unclear: Ask the developer to specify epic type and STOP
 
@@ -68,20 +68,20 @@ Create high-level epics that contain multiple features and user stories. Epics a
 
 6. **SUCCESS METRICS DEFINITION**:
    - Define specific KPIs based on epic type:
-      - **Strategic**: Revenue impact, market share, customer acquisition
-      - **Operational**: Efficiency metrics, cost savings, process time reduction
-      - **Technical**: Performance benchmarks, error rates, technical debt reduction
-      - **Product**: User engagement, feature adoption, satisfaction scores
-      - **Compliance**: Audit results, security assessments, compliance coverage
+     - **Strategic**: Revenue impact, market share, customer acquisition
+     - **Operational**: Efficiency metrics, cost savings, process time reduction
+     - **Technical**: Performance benchmarks, error rates, technical debt reduction
+     - **Product**: User engagement, feature adoption, satisfaction scores
+     - **Compliance**: Audit results, security assessments, compliance coverage
    - Set measurable success criteria and acceptance thresholds
 
 7. **RISK ASSESSMENT**:
    - Identify epic-specific risks based on type:
-      - **Strategic**: Market changes, competitive response, resource availability
-      - **Operational**: Process disruption, training requirements, change resistance
-      - **Technical**: Technical complexity, integration challenges, scalability issues
-      - **Product**: User acceptance, feature usability, market fit
-      - **Compliance**: Regulatory changes, security vulnerabilities, audit findings
+     - **Strategic**: Market changes, competitive response, resource availability
+     - **Operational**: Process disruption, training requirements, change resistance
+     - **Technical**: Technical complexity, integration challenges, scalability issues
+     - **Product**: User acceptance, feature usability, market fit
+     - **Compliance**: Regulatory changes, security vulnerabilities, audit findings
    - Define mitigation strategies and contingency plans
 8. **EPIC STRUCTURE CREATION**:
    - Create epic with title, description, success criteria

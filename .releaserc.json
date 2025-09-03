@@ -1,17 +1,15 @@
 {
-    "branches": [
-        "main"
+  "branches": ["main"],
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "writerOpts": {
+          "includeDetails": true
+        }
+      }
     ],
-    "plugins": [
-        "@semantic-release/commit-analyzer",
-        [
-            "@semantic-release/release-notes-generator",
-            {
-                "writerOpts": {
-                    "includeDetails": true
-                }
-            }
-        ],
-        "@semantic-release/github"
-    ]
+    "@semantic-release/github"
+  ]
 }

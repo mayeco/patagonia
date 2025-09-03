@@ -161,9 +161,9 @@ Follow these code generation constraints to avoid code that exceeds these limits
   - If a request asks to add functionality inside a NON-COMPLIANT UNIT: Reject the request and require a refactor-first step to bring the unit within limits, then re-attempt the feature.
   - If a feature can be implemented entirely outside the NON-COMPLIANT UNIT without touching it and without increasing its call surface (no new params, calls, or side effects on that unit): it is allowed. Otherwise, defer until after refactor.
 - ENFORCEMENT PROTOCOL:
-  1) Dry-run compliance scan to identify NON-COMPLIANT UNITs within the change scope (function/class granularity).
-  2) Diff gate: For each NON-COMPLIANT UNIT, assert net added lines <= 0 and equal-or-lower cyclomatic complexity. If violated, abort with rejection.
-  3) Commit annotation: "Refactor-only due to NON_COMPLIANT_CODE_AUGMENTATION_BAN".
+  1. Dry-run compliance scan to identify NON-COMPLIANT UNITs within the change scope (function/class granularity).
+  2. Diff gate: For each NON-COMPLIANT UNIT, assert net added lines <= 0 and equal-or-lower cyclomatic complexity. If violated, abort with rejection.
+  3. Commit annotation: "Refactor-only due to NON_COMPLIANT_CODE_AUGMENTATION_BAN".
 - REJECTION TEMPLATE:
 
 ```text
@@ -236,12 +236,10 @@ const discountRate = isPremium ? 0.1 : isStudent ? 0.05 : 0.0;
 
 // ❌ AVOID: Incomprehensible inline expressions
 const x = Math.floor((Date.now() - new Date(u.d).getTime()) / (1000 * 60 * 60 * 24));
-const y = u.a >= 18 && u.v && !u.b ? p ? 0.1 : s ? 0.05 : 0 : 0;
+const y = u.a >= 18 && u.v && !u.b ? (p ? 0.1 : s ? 0.05 : 0) : 0;
 
 // ✅ PREFERRED: Break complex expressions into clear steps
-const ageInDays = Math.floor(
-  (Date.now() - user.birthDate.getTime()) / (1000 * 60 * 60 * 24)
-);
+const ageInDays = Math.floor((Date.now() - user.birthDate.getTime()) / (1000 * 60 * 60 * 24));
 const userAge = Math.floor(ageInDays / 365.25);
 
 const discountRate = (() => {
@@ -258,15 +256,15 @@ const discountRate = (() => {
 def calculate_discount(user, base_price):
     if user.age < 18 or user.is_blocked:
         return 0
-    
+
     if not user.is_verified:
         return 0
-        
+
     if user.membership_type == "premium":
         return base_price * 0.1
     elif user.membership_type == "student":
         return base_price * 0.05
-    
+
     return 0
 
 # ❌ AVOID: Cryptic one-liners
@@ -285,20 +283,22 @@ def calc_disc(u, p):
 - GO: camelCase for unexported, PascalCase for exported names
 - AVOID_ABBREVIATIONS: Use full words (userId not uid, calculate not calc)
 - BE_DESCRIPTIVE: Names should explain purpose, not just type
-- CONSISTENT_PREFIXES: Use consistent prefixes (is_, has_, get_, set_)
+- CONSISTENT*PREFIXES: Use consistent prefixes (is*, has*, get*, set\_)
 - BOOLEAN_CLARITY: Boolean variables should read as yes/no questions
-COLLECTION_NAMES: Use plural for arrays/lists, singular for single items
+  COLLECTION_NAMES: Use plural for arrays/lists, singular for single items
 
 ```javascript
 // ✅ JAVASCRIPT/TYPESCRIPT: camelCase for variables and functions
 const userProfile = getUserProfile();
 const profileData = userProfile.data;
 const isProfileComplete = profileData.isComplete;
-const calculateDiscount = (user, price) => { /* ... */ };
+const calculateDiscount = (user, price) => {
+  /* ... */
+};
 
 // ❌ AVOID: snake_case in JavaScript
-const user_profile = getUserProfile();  // Wrong for JS
-const is_profile_complete = profileData.isComplete;  // Wrong for JS
+const user_profile = getUserProfile(); // Wrong for JS
+const is_profile_complete = profileData.isComplete; // Wrong for JS
 ```
 
 ```python
@@ -381,34 +381,35 @@ is_profile_complete := profileData.IsComplete  # Wrong for Go
 // ✅ PREFERRED: Consistent formatting
 function calculateTotal(items) {
   let total = 0;
-  
+
   for (let i = 0; i < items.length; i++) {
     const item = items[i];
     total += item.price * item.quantity;
   }
-  
+
   return total;
 }
 
 // Or with different brace style (pick one and stick to it):
-function calculateTotal(items)
-{
+function calculateTotal(items) {
   let total = 0;
-  
-  for (let i = 0; i < items.length; i++)
-  {
+
+  for (let i = 0; i < items.length; i++) {
     const item = items[i];
     total += item.price * item.quantity;
   }
-  
+
   return total;
 }
 
 // ❌ AVOID: Inconsistent formatting
 function calculateTotal(items) {
-let total=0;
-  for(let i=0;i<items.length;i++){
-const item=items[i];total+=item.price*item.quantity;}return total;
+  let total = 0;
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i];
+    total += item.price * item.quantity;
+  }
+  return total;
 }
 ```
 
@@ -417,11 +418,11 @@ const item=items[i];total+=item.price*item.quantity;}return total;
 def calculate_total(items):
     """Calculate total price of items."""
     total = 0
-    
+
     for item in items:
         if item.price > 0:
             total += item.price * item.quantity
-    
+
     return total
 
 # ❌ AVOID: Inconsistent indentation and spacing
@@ -452,15 +453,15 @@ export class UserService {
   constructor(database) {
     this.db = database;
   }
-  
+
   async createUser(userData) {
     // User creation logic
   }
-  
+
   async getUserById(id) {
     // User retrieval logic
   }
-  
+
   async updateUser(id, updates) {
     // User update logic
   }
@@ -508,12 +509,13 @@ function doEverything(data) {
 
 // O(1) - Constant time for small datasets
 function getUserById(users, id) {
-  return users[id];  // Array with ID as index
+  return users[id]; // Array with ID as index
 }
 
 // O(log n) - Logarithmic for sorted data
 function binarySearch(sortedArray, target) {
-  let left = 0, right = sortedArray.length - 1;
+  let left = 0,
+    right = sortedArray.length - 1;
   while (left <= right) {
     const mid = Math.floor((left + right) / 2);
     if (sortedArray[mid] === target) return mid;
@@ -525,7 +527,7 @@ function binarySearch(sortedArray, target) {
 
 // O(n) - Linear for unsorted data (acceptable for small n)
 function findUserByEmail(users, email) {
-  return users.find(user => user.email === email);
+  return users.find((user) => user.email === email);
 }
 
 // ❌ AVOID: Poor complexity choices
@@ -569,11 +571,12 @@ function handleLoginAttempts(attempts) {
 
 // ❌ AVOID: Magic numbers scattered throughout code
 function isEligibleForDiscount(user) {
-  return user.age >= 18 && user.isVerified;  // Magic number: 18
+  return user.age >= 18 && user.isVerified; // Magic number: 18
 }
 
 function handleLoginAttempts(attempts) {
-  if (attempts >= 3) {  // Magic number: 3
+  if (attempts >= 3) {
+    // Magic number: 3
     return 'account_locked';
   }
   return 'continue';
@@ -621,7 +624,7 @@ def handle_login_attempts(attempts):
 /**
  * Calculates the final price after applying discounts and taxes.
  * Uses the most recent pricing rules and handles edge cases.
- * 
+ *
  * @param {number} basePrice - The original item price (must be > 0)
  * @param {string} customerType - 'regular', 'premium', or 'vip'
  * @param {boolean} isTaxExempt - Whether customer is tax-exempt
@@ -634,37 +637,37 @@ function calculateFinalPrice(basePrice, customerType, isTaxExempt, discountPerce
   if (basePrice <= 0) {
     throw new Error('Base price must be greater than 0');
   }
-  
+
   // Apply customer-specific base discount
   let price = basePrice;
   if (customerType === 'premium') {
-    price *= 0.9;  // 10% discount
+    price *= 0.9; // 10% discount
   } else if (customerType === 'vip') {
-    price *= 0.8;  // 20% discount
+    price *= 0.8; // 20% discount
   }
-  
+
   // Apply additional discount if provided
   if (discountPercent > 0) {
-    price *= (1 - discountPercent / 100);
+    price *= 1 - discountPercent / 100;
   }
-  
+
   // Apply tax unless exempt
   if (!isTaxExempt) {
-    price *= 1.08;  // 8% tax
+    price *= 1.08; // 8% tax
   }
-  
-  return Math.round(price * 100) / 100;  // Round to cents
+
+  return Math.round(price * 100) / 100; // Round to cents
 }
 
 // ❌ AVOID: Useless or misleading comments
 // This function calculates something
 function calc(price, type, exempt, disc) {
   // Do some math
-  if (price < 0) return 0;  // This shouldn't happen
-  
+  if (price < 0) return 0; // This shouldn't happen
+
   let result = price;
-  result = result * 0.9;  // Apply discount
-  if (!exempt) result = result * 1.08;  // Tax
+  result = result * 0.9; // Apply discount
+  if (!exempt) result = result * 1.08; // Tax
   return result;
 }
 ```
@@ -685,7 +688,7 @@ function calc(price, type, exempt, disc) {
 // Use Map for key-value lookups with non-string keys
 const userRoles = new Map([
   [userId1, 'admin'],
-  [userId2, 'user']
+  [userId2, 'user'],
 ]);
 
 // Use Set for unique value collections
@@ -699,16 +702,16 @@ const user = {
   id: 123,
   name: 'John',
   email: 'john@example.com',
-  preferences: { theme: 'dark' }
+  preferences: { theme: 'dark' },
 };
 
 // ❌ AVOID: Wrong data structures for the job
 // Using Array when you need fast lookups
 const users = [user1, user2, user3];
-const user = users.find(u => u.id === targetId);  // O(n) lookup
+const user = users.find((u) => u.id === targetId); // O(n) lookup
 
 // Using Object when you need ordered data
-const config = { a: 1, b: 2, c: 3 };  // Order not guaranteed in older JS
+const config = { a: 1, b: 2, c: 3 }; // Order not guaranteed in older JS
 ```
 
 ### FUNCTION_PARAMETER_LIMITS
@@ -733,9 +736,24 @@ function createUser(userData) {
 }
 
 // ❌ AVOID: Too many parameters (code smell)
-function createUser(email, password, firstName, lastName, age, phone, address, 
-                   city, state, zipCode, country, preferences, newsletter, 
-                   termsAccepted, marketingOptIn, referralCode) {
+function createUser(
+  email,
+  password,
+  firstName,
+  lastName,
+  age,
+  phone,
+  address,
+  city,
+  state,
+  zipCode,
+  country,
+  preferences,
+  newsletter,
+  termsAccepted,
+  marketingOptIn,
+  referralCode
+) {
   // This is hard to read and maintain
 }
 ```
@@ -754,8 +772,8 @@ def send_email(email_config):
     # Implementation
 
 # ❌ AVOID: Excessive parameters
-def send_email(to, subj, msg, attch=None, pri=False, html=True, 
-               reply_to=None, cc=None, bcc=None, delay=0, retry=3, 
+def send_email(to, subj, msg, attch=None, pri=False, html=True,
+               reply_to=None, cc=None, bcc=None, delay=0, retry=3,
                track=True, tags=None, metadata=None):
     # Too many parameters, hard to remember order
 ```
@@ -804,11 +822,7 @@ try {
 // ✅ PREFERRED: Structured logging with context
 const logger = createLogger({
   level: 'info',
-  format: combine(
-    timestamp(),
-    errors({ stack: true }),
-    json()
-  )
+  format: combine(timestamp(), errors({ stack: true }), json()),
 });
 
 // Usage

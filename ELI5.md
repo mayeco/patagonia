@@ -51,9 +51,9 @@ Explain any concept, web, plan, backlog, or input in simple terms as if explaini
 4. **EXPLAIN SIMPLY**:
    - Use simple words, short sentences, and relatable examples (toys, games, everyday activities)
    - Use MCP search brave_web_search for comprehensive web searches:
-      - `brave_web_search "explain like i'm five {concept}"`
-      - `brave_web_search "{concept} explanation for children"`
-      - `brave_web_search "easy explanation of {concept}"`
+     - `brave_web_search "explain like i'm five {concept}"`
+     - `brave_web_search "{concept} explanation for children"`
+     - `brave_web_search "easy explanation of {concept}"`
 
 5. **USE VISUAL METAPHORS**:
    - Avoid technical jargon completely

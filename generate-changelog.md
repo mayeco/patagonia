@@ -7,10 +7,6 @@ auto_execution_mode: 3
 
 Generate a comprehensive changelog based on git commit history analysis, categorizing changes and providing detailed insights.
 
-## Important Rules
-
-- TARGET_ACTIVE_SHELL_COMMANDS
-
 ## ⚠️ CRITICAL AI EXECUTION RULES
 
 **DO NOT GET STUCK IN ANALYSIS LOOPS**: Complete changelog generation within 8 steps maximum. If git analysis takes too long, use available data and proceed.
@@ -41,20 +37,20 @@ Generate a comprehensive changelog based on git commit history analysis, categor
 2. **GIT REPOSITORY HISTORY ANALYSIS**:
    - **Shell-agnostic description**: This Git command lists the last 20 non-merge commits with a one-line header per commit (hash, author, YYYY-MM-DD date, subject), followed by per-file change stats. The header fields are separated by a literal pipe character `|`. For clarity and portability, you may prefer `-n 20` instead of `-20` (both are equivalent).
    - **Shell targeting guidance**: When executing programmatically, do not assume Bash. Detect the active shell and wrap the command accordingly.
-      - fish: `fish -c "git log --pretty=format:'%h|%an|%ad|%s' --date=short --stat -n 20 --no-merges"`
-      - Bash: `bash -lc "git log --pretty=format:'%h|%an|%ad|%s' --date=short --stat -n 20 --no-merges"`
-      - POSIX sh: `sh -lc "git log --pretty=format:'%h|%an|%ad|%s' --date=short --stat -n 20 --no-merges"`
+     - fish: `fish -c "git log --pretty=format:'%h|%an|%ad|%s' --date=short --stat -n 20 --no-merges"`
+     - Bash: `bash -lc "git log --pretty=format:'%h|%an|%ad|%s' --date=short --stat -n 20 --no-merges"`
+     - POSIX sh: `sh -lc "git log --pretty=format:'%h|%an|%ad|%s' --date=short --stat -n 20 --no-merges"`
 
    - **Quoting guidance**: Quote the pretty-format as `--pretty=format:'%h|%an|%ad|%s'` so `|` is treated as a literal within the argument (not a pipe). When wrapping in a shell, use outer double quotes so the inner single quotes survive. Do not split arguments across lines; treat each flag as a single token.
 
 3. **COMMIT CATEGORIZATION**:
    - Classify each commit by type using commit message patterns
-      - **Added**: Keywords like "add", "new", "create", "feature"
-      - **Changed**: Keywords like "update", "modify", "change", "improve"
-      - **Deprecated**: Keywords like "deprecate", "obsolete"
-      - **Removed**: Keywords like "remove", "delete", "eliminate"
-      - **Fixed**: Keywords like "fix", "bug", "issue", "resolve"
-      - **Security**: Keywords like "security", "vulnerability", "auth", "encrypt"
+     - **Added**: Keywords like "add", "new", "create", "feature"
+     - **Changed**: Keywords like "update", "modify", "change", "improve"
+     - **Deprecated**: Keywords like "deprecate", "obsolete"
+     - **Removed**: Keywords like "remove", "delete", "eliminate"
+     - **Fixed**: Keywords like "fix", "bug", "issue", "resolve"
+     - **Security**: Keywords like "security", "vulnerability", "auth", "encrypt"
 
 4. **GENERATE CHANGELOG**:
    - USE A DETERMINISTIC ALGORITHM TO GENERATE THE CHANGELOG

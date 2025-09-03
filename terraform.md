@@ -6,10 +6,6 @@ description: Scan projects and generate Terraform infrastructure as code automat
 
 Scan the current project and automatically detect infrastructure requirements through dependencies, environment variables, configuration files, and other indicators. Generate a complete /terraform folder with appropriate Terraform files for deploying the project.
 
-## Important Rules
-
-- TARGET_ACTIVE_SHELL_COMMANDS
-
 ## STEPS
 
 0. **LANGUAGE DETECTION**:
@@ -455,3 +451,4 @@ TF_LOG=DEBUG terraform apply
 - Project files accessible for scanning
 - Basic understanding of infrastructure concepts
 - Cost management approval for cloud resources
+```
