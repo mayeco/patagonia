@@ -19,7 +19,7 @@
     "kinopeee",
     "kamusis"
   ],
-  "ignorePaths": ["node_modules/**", "package.json", "package-lock.json"],
+  "ignorePaths": ["node_modules/**", "package.json", "package-lock.json", "pnpm-lock.yaml"],
   "allowCompoundWords": true,
   "dictionaries": ["typescript", "node", "npm", "html", "markdown"]
 }

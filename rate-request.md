@@ -40,8 +40,8 @@ Evaluate how well requests, plans, backlog items, or current pending tasks are u
 
 3. **RATE UNDERSTANDING (1-10)**:
    - Provide rating in the detected language
-   - 1 = Very unclear, major gaps in understanding / Muy poco claro, grandes brechas en la comprensión
-   - 10 = Perfectly clear, complete understanding / Perfectamente claro, comprensión completa
+   - 1 = Very unclear, major gaps in understanding
+   - 10 = Perfectly clear, complete understanding
 
 4. **EXPLAIN EVALUATION**:
    - Provide a clear plain-language explanation in the detected language

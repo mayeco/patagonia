@@ -1,6 +1,6 @@
 # This workflow ensures markdown files follow our style guide
 # Logic:
-# 1. Runs on every PR
+# 1. Runs on default branch only (pushes and PRs targeting it)
 # 2. Uses our local npm scripts for consistency
 # 3. Attempts to auto-fix issues and commits them on PRs
 # 4. Runs all markdown-related checks (lint, spell-check)
@@ -8,6 +8,9 @@
 name: Markdown Lint
 
 on:
+  push:
+    paths:
+      - '**/*.md'
   pull_request:
     paths:
       - '**/*.md'
@@ -17,30 +20,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - uses: actions/setup-node@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          version: 10
 
-      - run: npm ci
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "pnpm"
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
 
       # Run format check first since it's quick
-      - name: Check formatting
-        run: npm run format:check
+      - name: Check Formatting
+        run: pnpm run format:check
 
       # Run markdown fixes and checks
-      - name: Fix and check markdown
-        run: |
-          npm run fix:md
-          npm run spell-check
-
-      # Only commit fixes on PRs
-      - name: Commit fixes
-        if: github.event_name == 'pull_request'
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: 'fix: auto-fix markdown formatting'
-          file_pattern: '**/*.md'
+      - name: Check Markdown Format
+        run: pnpm run fix:md

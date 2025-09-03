@@ -78,4 +78,4 @@ Complete workflow for obtaining technical documentation of frameworks, libraries
    - Create executive summary
    - Prepare practical examples
 
-**IMPORTANTE:** Siempre priorizar documentación oficial sobre fuentes secundarias para obtener información precisa y actualizada.
+**IMPORTANT:** Always prioritize official documentation over secondary sources to obtain accurate and up-to-date information.
