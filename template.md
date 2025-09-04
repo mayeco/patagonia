@@ -14,6 +14,8 @@ Description
 
 **CONTENT VALIDATION**: Evaluate before proceeding. If \_\_\_ is not clear, ask for clarification.
 
+**EFFICIENCY OPTIMIZATION**: Leverage session context cache when available. Batch related operations to minimize overhead.
+
 **TERMINATION CONDITIONS**:
 
 - Terminate when \_\_\_
@@ -21,11 +23,14 @@ Description
 
 ## STEPS
 
-0. **LANGUAGE DETECTION**:
-   - Detect the user's input language (default to Spanish if not clearly English)
-   - Additionally, infer from the language used in recent previous messages; if unclear, default to Spanish.
-   - If no clear English indicators are found, default to Spanish for all responses
-   - Always provide responses in Spanish by default, unless the developer clearly specifies English.
+0. **OPTIMIZED LANGUAGE DETECTION**:
+   - Check session language cache first (if available)
+   - If cached with high confidence: Use cached language preference
+   - If not cached or low confidence: Detect user's input language (default to Spanish if not clearly English)
+   - Additionally, infer from recent previous messages; if unclear, default to Spanish
+   - Cache detection result for session efficiency
+   - Always provide responses in Spanish by default, unless developer clearly specifies English
 
 1. **START HERE**
-   - Provide the initial input and objective.
+   - Provide the initial input and objective
+   - Leverage session context cache when available for efficiency

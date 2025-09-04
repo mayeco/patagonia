@@ -56,9 +56,11 @@ Scan the current project and automatically detect infrastructure requirements th
    - Check for syntax errors and missing resources
    - If validation fails: Fix errors and re-validate
 
-7. **FILE OUTPUT**:
-   - Create the /terraform directory structure
-   - Save all generated files
+7. **OPTIMIZED FILE OUTPUT**:
+   - Prepare all file contents in memory first (batch optimization)
+   - Create the /terraform directory structure atomically
+   - Write all files in coordinated batch operation
+   - Validate entire structure before finalizing
    - Provide a summary of the generated infrastructure
 
 8. **COMPLETION REPORT**:

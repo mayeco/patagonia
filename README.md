@@ -23,6 +23,8 @@ Centralized workflows to standardize common tasks across projects (planning, imp
 
 ## Workflow index (slash-commands)
 
+### Optimized for efficient AI assistant execution
+
 - /ELI5 — Explain concepts simply
 - /backlog — Create backlog epics/features with priorities
 - /generate-changelog — Generate changelog from git history
@@ -54,9 +56,11 @@ Centralized workflows to standardize common tasks across projects (planning, imp
 
 - Start from `template.md` and adjust:
   - Frontmatter `description` succinctly explains the workflow.
-  - Add a domain-specific “⚠️ CRITICAL AI EXECUTION RULES” section.
+  - Add a domain-specific "⚠️ CRITICAL AI EXECUTION RULES" section.
   - Steps: put all language handling in Step 0 only. Keep steps actionable and bounded.
+  - Include efficiency optimizations: session caching, batch operations, smart confirmations.
 - Save as `<name>.md` and reference the filename as the slash-command.
+- See `session-context.md` and `batch-operations.md` for optimization patterns.
 
 ## Notes
 

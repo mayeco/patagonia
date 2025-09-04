@@ -25,14 +25,18 @@ Operational workflow for discovering the project's database schema and making it
 
 ## STEPS
 
-0. **LANGUAGE DETECTION**:
-   - Detect the user's input language (default to Spanish if not clearly English)
-   - Additionally, infer from the language used in recent previous messages; if unclear, default to Spanish.
-   - If no clear English indicators are found, default to Spanish for all responses
-   - Always provide responses in Spanish by default, unless the developer clearly specifies English.
+0. **OPTIMIZED LANGUAGE DETECTION**:
+   - Check session language cache first (if available)
+   - If cached with high confidence: Use cached language preference
+   - If not cached: Detect user's input language (default to Spanish if not clearly English)
+   - Additionally, infer from recent previous messages; if unclear, default to Spanish
+   - Cache detection result for session efficiency
+   - Always provide responses in Spanish by default, unless developer clearly specifies English
 
-1. **FRAMEWORK DETECTION**:
-   - Inspect repository indicators to infer framework/ORM:
+1. **OPTIMIZED FRAMEWORK DETECTION**:
+   - Check session project context cache first (if available)
+   - If cached: Use known framework/ORM information
+   - If not cached: Inspect repository indicators to infer framework/ORM:
      - JavaScript/TypeScript: `package.json` deps: `prisma`, `@prisma/client`, `typeorm`, `sequelize`, `knex`; files: `prisma/schema.prisma`, `knexfile.*`, `ormconfig.*`, `src/migrations/`
      - Python: `pyproject.toml`/`requirements.txt`: `django`, `sqlalchemy`, `alembic`; files: `manage.py`, `migrations/`, `alembic.ini`, `alembic/versions/`
      - Ruby on Rails: `Gemfile`: `rails`; files: `db/schema.rb`, `db/structure.sql`, `db/migrate/`
@@ -40,7 +44,8 @@ Operational workflow for discovering the project's database schema and making it
      - .NET EF Core: `*.csproj`: `Microsoft.EntityFrameworkCore.*`; files: `Migrations/`
      - Java Spring: `pom.xml`/Gradle: `liquibase`, `flyway`; files: `db/changelog*/`, `db/migration*/`
      - Go: `go.mod`: `gorm.io/gorm`; files: `migrations/`
-   - If multiple candidates, pick the one with an explicit schema file; otherwise ask the developer to choose.
+   - Cache framework detection result for session efficiency
+   - If multiple candidates, pick the one with an explicit schema file; otherwise ask the developer to choose
 
 2. **LOCATE SCHEMA OR MIGRATIONS**:
    - Preferred sources (in order):
