@@ -26,11 +26,7 @@ Initialize a new project for virtually any language or framework. This workflow 
 
 ## STEPS
 
-0. **LANGUAGE DETECTION**:
-   - Detect the user's input language (default to Spanish if not clearly English)
-   - Additionally, infer from the language used in recent previous messages; if unclear, default to Spanish.
-   - If no clear English indicators are found, default to Spanish for all responses
-   - Always provide responses in Spanish by default, unless the developer clearly specifies English.
+{% include _includes/language-detection.md %}
 
 1. **COLLECT INTENT**
    - Identify the target language/framework (e.g., Next.js, Rails, Spring Boot, Phoenix, Nuxt, Vue, Quarkus, Flask, etc.).

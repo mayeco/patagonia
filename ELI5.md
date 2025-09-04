@@ -27,11 +27,7 @@ Explain any concept, web, plan, backlog, or input in simple terms as if explaini
 
 ## STEPS
 
-0. **LANGUAGE DETECTION**:
-   - Detect the user's input language (default to Spanish if not clearly English)
-   - Additionally, infer from the language used in recent previous messages; if unclear, default to Spanish.
-   - If no clear English indicators are found, default to Spanish for all responses
-   - Always provide responses in Spanish by default, unless the developer clearly specifies English.
+{% include _includes/language-detection.md %}
 
 1. **IDENTIFY CONTENT TYPE**:
    - If input mentions "web" or contains URLs, explain the website/technology simply

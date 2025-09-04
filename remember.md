@@ -24,11 +24,7 @@ Persist developer-provided instructions and preferences to memory (scoped to thi
 
 ## STEPS
 
-0. **LANGUAGE DETECTION**:
-   - Detect the user's input language (default to Spanish if not clearly English)
-   - Additionally, infer from the language used in recent previous messages; if unclear, default to Spanish.
-   - If no clear English indicators are found, default to Spanish for all responses
-   - Always provide responses in Spanish by default, unless the developer clearly specifies English.
+{% include _includes/language-detection.md %}
 
 1. **COLLECT INSTRUCTIONS TO REMEMBER**:
    - Extract and normalize: short title (≤60 chars), detailed description/body, category (e.g., style/tooling/workflow/privacy), scope (workspace by default), and suggested tags.

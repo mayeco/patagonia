@@ -23,11 +23,7 @@ When the previous step fails (e.g., a tool error such as "Cascade error: Interna
 
 ## STEPS
 
-0. **LANGUAGE DETECTION**:
-   - Detect the user's input language (default to Spanish if not clearly in English).
-   - Additionally, infer from the language used in recent previous messages; if unclear, default to Spanish.
-   - If no clear English indicators are found, default to Spanish for all responses.
-   - Always provide responses in Spanish by default, unless the developer clearly specifies English.
+{% include _includes/language-detection.md %}
 
 1. **REVIEW FAILURE CONTEXT**:
    - Treat the developer's prompt as a signal that the previous step failed, not a request to debug an error message.

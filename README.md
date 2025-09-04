@@ -54,9 +54,15 @@ Centralized workflows to standardize common tasks across projects (planning, imp
 
 - Start from `template.md` and adjust:
   - Frontmatter `description` succinctly explains the workflow.
-  - Add a domain-specific “⚠️ CRITICAL AI EXECUTION RULES” section.
+  - Add a domain-specific "⚠️ CRITICAL AI EXECUTION RULES" section.
   - Steps: put all language handling in Step 0 only. Keep steps actionable and bounded.
+  - Use include files for common patterns (e.g., `{% include _includes/language-detection.md %}` for language detection).
 - Save as `<name>.md` and reference the filename as the slash-command.
+
+## Include Files
+
+Common workflow patterns are available as include files in `_includes/`:
+- `language-detection.md` - Standard language detection logic for Step 0
 
 ## Notes
 

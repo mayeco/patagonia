@@ -23,11 +23,7 @@ Do not proceed with coding, deployment, or execution. Wait for explicit develope
 
 ## STEPS
 
-0. **LANGUAGE DETECTION**:
-   - Detect the user's input language (default to Spanish if not clearly English)
-   - Additionally, infer from the language used in recent previous messages; if unclear, default to Spanish.
-   - If no clear English indicators are found, default to Spanish for all responses
-   - Always provide responses in Spanish by default, unless the developer clearly specifies English.
+{% include _includes/language-detection.md %}
 
 1. **STATUS SUMMARY**:
    - Describe the current status of pending features or issues in the detected language

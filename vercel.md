@@ -26,11 +26,7 @@ Vercel CLI is a command-line interface for interacting with the Vercel platform.
 
 ## STEPS
 
-0. **LANGUAGE DETECTION**:
-   - Detect the user's input language (default to Spanish if not clearly English).
-   - Additionally, infer from the language used in recent previous messages; if unclear, default to Spanish.
-   - If no clear English indicators are found, default to Spanish for all responses.
-   - Always provide responses in Spanish by default, unless the developer clearly specifies English.
+{% include _includes/language-detection.md %}
 
 1. **OPERATION IDENTIFICATION**: Identify the type of Vercel operation requested:
    - Project deployment and management.
