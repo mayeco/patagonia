@@ -62,6 +62,7 @@ Centralized workflows to standardize common tasks across projects (planning, imp
 ## Include Files
 
 Common workflow patterns are available as include files in `_includes/`:
+
 - `language-detection.md` - Standard language detection logic for Step 0
 
 ## Notes

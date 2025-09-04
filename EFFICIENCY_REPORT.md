@@ -7,6 +7,7 @@ This report documents multiple efficiency issues found in the Patagonia workflow
 ## Major Efficiency Issues Identified
 
 ### 1. **CRITICAL: Massive Code Duplication - Language Detection**
+
 - **Impact**: HIGH
 - **Files Affected**: 26+ workflow files
 - **Issue**: Identical "LANGUAGE DETECTION" step repeated across all workflow files
@@ -15,12 +16,14 @@ This report documents multiple efficiency issues found in the Patagonia workflow
 - **Files**: backlog.md, cxone.md, docs.md, ELI5.md, epic.md, error-continue.md, feature.md, gcloud.md, generate-changelog.md, generate-readme.md, git-status.md, implement.md, initialize.md, memory.md, memento.md, no-continue.md, project.md, rate-request.md, release.md, remember.md, schema.md, template.md, terraform.md, tsc-fix.md, vercel.md, and more
 
 ### 2. **Duplicate ESLint Configurations**
+
 - **Impact**: MEDIUM
 - **Files Affected**: 2 files (.eslintrc.js and eslint.config.js)
 - **Issue**: Both legacy and modern ESLint configs exist, causing confusion
 - **Maintenance Cost**: Developers must maintain two config files with overlapping rules
 
 ### 3. **Critical AI Execution Rules Duplication**
+
 - **Impact**: MEDIUM
 - **Files Affected**: 26+ workflow files
 - **Issue**: Similar "⚠️ CRITICAL AI EXECUTION RULES" patterns repeated
@@ -28,6 +31,7 @@ This report documents multiple efficiency issues found in the Patagonia workflow
 - **Maintenance Cost**: Inconsistent rule formatting and updates across files
 
 ### 4. **Termination Conditions Duplication**
+
 - **Impact**: MEDIUM
 - **Files Affected**: 24+ workflow files
 - **Issue**: Similar "TERMINATION CONDITIONS" blocks repeated
@@ -35,6 +39,7 @@ This report documents multiple efficiency issues found in the Patagonia workflow
 - **Maintenance Cost**: Inconsistent termination logic across workflows
 
 ### 5. **Inefficient Shell Command in package.json**
+
 - **Impact**: LOW
 - **Files Affected**: package.json
 - **Issue**: `check-links` script uses inefficient `find | xargs` pattern
@@ -42,6 +47,7 @@ This report documents multiple efficiency issues found in the Patagonia workflow
 - **Current**: `find . -name '*.md' -not -path './node_modules/*' -print0 | xargs -0 -n1 npx markdown-link-check`
 
 ### 6. **Underutilized Template Pattern**
+
 - **Impact**: MEDIUM
 - **Files Affected**: template.md and all workflow files
 - **Issue**: Template exists but workflows don't leverage it to reduce duplication
@@ -57,15 +63,19 @@ This report documents multiple efficiency issues found in the Patagonia workflow
 ## Recommended Solutions
 
 ### Priority 1: Language Detection Consolidation
+
 Create `_includes/language-detection.md` and reference it from all workflows using an include mechanism.
 
 ### Priority 2: ESLint Configuration Cleanup
+
 Remove `.eslintrc.js` and standardize on `eslint.config.js` (modern flat config).
 
 ### Priority 3: Template Enhancement
+
 Enhance `template.md` to include common patterns and create include files for repeated sections.
 
 ### Priority 4: Script Optimization
+
 Replace inefficient shell patterns with optimized alternatives.
 
 ## Implementation Status
