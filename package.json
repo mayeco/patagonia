@@ -19,7 +19,7 @@
     "postinstall": "husky",
     "format": "prettier --write \"**/*.{js,json,md,yml,yaml}\"",
     "format:check": "prettier --check \"**/*.{js,json,md,yml,yaml}\"",
-    "check-links": "npx markdown-link-check --verbose -c .markdown-link-check.json **/*.md",
+    "check-links": "find . -name '*.md' -not -path './node_modules/*' -print0 | xargs -0 -n1 npx markdown-link-check --verbose -c .markdown-link-check.json",
     "fix:md": "markdownlint-cli2 --fix \"**/*.md\"",
     "spell-check": "cspell \"**/*.md\"",
     "lint:js": "eslint .",
