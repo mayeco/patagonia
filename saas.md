@@ -275,7 +275,7 @@ Genera una aplicación SaaS completa con arquitectura moderna, autenticación, p
 
 ### Estructura de Archivos SaaS
 
-```
+```bash
 src/
 ├── app/
 │   ├── (auth)/           # Rutas de autenticación
@@ -427,7 +427,7 @@ npm run dev
 
 ## TIEMPO ESTIMADO CON IA
 
-**Total: 40-80 minutos para SaaS completo funcionando en local**
+Total: 40-80 minutos para SaaS completo funcionando en local
 
 - Fase 0-1: 5 minutos (análisis + setup)
 - Fase 2-3: 10 minutos (inicialización + infraestructura)
