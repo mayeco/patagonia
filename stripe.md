@@ -1,6 +1,7 @@
 ---
 description: Analyze repository stack, research latest Stripe versions, and implement complete payment integration with phased approach and real-time validation
 ---
+
 ## FASE 0: ANÁLISIS PRE-IMPLEMENTACIÓN (CRÍTICO)
 
 ### Detección Automática de Stack
@@ -206,3 +207,7 @@ npm run stripe:validate
 
 # Test checkout flow
 npm run stripe:test
+
+# Setup webhook local
+npm run stripe:webhook-setup
+```
