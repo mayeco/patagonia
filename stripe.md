@@ -1,8 +1,8 @@
 # Stripe Integration Phases
 
 ---
-description: Analyze repository stack, research latest Stripe versions, and implement complete payment integration with phased approach and real-time validation
----
+
+## description: Analyze repository stack, research latest Stripe versions, and implement complete payment integration with phased approach and real-time validation
 
 ## FASE 0: ANÁLISIS PRE-IMPLEMENTACIÓN (CRÍTICO)
 
