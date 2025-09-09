@@ -1,3 +1,5 @@
+# Stripe Integration Phases
+
 ---
 description: Analyze repository stack, research latest Stripe versions, and implement complete payment integration with phased approach and real-time validation
 ---
@@ -197,7 +199,7 @@ description: Analyze repository stack, research latest Stripe versions, and impl
 3. Checklist de testing
 4. Optimizaciones finales
 
-**Total estimado: 60 minutos vs 3+ horas anteriores**
+### Total estimado: 60 minutos vs 3+ horas anteriores
 
 ## COMANDOS DE VALIDACIÓN
 
