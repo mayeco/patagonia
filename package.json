@@ -10,7 +10,7 @@
     "globals": "^16.4.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.6",
-    "markdown-link-check": "^3.13.7",
+    "markdown-link-check": "^3.14.1",
     "markdownlint-cli2": "^0.18.1",
     "prettier": "^3.6.2",
     "shellcheck": "^4.1.0"

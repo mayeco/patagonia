@@ -30,8 +30,8 @@ importers:
         specifier: ^16.1.6
         version: 16.1.6
       markdown-link-check:
-        specifier: ^3.13.7
-        version: 3.13.7
+        specifier: ^3.14.1
+        version: 3.14.1
       markdownlint-cli2:
         specifier: ^0.18.1
         version: 0.18.1
@@ -559,12 +559,12 @@ packages:
   colorette@2.0.20:
     resolution: {integrity: sha512-IfEDxwoWIjkeXL1eXcDiow4UbKjhLdq6/EuSVR9GMN7KVH3r9gQ83e73hsz1Nd1T3ijd5xv1wcWRYO+D6kCI2w==}
 
-  commander@13.1.0:
-    resolution: {integrity: sha512-/rFeCpNJQbhSZjGVwO9RFV3xPqbnERS8MmIQzCtD/zl6gpJuV/bMLuN92oG3F7d8oDEHHRrujSXNUr8fpjntKw==}
-    engines: {node: '>=18'}
-
   commander@14.0.0:
     resolution: {integrity: sha512-2uM9rYjPvyq39NwLRqaiLtWHyDC1FvryJDa2ATTVims5YAS4PupsEQsDvP14FqhFr0P49CYDugi59xaxJlTXRA==}
+    engines: {node: '>=20'}
+
+  commander@14.0.1:
+    resolution: {integrity: sha512-2JkV3gUZUVrbNA+1sjBOYLsMZ5cEEl8GTFP2a4AVz5hvasAMCQ1D2l2le/cX+pV4N6ZU17zjUahLpIXRrnWL8A==}
     engines: {node: '>=20'}
 
   commander@2.20.3:
@@ -640,6 +640,15 @@ packages:
 
   debug@4.4.1:
     resolution: {integrity: sha512-KcKCqiftBJcZr++7ykoDIEwSa3XWowTfNPo92BYxjXiyYEVrUQh2aLyhxBCwww+heortUFxEJYcRzosstTEBYQ==}
+    engines: {node: '>=6.0'}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+
+  debug@4.4.3:
+    resolution: {integrity: sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA==}
     engines: {node: '>=6.0'}
     peerDependencies:
       supports-color: '*'
@@ -1093,8 +1102,8 @@ packages:
     resolution: {integrity: sha512-41Cifkg6e8TylSpdtTpeLVMqvSBEVzTttHvERD741+pnZ8ANv0004MRL43QKPDlK9cGvNp6NZWZUBlbGXYxxng==}
     engines: {node: '>=0.12.0'}
 
-  is-relative-url@4.0.0:
-    resolution: {integrity: sha512-PkzoL1qKAYXNFct5IKdKRH/iBQou/oCC85QhXj6WKtUQBliZ4Yfd3Zk27RHu9KQG8r6zgvAA2AQKC9p+rqTszg==}
+  is-relative-url@4.1.0:
+    resolution: {integrity: sha512-vhIXKasjAuxS7n+sdv7pJQykEAgS+YU8VBQOENXwo/VZpOHDgBBsIbHo7zFKaWBjYWF4qxERdhbPRRtFAeJKfg==}
     engines: {node: '>=14.16'}
 
   is-stream@1.1.0:
@@ -1160,8 +1169,8 @@ packages:
     resolution: {integrity: sha512-/vlFKAoH5Cgt3Ie+JLhRbwOsCQePABiU3tJ1egGvyQ+33R/vcwM2Zl2QR/LzjsBeItPt3oSVXapn+m4nQDvpzw==}
     engines: {node: '>=14'}
 
-  link-check@5.4.0:
-    resolution: {integrity: sha512-0Pf4xBVUnwJdbDgpBlhHNmWDtbVjHTpIFs+JaBuIsC9PKRxjv4KMGCO2Gc8lkVnqMf9B/yaNY+9zmMlO5MyToQ==}
+  link-check@5.5.0:
+    resolution: {integrity: sha512-CpMk2zMfyEMdDvFG92wO5pU/2I/wbw72/9pvUFhU9cDKkwhmVlPuvxQJzd/jXA2iVOgNgPLnS5zyOLW7OzNpdA==}
 
   linkify-it@5.0.0:
     resolution: {integrity: sha512-5aHCbzQRADcdP+ATqnDuhhJ/MRIqDkZX5pyjFHRRysS8vZ5AbqGEoFIb6pYHPZ+L/OC2Lc+xT8uHVVR5CAK/wQ==}
@@ -1198,8 +1207,8 @@ packages:
     resolution: {integrity: sha512-a54IwgWPaeBCAAsv13YgmALOF1elABB08FxO9i+r4VFk5Vl4pKokRPeX8u5TCgSsPi6ec1otfLjdOpVcgbpshg==}
     hasBin: true
 
-  markdown-link-check@3.13.7:
-    resolution: {integrity: sha512-Btn3HU8s2Uyh1ZfzmyZEkp64zp2+RAjwfQt1u4swq2Xa6w37OW0T2inQZrkSNVxDSa2jSN2YYhw/JkAp5jF1PQ==}
+  markdown-link-check@3.14.1:
+    resolution: {integrity: sha512-h1tihNL3kmOS3N7H4FyF4xKDxiHnNBNSgs/LWlDiRHlC8O0vfRX0LhDDvesRSs4HM7nS0F658glLxonaXBmuWw==}
     hasBin: true
 
   markdown-link-extractor@4.0.2:
@@ -2091,7 +2100,7 @@ snapshots:
 
   '@tokenizer/inflate@0.2.7':
     dependencies:
-      debug: 4.4.1
+      debug: 4.4.3
       fflate: 0.8.2
       token-types: 6.1.1
     transitivePeerDependencies:
@@ -2302,9 +2311,9 @@ snapshots:
 
   colorette@2.0.20: {}
 
-  commander@13.1.0: {}
-
   commander@14.0.0: {}
+
+  commander@14.0.1: {}
 
   commander@2.20.3: {}
 
@@ -2430,6 +2439,10 @@ snapshots:
   data-uri-to-buffer@6.0.2: {}
 
   debug@4.4.1:
+    dependencies:
+      ms: 2.1.3
+
+  debug@4.4.3:
     dependencies:
       ms: 2.1.3
 
@@ -2755,7 +2768,7 @@ snapshots:
     dependencies:
       basic-ftp: 5.0.5
       data-uri-to-buffer: 6.0.2
-      debug: 4.4.1
+      debug: 4.4.3
     transitivePeerDependencies:
       - supports-color
 
@@ -2834,14 +2847,14 @@ snapshots:
   http-proxy-agent@7.0.2:
     dependencies:
       agent-base: 7.1.4
-      debug: 4.4.1
+      debug: 4.4.3
     transitivePeerDependencies:
       - supports-color
 
   https-proxy-agent@7.0.6:
     dependencies:
       agent-base: 7.1.4
-      debug: 4.4.1
+      debug: 4.4.3
     transitivePeerDependencies:
       - supports-color
 
@@ -2903,7 +2916,7 @@ snapshots:
 
   is-number@7.0.0: {}
 
-  is-relative-url@4.0.0:
+  is-relative-url@4.1.0:
     dependencies:
       is-absolute-url: 4.0.1
 
@@ -2958,9 +2971,9 @@ snapshots:
 
   lilconfig@3.1.3: {}
 
-  link-check@5.4.0:
+  link-check@5.5.0:
     dependencies:
-      is-relative-url: 4.0.0
+      is-relative-url: 4.1.0
       ms: 2.1.3
       needle: 3.3.1
       node-email-verifier: 2.0.0
@@ -3025,12 +3038,12 @@ snapshots:
       punycode.js: 2.3.1
       uc.micro: 2.1.0
 
-  markdown-link-check@3.13.7:
+  markdown-link-check@3.14.1:
     dependencies:
       async: 3.2.6
       chalk: 5.6.2
-      commander: 13.1.0
-      link-check: 5.4.0
+      commander: 14.0.1
+      link-check: 5.5.0
       markdown-link-extractor: 4.0.2
       needle: 3.3.1
       progress: 2.0.3
@@ -3238,7 +3251,7 @@ snapshots:
   micromark@4.0.2:
     dependencies:
       '@types/debug': 4.1.12
-      debug: 4.4.1
+      debug: 4.4.3
       decode-named-character-reference: 1.2.0
       devlop: 1.1.0
       micromark-core-commonmark: 2.0.3
@@ -3323,7 +3336,7 @@ snapshots:
     dependencies:
       '@tootallnate/quickjs-emscripten': 0.23.0
       agent-base: 7.1.4
-      debug: 4.4.1
+      debug: 4.4.3
       get-uri: 6.0.5
       http-proxy-agent: 7.0.2
       https-proxy-agent: 7.0.6
@@ -3405,7 +3418,7 @@ snapshots:
   proxy-agent@6.5.0:
     dependencies:
       agent-base: 7.1.4
-      debug: 4.4.1
+      debug: 4.4.3
       http-proxy-agent: 7.0.2
       https-proxy-agent: 7.0.6
       lru-cache: 7.18.3
@@ -3527,7 +3540,7 @@ snapshots:
   socks-proxy-agent@8.0.5:
     dependencies:
       agent-base: 7.1.4
-      debug: 4.4.1
+      debug: 4.4.3
       socks: 2.8.7
     transitivePeerDependencies:
       - supports-color
