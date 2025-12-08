@@ -11,7 +11,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.1.6",
     "markdown-link-check": "^3.13.7",
-    "markdownlint-cli2": "^0.18.1",
+    "markdownlint-cli2": "^0.20.0",
     "prettier": "^3.6.2",
     "shellcheck": "^4.1.0"
   },
